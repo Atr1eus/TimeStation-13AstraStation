@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
 /// npc控制类 只关心npc的行为逻辑
@@ -13,21 +14,21 @@ public class NpcController : MonoBehaviour
     public ItemData currentRequestItem { get; protected set; } //当前npc索求物品
     public int currentRequestAmount { get; protected set; }
 
-    public void Initialize(Npc npc)
+    public void InitializeController(Npc npc)
     {
         this.npc = npc;
         npcSpawnTime = Time.time;
         isRequestSuccess = false;
         isTradeFinish = false;
     }
-    public void InitialRandomOfferItem()
+    public void InitializeRandomOfferItem()
     {
         //初始化随机OfferItem
         currentOfferItem = npc.GetRandomOfferItem();
         currentOfferAmount = Random.Range(currentOfferItem.minOfferAmount, currentOfferItem.maxOfferAmount + 1);
         //todo：UI显示
     }
-    public void InitialRandomRequestItem()
+    public void InitializeRandomRequestItem()
     {
         //初始化随机RequestItem
         currentRequestItem = npc.GetRandomRequestItem();
@@ -40,7 +41,7 @@ public class NpcController : MonoBehaviour
     }
     public void HandMoveOut()
     {
-
+        
     }
 
     public void OnTradeEnter() //交易开始行为

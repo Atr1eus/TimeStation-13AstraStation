@@ -15,7 +15,7 @@ MonoBehaviour:
   age: 0
   npcName: 
   sex: 0
-  hand: {fileID: 0}
+  hand: {fileID: 1233771984232238364, guid: a69796c0bb0495b41acc91d94befe66d, type: 3}
   type: 0
   npcDescription: 
   greetingDialogues: []
@@ -24,6 +24,6 @@ MonoBehaviour:
   requestItems: []
   offerItems: []
   minAppearRound: 0
-  maxAppearRound: 100
+  maxAppearRound: 5
   isMoneyMore10K: 0
   isRoundMore5: 0

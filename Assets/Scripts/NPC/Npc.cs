@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public enum NpcType
 {
     Normal,
-    Special
+    Story
 }
 public enum NpcSex
 {
@@ -32,8 +32,8 @@ public class Npc : ScriptableObject
 
 
     [Header("交易配置")]
-    public List<ItemData> requestItems;
-    public List<ItemData> offerItems;
+    public List<ItemData> requestItems; //索取物品列表
+    public List<ItemData> offerItems; //带来物品列表
 
     [Header("出现时间配置")]
     public int minAppearRound;
@@ -47,7 +47,7 @@ public class Npc : ScriptableObject
 
     public ItemData GetRandomRequestItem() => requestItems[Random.Range(0, requestItems.Count)]; //获取随机物品要求
     public ItemData GetRandomOfferItem() => offerItems[Random.Range(0, offerItems.Count)];
-
+    public string GetDescription() => npcDescription;
 
 
 

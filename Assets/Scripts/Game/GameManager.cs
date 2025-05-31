@@ -14,6 +14,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private NpcManager m_npcManager;
     [SerializeField] private InventorySystem m_inventory;
     [SerializeField] private RoundManager m_roundManager;
+    [SerializeField] private NpcCardManager m_cardManager;
 
     //todo:UIManager
 
@@ -53,6 +54,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             return m_roundManager;
         }
     }
+    public NpcCardManager CardManger
+    {
+        get
+        {
+            if (m_cardManager == null)
+                m_cardManager = NpcCardManager.Instance;
+            return m_cardManager;
+        }
+    }
 
     protected override void Awake()
     {
@@ -61,15 +71,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     protected virtual void Start()
     {
+        NewRoundEnter();
+    }
+    public void NewRoundEnter()
+    {
         RoundManager.StartNewRound();
+        NpcCardManager.Instance.remainingNpcs = RoundManager.Instance.currentRoundNpcs;
+        NpcCardManager.Instance.InitializeCards(RoundManager.Instance.currentRoundNpcs);
     }
     protected virtual void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            NpcM.ClearCurrentNpc();
-            NpcM.SpawnNpc(0);
 
-        }
+    }
+    public void InitializeCardUI()
+    {
+
     }
 }

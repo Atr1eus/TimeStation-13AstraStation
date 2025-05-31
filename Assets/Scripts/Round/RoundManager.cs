@@ -21,10 +21,10 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
     private bool isRoundActive; //是否激活回合时间
 
     [Header("NPC池子")]
-    [SerializeField] private List<Npc> wholeNpcs = new List<Npc>(); //总NPC池子
-    [SerializeField] private List<Npc> availableNpcs = new List<Npc>(); //可出现NPC池子
+    public List<Npc> wholeNpcs = new List<Npc>(); //总NPC池子
+    public List<Npc> availableNpcs = new List<Npc>(); //可出现NPC池子
 
-    [SerializeField] private List<Npc> currentRoundNpcs = new List<Npc>(); //本回合出现NPC
+    public List<Npc> currentRoundNpcs = new List<Npc>(); //本回合出现NPC
     public UnityEvent OnRoundStart;
     public UnityEvent OnRoundEnd;
     public UnityEvent OnRountStep;
@@ -36,12 +36,12 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         remainingSelections = maxSelectionsPerRound;
         roundTimer = roundDuration;
         isRoundActive = true;
-        InitialAvaliableNpcs();
-        InitialRoundNpcs();
+        InitializeAvaliableNpcs();
+        InitializeRoundNpcs();
         OnRoundStart?.Invoke();
     }
 
-    public void InitialAvaliableNpcs()//初始化本回合角色池
+    public List<Npc> InitializeAvaliableNpcs()//初始化本回合角色池
     {
         foreach (var npc in wholeNpcs)
         {
@@ -51,14 +51,16 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
                 availableNpcs.Add(npc);
             }
         }
+        return availableNpcs;
     }
-    public void InitialRoundNpcs()//初始化本回合角色
+    public List<Npc> InitializeRoundNpcs()//初始化本回合角色
     {
         OutOfOrder(availableNpcs);
         for (int i = 0; i < selectionsPerRound && i < availableNpcs.Count; i++)
         {
             currentRoundNpcs.Add(availableNpcs[i]);
         }
+        return currentRoundNpcs;
     }
 
     public List<Npc> OutOfOrder(List<Npc> Npcs) //随机打乱Npc池
@@ -78,7 +80,7 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         }
         return Npcs;
     }
-    public void ClearCurrentNpc()
+    public void ClearCurrentNpc() 
     {
         availableNpcs.Clear();
         currentRoundNpcs.Clear();

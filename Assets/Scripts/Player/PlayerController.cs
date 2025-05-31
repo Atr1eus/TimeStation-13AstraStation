@@ -6,20 +6,13 @@ using UnityEngine;
 
 public class PlayerController : SingletonMonoBehaviour<PlayerController>
 {
-    public int gold { get; private set; }
+    public int gold { get; private set; } = 200;
 
     public bool CanAfford(ItemData item, int amount) => item.itemPrice * amount <= gold;
     public void Afford(ItemData item, int amount = 1) => gold -= item.itemPrice * amount;
     void Update()
     {
 
-    }
-    private void TryInteract()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            //todo:UI½»»¥
-        }
     }
 
 }

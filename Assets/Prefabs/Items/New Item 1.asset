@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0771538adb023f945a435f2c50d8adda, type: 3}
-  m_Name: New Item
+  m_Name: New Item 1
   m_EditorClassIdentifier: 
-  itemName: Apple
+  itemName: Pen
   itemID: 1
-  itemPrice: 10
-  prefab: {fileID: 2420219703718885894, guid: 84fb08237b052004baa901ac7959201b, type: 3}
+  itemPrice: 20
+  prefab: {fileID: 3576741517350751033, guid: 7901d5e978c5c8c46b63b63296157c14, type: 3}
   itemDescription: 
   isStackable: 1
   maxStack: 50

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// npc¹ÜÀíÀà Ö»¹ØĞÄnpcÔÚÊ²Ã´Ê±ºò×ö
+/// npcç®¡ç†ç±» åªå…³å¿ƒnpcåœ¨ä»€ä¹ˆæ—¶å€™åš
 /// </summary>
 public class NpcManager : SingletonMonoBehaviour<NpcManager>
 {
@@ -9,8 +9,9 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     public Transform npcSpawnPoint;
     private int npcIndex = -1;
     public NpcController currentNpc;
-    private Npc GetNpcInRandom() => Npcs[Random.Range(0, Npcs.Count)]; //ÔÚÁĞ±íÖĞËæ»úÑ¡È¡npc
-    private Npc GetNpcInOrder() => Npcs[++npcIndex % Npcs.Count]; // ÔÚÁĞ±íÖĞË³ĞòÑ¡È¡npc
+    public GameObject npcObj;
+    private Npc GetNpcInRandom() => Npcs[Random.Range(0, Npcs.Count)]; //åœ¨åˆ—è¡¨ä¸­éšæœºé€‰å–npc
+    private Npc GetNpcInOrder() => Npcs[++npcIndex % Npcs.Count]; // åœ¨åˆ—è¡¨ä¸­é¡ºåºé€‰å–npc
 
     protected override void Awake()
     {
@@ -18,25 +19,35 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         currentNpc = FindObjectOfType<NpcController>();
     }
 
-    public void SpawnNpc(int rule) //0ÎªËæ»úÉú³É 1ÎªË³ĞòÉú³É
+    public void SpawnNpc(int rule) //0ä¸ºéšæœºç”Ÿæˆ 1ä¸ºé¡ºåºç”Ÿæˆ åºŸå¼ƒåŠŸèƒ½ æš‚æ—¶ç•™ç€
     {
-        //Ã¿´ÎÉú³ÉÖØĞÂÊµÀı»¯NPC£¬³õÊ¼»¯¿ØÖÆÆ÷
+        //æ¯æ¬¡ç”Ÿæˆé‡æ–°å®ä¾‹åŒ–NPCï¼Œåˆå§‹åŒ–æ§åˆ¶å™¨
         Npc npc = rule == 0 ? GetNpcInRandom() : GetNpcInOrder();
         GameObject npcObj = Instantiate(npc.hand, npcSpawnPoint.position, Quaternion.identity);
         currentNpc = npcObj.AddComponent<NpcController>();
-        currentNpc.Initialize(npc);
+        currentNpc.InitializeController(npc);
         currentNpc.OnTradeEnter();
     }
-    public void SpawnNpc(Npc npc) //Ö±½Ó¸ù¾İNPCÉú³É
+    public void SpawnNpc(Npc npc) //ç›´æ¥æ ¹æ®NPCç”Ÿæˆ ä¸ä¸NpcCardäº§ç”Ÿå…³è” åŠåºŸå¼ƒ
     {
         GameObject npcObj = Instantiate(npc.hand, npcSpawnPoint.position, Quaternion.identity);
-        currentNpc = npcObj.GetComponent<NpcController>();
-        currentNpc.Initialize(npc);
+        currentNpc = npcObj.AddComponent<NpcController>();
+        currentNpc.InitializeController(npc);
         currentNpc.OnTradeEnter();
+    }
+    public void InitializeCurrentNpc(NpcCard npcCard)//npcCardé€‰æ‹©äº‹ä»¶ æ ¹æ®ç©å®¶çš„é€‰æ‹©å®šä¹‰currentNpc
+    {
+        Npc npc = npcCard.npc;
+        npcObj = Instantiate(npc.hand, npcSpawnPoint.position, Quaternion.identity);
+        currentNpc = npcObj.AddComponent<NpcController>();
+        currentNpc.InitializeController(npc);
+        currentNpc.OnTradeEnter();
+        Debug.Log($"currentNpc:{currentNpc.npc.name}");
     }
     public void ClearCurrentNpc()
     {
-        //NPCÀë¿ªÊ± Ïú»ÙNPCÊµÀı²¢ÖÃ¿Õ¿ØÖÆÆ÷
+        Destroy(npcObj);
+        //NPCç¦»å¼€æ—¶ é”€æ¯NPCå®ä¾‹å¹¶ç½®ç©ºæ§åˆ¶å™¨
         if (currentNpc.gameObject != null)
         {
             Destroy(currentNpc.gameObject);

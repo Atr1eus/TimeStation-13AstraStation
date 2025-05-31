@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0771538adb023f945a435f2c50d8adda, type: 3}
-  m_Name: New Item
+  m_Name: New Item 2
   m_EditorClassIdentifier: 
-  itemName: Apple
-  itemID: 1
-  itemPrice: 10
-  prefab: {fileID: 2420219703718885894, guid: 84fb08237b052004baa901ac7959201b, type: 3}
+  itemName: Pineapple
+  itemID: 3
+  itemPrice: 30
+  prefab: {fileID: 1751598719030664480, guid: 1ff680d9d1a7dbc4f80f2956242840c6, type: 3}
   itemDescription: 
   isStackable: 1
-  maxStack: 50
+  maxStack: 1
   minRequestAmount: 1
   maxRequestAmount: 5
   minOfferAmount: 0

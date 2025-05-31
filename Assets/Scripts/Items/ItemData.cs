@@ -1,6 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum ItemType
+{
+    Normal,
+    Story
+}
 /// <summary>
 /// 物品数据类
 /// </summary>
