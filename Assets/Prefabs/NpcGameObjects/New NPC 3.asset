@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e6be5f878d8d94f93f637d411a1b91, type: 3}
+  m_Name: New NPC 3
+  m_EditorClassIdentifier: 
+  age: 0
+  npcName: 
+  sex: 0
+  hand: {fileID: 0}
+  type: 0
+  npcDescription: 
+  greetingDialogues: []
+  successDialogues: []
+  refuseDialogues: []
+  requestItems: []
+  offerItems: []
+  minAppearRound: 0
+  maxAppearRound: 100
+  isMoneyMore10K: 0
+  isRoundMore5: 0

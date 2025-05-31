@@ -13,7 +13,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private PlayerController m_player;
     [SerializeField] private NpcManager m_npcManager;
     [SerializeField] private InventorySystem m_inventory;
-    //todo£ºUIManager
+    [SerializeField] private RoundManager m_roundManager;
+
+    //todo:UIManager
 
     public PlayerController Player
     {
@@ -24,7 +26,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             return m_player;
         }
     }
-    public NpcManager Npc
+    public NpcManager NpcM
     {
         get
         {
@@ -42,11 +44,32 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             return m_inventory;
         }
     }
+    public RoundManager RoundManager
+    {
+        get
+        {
+            if (m_roundManager == null)
+                m_roundManager = RoundManager.Instance;
+            return m_roundManager;
+        }
+    }
 
     protected override void Awake()
     {
         base.Awake();
 
     }
+    protected virtual void Start()
+    {
+        RoundManager.StartNewRound();
+    }
+    protected virtual void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            NpcM.ClearCurrentNpc();
+            NpcM.SpawnNpc(0);
 
+        }
+    }
 }

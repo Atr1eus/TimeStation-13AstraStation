@@ -7,7 +7,7 @@ public class NpcController : MonoBehaviour
     public Npc npc;
     public float npcSpawnTime { get; protected set; } //当前npc的创建时间
     private bool isTradeFinish = false; //交换是否结束
-    private bool isTradeSuccess = false; //是否成功交易
+    private bool isRequestSuccess = false; //是否获取到了需要的物品
     public ItemData currentOfferItem { get; protected set; } //当前npc给予物品
     public int currentOfferAmount { get; protected set; }
     public ItemData currentRequestItem { get; protected set; } //当前npc索求物品
@@ -17,6 +17,8 @@ public class NpcController : MonoBehaviour
     {
         this.npc = npc;
         npcSpawnTime = Time.time;
+        isRequestSuccess = false;
+        isTradeFinish = false;
     }
     public void InitialRandomOfferItem()
     {
@@ -29,12 +31,12 @@ public class NpcController : MonoBehaviour
     {
         //初始化随机RequestItem
         currentRequestItem = npc.GetRandomRequestItem();
-        currentRequestAmount = Random.Range(currentRequestItem.minRequestAmount,currentRequestItem.maxOfferAmount + 1);
+        currentRequestAmount = Random.Range(currentRequestItem.minRequestAmount, currentRequestItem.maxOfferAmount + 1);
         //todo：UI显示
     }
     public void HandMoveIn() //手进入动画 
     {
-        
+
     }
     public void HandMoveOut()
     {
@@ -52,7 +54,7 @@ public class NpcController : MonoBehaviour
     public void OnTradeExit()
     {
         isTradeFinish = true;
-        if (isTradeSuccess)
+        if (isRequestSuccess)
         {
             OnTradeAccepted();
         }
