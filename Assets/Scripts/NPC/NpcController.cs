@@ -8,11 +8,13 @@ public class NpcController : MonoBehaviour
     public Npc npc;
     public float npcSpawnTime { get; protected set; } //当前npc的创建时间
     private bool isTradeFinish = false; //交换是否结束
-    private bool isRequestSuccess = false; //是否获取到了需要的物品
+    public bool isRequestSuccess = false; //是否获取到了需要的物品
     public ItemData currentOfferItem { get; protected set; } //当前npc给予物品
     public int currentOfferAmount { get; protected set; }
     public ItemData currentRequestItem { get; protected set; } //当前npc索求物品
-    public int currentRequestAmount { get; protected set; }
+    public int currentRequestAmount { get; protected set; } 
+    public int perRequestAwardGolds { get; protected set; } //获得索要物品时 每个索要物品给予的金钱
+    public int perNonrequestAwardGolds { get; protected set; } //获得非索要物品时 每个非索要物品给予的金钱
 
     public void InitializeController(Npc npc)
     {
@@ -20,6 +22,33 @@ public class NpcController : MonoBehaviour
         npcSpawnTime = Time.time;
         isRequestSuccess = false;
         isTradeFinish = false;
+        InitializeRandomOfferItem();
+        InitializeRandomRequestItem();
+        perRequestAwardGolds = npc.GetRandomRequestAwardGolds();
+        perNonrequestAwardGolds = npc.GetRandomNonrequestAwardGolds();
+        Debug.Log($"{npc.name}向你索要{currentRequestAmount}个{currentRequestItem.name},他给你带来了{currentOfferAmount}个{currentOfferItem.name}");
+    }
+    public int AffordForItems(ItemData itemdata,int amount) //计算Npc获得物品后给予玩家的金钱
+    {
+        int total = 0;
+        if(itemdata == currentRequestItem)
+        {
+            if(amount > currentRequestAmount)
+            {
+                total += currentRequestAmount * perRequestAwardGolds + (amount - currentRequestAmount) * perNonrequestAwardGolds;
+                currentRequestAmount = 0;
+            }
+            else 
+            {
+                total += amount * perRequestAwardGolds;
+                currentRequestAmount -= amount;
+            }
+        }
+        else
+        {
+            total = amount * perRequestAwardGolds;
+        }
+        return total;
     }
     public void InitializeRandomOfferItem()
     {
@@ -35,20 +64,12 @@ public class NpcController : MonoBehaviour
         currentRequestAmount = Random.Range(currentRequestItem.minRequestAmount, currentRequestItem.maxOfferAmount + 1);
         //todo：UI显示
     }
-    public void HandMoveIn() //手进入动画 
-    {
-
-    }
-    public void HandMoveOut()
-    {
-        
-    }
 
     public void OnTradeEnter() //交易开始行为
     {
         HandMoveIn();
     }
-    public void OnTradeStep() //交易过程update 更新isTradeSuccess参数
+    public void OnTradeStep() //交易过程update
     {
 
     }
@@ -74,4 +95,14 @@ public class NpcController : MonoBehaviour
 
     }
 
+    public void HandMoveIn() //手进入动画 
+    {
+        //todo
+        Debug.Log("手进入动画播放");
+    }
+    public void HandMoveOut()
+    {
+        //todo
+        Debug.Log("手移出动画播放");
+    }
 }

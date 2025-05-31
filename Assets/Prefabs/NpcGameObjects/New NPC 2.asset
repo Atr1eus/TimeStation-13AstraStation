@@ -17,12 +17,14 @@ MonoBehaviour:
   sex: 0
   hand: {fileID: 1233771984232238364, guid: a69796c0bb0495b41acc91d94befe66d, type: 3}
   type: 0
-  npcDescription: 
+  npcDescription: "\u5B69\u5B50\u7684\u58F0\u97F3"
   greetingDialogues: []
   successDialogues: []
   refuseDialogues: []
-  requestItems: []
-  offerItems: []
+  requestItems:
+  - {fileID: 11400000, guid: 7b5eefb295097974b8a2ec51ba448edb, type: 2}
+  offerItems:
+  - {fileID: 11400000, guid: 823e4213a11904b468dcf8214b8d3383, type: 2}
   minAppearRound: 0
   maxAppearRound: 100
   isMoneyMore10K: 0

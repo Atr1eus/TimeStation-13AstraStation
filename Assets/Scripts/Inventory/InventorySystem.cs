@@ -1,61 +1,64 @@
 using System.Collections.Generic;
-
+using UnityEngine;
 /// <summary>
 /// 仓库系统
 /// </summary>
 public class InventorySystem : SingletonMonoBehaviour<InventorySystem>
 {
     public List<Item> items;
-    public bool AddItem(Item item) //增加物品操作
+    public List<ItemData> datas;
+    public void AddItem(Item item) //增加物品操作
     {
-        //堆叠成功返回true 反之增加item
-        if (item.data.isStackable)
+        foreach (var it in items)
         {
-            foreach (var it in items)
+            if (it.data == item.data)
             {
-                it.MergeWith(item);
-                if (item.amount <= 0) return true;
+                it.amount += item.amount;
+                return;
             }
         }
         items.Add(item);
-        return false;
+        datas.Add(item.data);
     }
-    public bool RemoveItem(Item item, int removeAmount = 1)//移除一定数量的物品
+    public bool RemoveItem(ItemData item, int removeAmount = 1)//移除一定数量的物品
     {
-        for (int i = items.Count - 1; i >= 0; i--)
+        for (int i = datas.Count - 1; i >= 0; i--)
         {
-            if (items[i].data == item.data)
+            if (datas[i] == item)
             {
                 if (items[i].amount > removeAmount)
                 {
                     items[i].amount -= removeAmount;
                     return true;
                 }
-                else
+                else if (items[i].amount == removeAmount)
                 {
-                    removeAmount -= items[i].amount;
                     items.RemoveAt(i);
-                    if (removeAmount <= 0) return true;
+                    datas.RemoveAt(i);
+                    return true;
                 }
+                return false;
             }
         }
         return false;
     }
-    public bool HasEnoughItem(Item item, int needAmount = 1) //判断是否有足量的物品/是否存在物品
+    public bool HasEnoughItem(ItemData item, int needAmount = 1) //判断是否有足量的物品/是否存在物品
     {
-        int total = 0;
-        foreach (var it in items)
+        for (int i = 0; i < datas.Count; i++)
         {
-            if (item.data == it.data)
+            if (item.Equals(datas[i]))
             {
-                total += it.amount;
+                Debug.Log($"有{items[i].amount}个{item.name}");
+                return items[i].amount > needAmount;
             }
         }
-        return total >= needAmount;
+        return false;
     }
 
     protected override void Awake()
     {
         base.Awake();
+        items = new List<Item>();
+        datas = new List<ItemData>();
     }
 }

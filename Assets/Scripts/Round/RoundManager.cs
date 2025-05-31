@@ -15,10 +15,11 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
     [SerializeField] private float roundDuration = 180f;//单回合持续时间
 
     [Header("当前回合状态")]
-    private int currentRound = 1; //回合数
+    private int currentRound = 0; //回合数
     private int remainingSelections; //剩余选择数
     private float roundTimer; //回合剩余时间
     private bool isRoundActive; //是否激活回合时间
+    public bool canSelect = true;
 
     [Header("NPC池子")]
     public List<Npc> wholeNpcs = new List<Npc>(); //总NPC池子
@@ -34,6 +35,8 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         ClearCurrentNpc();
         currentRound++;
         remainingSelections = maxSelectionsPerRound;
+        canSelect = true;
+        DecriseSelectionTimes();//回合开始选择一次 次数要减去
         roundTimer = roundDuration;
         isRoundActive = true;
         InitializeAvaliableNpcs();
@@ -43,6 +46,8 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
 
     public List<Npc> InitializeAvaliableNpcs()//初始化本回合角色池
     {
+        availableNpcs.Clear();
+        Debug.Log($"InitializeAvailableNpcs: currentRound={currentRound}, wholeNpcs.Count={wholeNpcs.Count}");
         foreach (var npc in wholeNpcs)
         {
             if (NpcAppearConditions.CanNpcAppear(npc) && npc.minAppearRound <= currentRound
@@ -80,7 +85,13 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         }
         return Npcs;
     }
-    public void ClearCurrentNpc() 
+    public void DecriseSelectionTimes() //减一次选择机会
+    {
+        --remainingSelections;
+        canSelect = remainingSelections > 0;
+    }
+
+    public void ClearCurrentNpc()
     {
         availableNpcs.Clear();
         currentRoundNpcs.Clear();

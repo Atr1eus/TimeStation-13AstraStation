@@ -14,26 +14,5 @@ public class Item : MonoBehaviour
         this.data = itemData;
         this.amount = quantity;
     }
-    public void MergeWith(Item other) //¶Ñµþ²Ù×÷
-    {
-        if(CanMergeWith(other))
-        {
-            int total = amount + other.amount;
-            if(total <= data.maxStack)
-            {
-                amount = total;
-                other.amount = 0;
-            }
-            else 
-            {
-                amount = data.maxStack;
-                other.amount = total - data.maxStack;
-            }
-        }
-    }
-    public bool CanMergeWith(Item other)
-    {
-        return data == other.data && data.isStackable && amount < data.maxStack;
-    }
 
 }

@@ -16,8 +16,8 @@ public class NpcCardManager : SingletonMonoBehaviour<NpcCardManager>
     {
         ClearCardList();
         float screenWidth = Screen.width;
-        float leftBorder = screenWidth / 5f;    // 左边界（1/3 处）
-        float rightBorder = screenWidth * 4f / 5f; // 右边界（2/3 处）
+        float leftBorder = screenWidth / 6f;    // 左边界（1/6 处）
+        float rightBorder = screenWidth * 5f / 6f; // 右边界（5/6 处）
         float totalSpace = rightBorder - leftBorder;
         float spacing = totalSpace / (npcs.Count + 1); // 卡牌间距
         for (int i = 0; i < npcs.Count; i++)

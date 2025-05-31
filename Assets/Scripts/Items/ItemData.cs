@@ -18,10 +18,6 @@ public class ItemData : ScriptableObject
     public GameObject prefab;
     [TextArea]public string itemDescription; //物品描述
 
-    [Header("堆叠配置")]
-    public bool isStackable = true; //是否可堆叠
-    public int maxStack = 1; //最大堆叠数
-
     [Header("索要/交易配置")]
     public int minRequestAmount = 1;
     public int maxRequestAmount = 5;
@@ -29,10 +25,4 @@ public class ItemData : ScriptableObject
     public int maxOfferAmount = 5;
 
     //todo：根据需求增加item属性，如item种类或item动效
-
-
-
-    
-
-
 }
