@@ -27,5 +27,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 823e4213a11904b468dcf8214b8d3383, type: 2}
   minAppearRound: 0
   maxAppearRound: 100
+  minPerRequestAwardGolds: 50
+  maxPerRequestAwardGolds: 100
+  minPerNonrequestAwardGolds: 5
+  maxPerNonrequestAwardGolds: 10
   isMoneyMore10K: 0
   isRoundMore5: 0

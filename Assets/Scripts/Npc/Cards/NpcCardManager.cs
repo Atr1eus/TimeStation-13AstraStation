@@ -45,7 +45,10 @@ public class NpcCardManager : SingletonMonoBehaviour<NpcCardManager>
             activeCards.Add(cardUI);
         }
     }
-
+    public void InitializeRemainingNpcs(List<Npc> npcs)
+    {
+        remainingNpcs = npcs;
+    }
     public void SelectCard(NpcCard selectedCard) //Ñ¡Ôñ¿¨ÅÆÊÂ¼þ
     {
         NpcCardUI selectedUI = activeCards.Find(c => c.npcCard == selectedCard);

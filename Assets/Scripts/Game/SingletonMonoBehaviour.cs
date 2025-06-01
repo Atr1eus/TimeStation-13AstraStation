@@ -21,7 +21,7 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
             }
             return m_instance;
         }
-        
+
     }
 
     protected virtual void Awake()
@@ -29,6 +29,7 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
         if (m_instance == null)
         {
             m_instance = this as T;
+            transform.SetParent(null);
             DontDestroyOnLoad(gameObject);
         }
         else

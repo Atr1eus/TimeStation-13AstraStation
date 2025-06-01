@@ -1,4 +1,5 @@
 using System.ComponentModel.Design.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GameState
@@ -11,53 +12,50 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     [Header("Systems")]
     [SerializeField] private PlayerController m_player;
-    [SerializeField] private NpcManager m_npcManager;
+    [SerializeField] private NpcManager m_npc;
     [SerializeField] private InventorySystem m_inventory;
-    [SerializeField] private RoundManager m_roundManager;
-    [SerializeField] private NpcCardManager m_cardManager;
+    [SerializeField] private RoundManager m_round;
+    [SerializeField] private NpcCardManager m_npcCard;
 
     //todo:UIManager
-
 
     protected override void Awake()
     {
         base.Awake();
-
     }
     protected virtual void Start()
     {
     }
     public void OnNextRoundClick()
     {
-        NpcManager.Instance.currentNpc.OnTradeExit();
-        NpcManager.Instance.ClearCurrentNpc();
-        RoundManager.Instance.StartNewRound();
-        NpcCardManager.Instance.remainingNpcs = RoundManager.Instance.currentRoundNpcs;
-        NpcCardManager.Instance.InitializeCards(RoundManager.Instance.currentRoundNpcs);
+        m_npc.currentNpc.OnTradeExit();
+        m_npc.ClearCurrentNpc();
+        m_round.StartNewRound();
+        m_npcCard.InitializeRemainingNpcs(m_round.currentRoundNpcs);
+        m_npcCard.InitializeCards(m_round.currentRoundNpcs);
     }
     public void OnNextNpcButtonClick()
     {
-        if (!RoundManager.Instance.canSelect)
+        if (!m_round.canSelect)
         {
             Debug.Log("无法再进行选择了");
             return;
         }
-        NpcManager.Instance.currentNpc.OnTradeExit();
-        RoundManager.Instance.DecriseSelectionTimes();
-        NpcCardManager.Instance.LoadRemainingCards();
-        NpcManager.Instance.ClearCurrentNpc();
+        m_npc.currentNpc.OnTradeExit();
+        m_round.DecriseSelectionTimes();
+        m_npcCard.LoadRemainingCards();
+        m_npc.ClearCurrentNpc();
     }
     public void OnAcceptNpcOfferButtonClick()
     {
-        InventorySystem.Instance.AddItem(new Item(NpcManager.Instance.currentNpc.currentOfferItem, NpcManager.Instance.currentNpc.currentOfferAmount));
+        m_inventory.GetNpcOfferItems(m_npc.currentNpc);
 
-        Debug.Log($"成功获取了{NpcManager.Instance.currentNpc.currentOfferAmount}个{NpcManager.Instance.currentNpc.currentOfferItem}");
+        Debug.Log($"成功获取了{m_npc.currentNpc.currentOfferAmount}个{m_npc.currentNpc.currentOfferItem}");
     }
 
     public void OnInventoryBrowseButtonClick()
     {
-        NpcManager.Instance.currentNpc.isRequestSuccess = true;
-        foreach (Item item in InventorySystem.Instance.items)
+        foreach (Item item in m_inventory.items)
         {
             Debug.Log($"拥有{item.data.name}{item.amount}个");
         }
@@ -65,14 +63,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void OnRefuseNpcButtonClick()
     {
-        NpcManager.Instance.currentNpc.isRequestSuccess = false;
-        NpcManager.Instance.currentNpc.OnTradeExit();
+        m_npc.currentNpc.isRequestSuccess = false;
+        m_npc.currentNpc.OnTradeExit();
     }
 
     public void OnOfferNpcItemButtonClick()
     {
 
     }
+
+
+    /// <summary>
+    /// 测试给予功能
+    /// </summary>
     public ItemData item0;
     public ItemData item1;
     public ItemData item2;
