@@ -24,8 +24,8 @@ public class DialogueManager : MonoBehaviour
     [Header("UIHandler")]
     public DialogueUIHandler UiHandler;
 
-    [Header("事件")]
-    public DialogueEvent EventList;
+    [Header("事件处理器")]
+    public DialogueEventList eventHandler;
 
     private void Awake()
     {
@@ -133,22 +133,9 @@ public class DialogueManager : MonoBehaviour
 
     public void EventHandler(DialogueEvent myEvent)
     {
-        if (myEvent != null)
+        if (eventHandler != null && myEvent != null)
         {
-            Debug.Log(myEvent.eventName);
-            if (myEvent.eventName == "End")
-            {
-                dialogueManager.Ui.ShowDialoguePane(false);
-                if(Input.GetKeyDown(KeyCode.Space))
-                {
-                    Destroy(this.gameObject);
-                }
-            }
-
-            if (myEvent.eventName == "yourEvent")
-            {
-
-            }
+            eventHandler.EventHandler(myEvent);
         }
     }
     
