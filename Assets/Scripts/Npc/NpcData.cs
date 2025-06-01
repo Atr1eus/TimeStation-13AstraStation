@@ -1,20 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Npc : MonoBehaviour
+using UnityEngine.UI;
+/// <summary>
+/// npc���������� ֻ����npc��ʲô
+/// </summary>
+public enum NpcType
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    Normal,
+    Story
 }
 public enum NpcSex
 {
@@ -51,7 +45,7 @@ public class NpcData : ScriptableObject
     public int maxPerNonrequestAwardGolds; //ÿ����һ����������Ʒ���ܻ�õ���߽�Ǯ
     [Header("Npc�øж�����")]
     public int initialFavorability;
-    
+
     [Header("NPC��������")]
     public bool isMoneyMore10K;
     public bool isRoundMore5;
