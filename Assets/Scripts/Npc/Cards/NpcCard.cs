@@ -7,9 +7,9 @@ using UnityEngine.UI;
 [System.Serializable]
 public class NpcCard 
 {
-    public Npc npc; 
+    public NpcData npc; 
     public string description;
-    public NpcCard(Npc npc)
+    public NpcCard(NpcData npc)
     {
         this.npc = npc;
         description = npc.GetDescription();

@@ -7,8 +7,10 @@ using UnityEngine.UI;
 
 public class TradingSceneManager : SceneManager
 {
+    [SerializeField] private GameManager manager;
     [Header("UI×é¼þ")]
     [SerializeField] private Button loadRestSceneButton;
+    [SerializeField] private Button nextNpcButton;
 
     protected override void Awake()
     {

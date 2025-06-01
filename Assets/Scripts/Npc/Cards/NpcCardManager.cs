@@ -10,9 +10,9 @@ public class NpcCardManager : SingletonMonoBehaviour<NpcCardManager>
     public GameObject cardPrefab;
     public Transform cardContainer;
     public List<NpcCardUI> activeCards = new List<NpcCardUI>();
-    public List<Npc> remainingNpcs = new List<Npc>();
+    public List<NpcData> remainingNpcs = new List<NpcData>();
 
-    public void InitializeCards(List<Npc> npcs)
+    public void InitializeCards(List<NpcData> npcs)
     {
         ClearCardList();
         float screenWidth = Screen.width;
@@ -45,7 +45,7 @@ public class NpcCardManager : SingletonMonoBehaviour<NpcCardManager>
             activeCards.Add(cardUI);
         }
     }
-    public void InitializeRemainingNpcs(List<Npc> npcs)
+    public void InitializeRemainingNpcs(List<NpcData> npcs)
     {
         remainingNpcs = npcs;
     }

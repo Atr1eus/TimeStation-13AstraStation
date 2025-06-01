@@ -24,9 +24,9 @@ public class NpcController : MonoBehaviour
         isTradeFinish = false;
         InitializeRandomOfferItem();
         InitializeRandomRequestItem();
-        perRequestAwardGolds = npc.GetRandomRequestAwardGolds();
-        perNonrequestAwardGolds = npc.GetRandomNonrequestAwardGolds();
-        Debug.Log($"{npc.name}向你索要{currentRequestAmount}个{currentRequestItem.name},他给你带来了{currentOfferAmount}个{currentOfferItem.name}");
+        perRequestAwardGolds = npc.data.GetRandomRequestAwardGolds();
+        perNonrequestAwardGolds = npc.data.GetRandomNonrequestAwardGolds();
+        Debug.Log($"{npc.data.name}向你索要{currentRequestAmount}个{currentRequestItem.name},他给你带来了{currentOfferAmount}个{currentOfferItem.name}");
     }
     public int AffordForItems(ItemData itemdata,int amount) //计算Npc获得物品后给予玩家的金钱
     {
@@ -53,14 +53,14 @@ public class NpcController : MonoBehaviour
     public void InitializeRandomOfferItem()
     {
         //初始化随机OfferItem
-        currentOfferItem = npc.GetRandomOfferItem();
+        currentOfferItem = npc.data.GetRandomOfferItem();
         currentOfferAmount = Random.Range(currentOfferItem.minOfferAmount, currentOfferItem.maxOfferAmount + 1);
         //todo：UI显示
     }
     public void InitializeRandomRequestItem()
     {
         //初始化随机RequestItem
-        currentRequestItem = npc.GetRandomRequestItem();
+        currentRequestItem = npc.data.GetRandomRequestItem();
         currentRequestAmount = Random.Range(currentRequestItem.minRequestAmount, currentRequestItem.maxOfferAmount + 1);
         //todo：UI显示
     }

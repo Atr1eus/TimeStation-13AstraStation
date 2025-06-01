@@ -16,7 +16,7 @@ public enum NpcSex
     Woman
 }
 [CreateAssetMenu(fileName = "New NPC", menuName = "Game/NPC")]
-public class Npc : ScriptableObject
+public class NpcData : ScriptableObject
 {
     public int age;
     public string npcName;
@@ -43,6 +43,9 @@ public class Npc : ScriptableObject
     public int maxPerRequestAwardGolds; //每交易一个需求物品可能获得的最高金钱
     public int minPerNonrequestAwardGolds; //每交易一个非需求物品可能获得的最低金钱
     public int maxPerNonrequestAwardGolds; //每交易一个非需求物品可能获得的最高金钱
+    [Header("Npc好感度配置")]
+    public int initialFavorability;
+    
     [Header("NPC出现条件")]
     public bool isMoneyMore10K;
     public bool isRoundMore5;
@@ -52,7 +55,7 @@ public class Npc : ScriptableObject
     public ItemData GetRandomRequestItem() => requestItems[Random.Range(0, requestItems.Count)]; //获取随机物品要求
     public ItemData GetRandomOfferItem() => offerItems[Random.Range(0, offerItems.Count)];
     public string GetDescription() => npcDescription;
-    public int GetRandomRequestAwardGolds() => Random.Range(minPerRequestAwardGolds,maxPerRequestAwardGolds + 1);
+    public int GetRandomRequestAwardGolds() => Random.Range(minPerRequestAwardGolds, maxPerRequestAwardGolds + 1);
     public int GetRandomNonrequestAwardGolds() => Random.Range(minPerNonrequestAwardGolds, maxPerNonrequestAwardGolds + 1);
 
 
