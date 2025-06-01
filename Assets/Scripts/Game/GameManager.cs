@@ -16,6 +16,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private InventorySystem m_inventory;
     [SerializeField] private RoundManager m_round;
     [SerializeField] private NpcCardManager m_npcCard;
+    [SerializeField] private SceneLoader m_sceneLoader;
 
     //todo:UIManager
 
@@ -71,8 +72,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
 
     }
-
-
     /// <summary>
     /// ²âÊÔ¸øÓè¹¦ÄÜ
     /// </summary>
