@@ -1,61 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-/// <summary>
-/// npcÊý¾ÝÅäÖÃÀà Ö»¹ØÐÄnpcÊÇÊ²Ã´
-/// </summary>
-public enum NpcType
+
+public class Npc : MonoBehaviour
 {
-    Normal,
-    Story
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
 public enum NpcSex
 {
     Man,
     Woman
 }
-
-
 [CreateAssetMenu(fileName = "New NPC", menuName = "Game/NPC")]
 public class NpcData : ScriptableObject
 {
     public int age;
-    public int favorability; // ºÃ¸Ð¶È
     public string npcName;
     public NpcSex sex;
     public GameObject hand;
     public NpcType type;
     [TextArea] public string npcDescription;
 
-    [Header("¶Ô»°ÅäÖÃ")]
-    public List<string> greetingDialogues; //³õÊ¼¶Ô»°ÁÐ±í
-    public List<string> successDialogues; //Í¬Òâ¸øÓè¶Ô»°ÁÐ±í
-    public List<string> refuseDialogues; //¾Ü¾ø¸øÓè¶Ô»°ÁÐ±í
+    [Header("ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public List<string> greetingDialogues; //ï¿½ï¿½Ê¼ï¿½Ô»ï¿½ï¿½Ð±ï¿½
+    public List<string> successDialogues; //Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½Ð±ï¿½
+    public List<string> refuseDialogues; //ï¿½Ü¾ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½Ð±ï¿½
 
 
-    [Header("½»Ò×ÅäÖÃ")]
-    public List<ItemData> requestItems; //Ë÷È¡ÎïÆ·ÁÐ±í
-    public List<ItemData> offerItems; //´øÀ´ÎïÆ·ÁÐ±í
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public List<ItemData> requestItems; //ï¿½ï¿½È¡ï¿½ï¿½Æ·ï¿½Ð±ï¿½
+    public List<ItemData> offerItems; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Ð±ï¿½
 
-    [Header("³öÏÖÊ±¼äÅäÖÃ")]
-    public int minAppearRound; //×îÔç³öÏÖ»ØºÏ
-    public int maxAppearRound; //×îÍí³öÏÖ»ØºÏ
-    [Header("Npc½ðÇ®½±Àø")]
-    public int minPerRequestAwardGolds; //Ã¿½»Ò×Ò»¸öÐèÇóÎïÆ·¿ÉÄÜ»ñµÃµÄ×îµÍ½ðÇ®
-    public int maxPerRequestAwardGolds; //Ã¿½»Ò×Ò»¸öÐèÇóÎïÆ·¿ÉÄÜ»ñµÃµÄ×î¸ß½ðÇ®
-    public int minPerNonrequestAwardGolds; //Ã¿½»Ò×Ò»¸ö·ÇÐèÇóÎïÆ·¿ÉÄÜ»ñµÃµÄ×îµÍ½ðÇ®
-    public int maxPerNonrequestAwardGolds; //Ã¿½»Ò×Ò»¸ö·ÇÐèÇóÎïÆ·¿ÉÄÜ»ñµÃµÄ×î¸ß½ðÇ®
-    [Header("NPC³öÏÖÌõ¼þ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public int minAppearRound; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»Øºï¿½
+    public int maxAppearRound; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»Øºï¿½
+    [Header("Npcï¿½ï¿½Ç®ï¿½ï¿½ï¿½ï¿½")]
+    public int minPerRequestAwardGolds; //Ã¿ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Ü»ï¿½Ãµï¿½ï¿½ï¿½Í½ï¿½Ç®
+    public int maxPerRequestAwardGolds; //Ã¿ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Ü»ï¿½Ãµï¿½ï¿½ï¿½ß½ï¿½Ç®
+    public int minPerNonrequestAwardGolds; //Ã¿ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Ü»ï¿½Ãµï¿½ï¿½ï¿½Í½ï¿½Ç®
+    public int maxPerNonrequestAwardGolds; //Ã¿ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Ü»ï¿½Ãµï¿½ï¿½ï¿½ß½ï¿½Ç®
+    [Header("Npcï¿½Ã¸Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public int initialFavorability;
+    
+    [Header("NPCï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public bool isMoneyMore10K;
     public bool isRoundMore5;
 
-    public string GetRandomGreeting() => greetingDialogues[Random.Range(0, greetingDialogues.Count)]; //»ñÈ¡Ëæ»úÕÐºôÓï
+    public string GetRandomGreeting() => greetingDialogues[Random.Range(0, greetingDialogues.Count)]; //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ðºï¿½ï¿½ï¿½
 
-    public ItemData GetRandomRequestItem() => requestItems[Random.Range(0, requestItems.Count)]; //»ñÈ¡Ëæ»úÎïÆ·ÒªÇó
+    public ItemData GetRandomRequestItem() => requestItems[Random.Range(0, requestItems.Count)]; //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Æ·Òªï¿½ï¿½
     public ItemData GetRandomOfferItem() => offerItems[Random.Range(0, offerItems.Count)];
     public string GetDescription() => npcDescription;
-    public int GetRandomRequestAwardGolds() => Random.Range(minPerRequestAwardGolds,maxPerRequestAwardGolds + 1);
+    public int GetRandomRequestAwardGolds() => Random.Range(minPerRequestAwardGolds, maxPerRequestAwardGolds + 1);
     public int GetRandomNonrequestAwardGolds() => Random.Range(minPerNonrequestAwardGolds, maxPerNonrequestAwardGolds + 1);
 
 
