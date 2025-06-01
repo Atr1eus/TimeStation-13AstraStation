@@ -5,44 +5,55 @@ using UnityEngine;
 /// </summary>
 public class NpcManager : SingletonMonoBehaviour<NpcManager>
 {
-    public List<Npc> Npcs = new List<Npc>();
+    public List<NpcData> npcDatas = new List<NpcData>();
+    public Dictionary<string, Npc> npcDictionary = new Dictionary<string, Npc>();
     public Transform npcSpawnPoint;
     private int npcIndex = -1;
     public NpcController currentNpc;
     public GameObject npcObj;
-    private Npc GetNpcInRandom() => Npcs[Random.Range(0, Npcs.Count)]; //在列表中随机选取npc
-    private Npc GetNpcInOrder() => Npcs[++npcIndex % Npcs.Count]; // 在列表中顺序选取npc
+    private NpcData GetNpcInRandom() => npcDatas[Random.Range(0, npcDatas.Count)]; //在列表中随机选取npc
+    private NpcData GetNpcInOrder() => npcDatas[++npcIndex % npcDatas.Count]; // 在列表中顺序选取npc
 
     protected override void Awake()
     {
         base.Awake();
         currentNpc = FindObjectOfType<NpcController>();
+        InitializeNpcs();
     }
-
+    public void InitializeNpcs()
+    {
+        foreach (var npcData in npcDatas)
+        {
+            npcDictionary.Add(npcData.name, new Npc(npcData));
+        }
+    }
     public void SpawnNpc(int rule) //0为随机生成 1为顺序生成 废弃功能 暂时留着
     {
         //每次生成重新实例化NPC，初始化控制器
-        Npc npc = rule == 0 ? GetNpcInRandom() : GetNpcInOrder();
-        GameObject npcObj = Instantiate(npc.hand, npcSpawnPoint.position, Quaternion.identity);
+        NpcData npcdata = rule == 0 ? GetNpcInRandom() : GetNpcInOrder();
+        Npc npc = npcDictionary[npcdata.name];
+        GameObject npcObj = Instantiate(npc.data.hand, npcSpawnPoint.position, Quaternion.identity);
         currentNpc = npcObj.AddComponent<NpcController>();
         currentNpc.InitializeController(npc);
         currentNpc.OnTradeEnter();
     }
-    public void SpawnNpc(Npc npc) //直接根据NPC生成 不与NpcCard产生关联 半废弃
+    public void SpawnNpc(NpcData npcdata) //直接根据NPC生成 不与NpcCard产生关联 半废弃
     {
-        GameObject npcObj = Instantiate(npc.hand, npcSpawnPoint.position, Quaternion.identity);
+        GameObject npcObj = Instantiate(npcdata.hand, npcSpawnPoint.position, Quaternion.identity);
+        Npc npc = npcDictionary[npcdata.name];
         currentNpc = npcObj.AddComponent<NpcController>();
         currentNpc.InitializeController(npc);
         currentNpc.OnTradeEnter();
     }
     public void InitializeCurrentNpc(NpcCard npcCard)//npcCard选择事件 根据玩家的选择定义currentNpc
     {
-        Npc npc = npcCard.npc;
-        npcObj = Instantiate(npc.hand, npcSpawnPoint.position, Quaternion.identity);
+        NpcData npcdata = npcCard.npc;
+        Npc npc = npcDictionary[npcdata.name];
+        npcObj = Instantiate(npc.data.hand, npcSpawnPoint.position, Quaternion.identity);
         currentNpc = npcObj.AddComponent<NpcController>();
         currentNpc.InitializeController(npc);
         currentNpc.OnTradeEnter();
-        Debug.Log($"currentNpc:{currentNpc.npc.name}");
+        Debug.Log($"currentNpc:{currentNpc.npc.data.name}");
     }
     public void ClearCurrentNpc()
     {

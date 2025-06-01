@@ -7,9 +7,8 @@ using UnityEngine.UI;
 
 public class RestSceneManager : SceneManager
 {
-    [Header("UI×é¼þ")]
+    [Header("UI??")]
     [SerializeField] private Button loadTradingSceneButton;
-
     protected override void Awake()
     {
         base.Awake();

@@ -32,8 +32,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         m_npc.currentNpc.OnTradeExit();
         m_npc.ClearCurrentNpc();
         m_round.StartNewRound();
-        m_npcCard.InitializeRemainingNpcs(m_round.currentRoundNpcs);
-        m_npcCard.InitializeCards(m_round.currentRoundNpcs);
+        m_npcCard.InitializeRemainingNpcs(m_round.currentRoundNpcDatas);
+        m_npcCard.InitializeCards(m_round.currentRoundNpcDatas);
     }
     public void OnNextNpcButtonClick()
     {

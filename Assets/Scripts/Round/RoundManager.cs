@@ -22,10 +22,12 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
     public bool canSelect = true;
 
     [Header("NPC池子")]
-    public List<Npc> wholeNpcs = new List<Npc>(); //总NPC池子
-    public List<Npc> availableNpcs = new List<Npc>(); //可出现NPC池子
+    public List<NpcData> wholeNpcDatas = new List<NpcData>(); //总NPC池子
+    public List<NpcData> availableNpcDatas = new List<NpcData>(); //可出现NPC池子
 
-    public List<Npc> currentRoundNpcs = new List<Npc>(); //本回合出现NPC
+    public List<NpcData> currentRoundNpcDatas = new List<NpcData>(); //本回合出现NPC
+    public List<Npc> currentRoundNpcs = new List<Npc>();
+
     public UnityEvent OnRoundStart;
     public UnityEvent OnRoundEnd;
     public UnityEvent OnRountStep;
@@ -39,40 +41,49 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         DecriseSelectionTimes();//回合开始选择一次 次数要减去
         roundTimer = roundDuration;
         isRoundActive = true;
-        InitializeAvaliableNpcs();
+        InitializeAvaliableNpcDatas();
+        InitializeRoundNpcDatas();
         InitializeRoundNpcs();
         OnRoundStart?.Invoke();
     }
 
-    public List<Npc> InitializeAvaliableNpcs()//初始化本回合角色池
+    public List<NpcData> InitializeAvaliableNpcDatas()//初始化本回合角色池
     {
-        availableNpcs.Clear();
-        Debug.Log($"InitializeAvailableNpcs: currentRound={currentRound}, wholeNpcs.Count={wholeNpcs.Count}");
-        foreach (var npc in wholeNpcs)
+        availableNpcDatas.Clear();
+        Debug.Log($"InitializeAvailableNpcs: currentRound={currentRound}, wholeNpcs.Count={wholeNpcDatas.Count}");
+        foreach (var npc in wholeNpcDatas)
         {
             if (NpcAppearConditions.CanNpcAppear(npc) && npc.minAppearRound <= currentRound
                  && npc.maxAppearRound >= currentRound)
             {
-                availableNpcs.Add(npc);
+                availableNpcDatas.Add(npc);
             }
         }
-        return availableNpcs;
+        return availableNpcDatas;
     }
-    public List<Npc> InitializeRoundNpcs()//初始化本回合角色
+    public List<NpcData> InitializeRoundNpcDatas()//初始化本回合角色
     {
-        OutOfOrder(availableNpcs);
-        for (int i = 0; i < selectionsPerRound && i < availableNpcs.Count; i++)
+        OutOfOrder(availableNpcDatas);
+        for (int i = 0; i < selectionsPerRound && i < availableNpcDatas.Count; i++)
         {
-            currentRoundNpcs.Add(availableNpcs[i]);
+            currentRoundNpcDatas.Add(availableNpcDatas[i]);
+        }
+        return currentRoundNpcDatas;
+    }
+    public List<Npc> InitializeRoundNpcs()
+    {
+        foreach (var npcdata in currentRoundNpcDatas)
+        {
+            currentRoundNpcs.Add(NpcManager.Instance.npcDictionary[npcdata.name]);
         }
         return currentRoundNpcs;
     }
 
-    public List<Npc> OutOfOrder(List<Npc> Npcs) //随机打乱Npc池
+    public List<NpcData> OutOfOrder(List<NpcData> Npcs) //随机打乱Npc池
     {
         System.Random randomNum = new System.Random();
         int index = 0;
-        Npc temp;
+        NpcData temp;
         for (int i = 0; i < Npcs.Count; i++)
         {
             index = randomNum.Next(0, Npcs.Count);
@@ -93,7 +104,8 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
 
     public void ClearCurrentNpc()
     {
-        availableNpcs.Clear();
+        availableNpcDatas.Clear();
+        currentRoundNpcDatas.Clear();
         currentRoundNpcs.Clear();
     }
 }
