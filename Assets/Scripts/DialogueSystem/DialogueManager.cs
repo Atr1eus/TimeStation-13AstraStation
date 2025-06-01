@@ -7,13 +7,11 @@ using DialogueSystem;
 public class DialogueManager : MonoBehaviour
 {
     Dialogue dialogueManager;
+    List<DialogueGameState> gameStateVariables = new List<DialogueGameState>();
 
     [Header("对话设置")]
     public DialogueGraph graph;
     public DialogueTheme alternativeTheme;
-
-    //[Header("Game State Variables")]
-    //public List<DialogueGameState> gameStateVariables = new List<DialogueGameState>();
 
     [Header("输入控制")]
     public KeyCode advanceKey = KeyCode.Space;
@@ -39,6 +37,10 @@ public class DialogueManager : MonoBehaviour
 
         dialogueManager.dialogueCallbackActions.OnNodeLeave += OnNodeLeave;
         dialogueManager.dialogueCallbackActions.OnNodeEnter += OnNodeEnter;
+
+        //gameStateVariables.Add(new DialogueGameState(10f, "floatExample"));
+        GameStateHandler();
+        dialogueManager.SetDialogGameState(gameStateVariables);
 
         dialogueManager.OnChoiceDraw += OnChoiceDraw;
 
@@ -131,6 +133,7 @@ public class DialogueManager : MonoBehaviour
         return true;
     }
 
+    //事件处理
     public void EventHandler(DialogueEvent myEvent)
     {
         if (eventHandler != null && myEvent != null)
@@ -138,5 +141,10 @@ public class DialogueManager : MonoBehaviour
             eventHandler.EventHandler(myEvent);
         }
     }
-    
+
+    //游戏状态处理（获取角色属性判断是哪组对话）
+    public void GameStateHandler()
+    {
+
+    }
 }
