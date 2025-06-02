@@ -30,7 +30,7 @@ public class DialogueManager : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
-        curNpc = GetComponent<Npc>();
+        //curNpc = GetComponent<Npc>();
 
         if (curNpc == null)
         {
@@ -45,8 +45,7 @@ public class DialogueManager : MonoBehaviour
         dialogueManager.dialogueCallbackActions.OnNodeLeave += OnNodeLeave;
         dialogueManager.dialogueCallbackActions.OnNodeEnter += OnNodeEnter;
 
-        //gameStateVariables.Add(new DialogueGameState(10f, "floatExample"));
-        GameStateHandler();
+        //GameStateHandler();
         dialogueManager.SetDialogGameState(gameStateVariables);
 
         dialogueManager.OnChoiceDraw += OnChoiceDraw;

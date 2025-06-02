@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public enum NpcAttribute
 {
-    Favorability
+    Favorability,
+    bit1,
+    bit2,
+    bit3
 }
 
 public class Npc

@@ -14,6 +14,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private PlayerController m_player;
     [SerializeField] private NpcManager m_npc;
     [SerializeField] private InventorySystem m_inventory;
+    [SerializeField] private InventoryBrowser m_inventoryUI;
     [SerializeField] private RoundManager m_round;
     [SerializeField] private NpcCardManager m_npcCard;
     [SerializeField] private SceneLoader m_sceneLoader;
@@ -56,6 +57,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void OnInventoryBrowseButtonClick()
     {
+        m_inventoryUI.OnInventoryBrowseButtonClick();
         foreach (Item item in m_inventory.items)
         {
             Debug.Log($"ÓµÓÐ{item.data.name}{item.amount}¸ö");
