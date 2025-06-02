@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7e6be5f878d8d94f93f637d411a1b91, type: 3}
-  m_Name: New NPC 4
+  m_Name: SpecialNpc
   m_EditorClassIdentifier: 
-  age: 0
-  npcName: 
-  sex: 0
-  hand: {fileID: 1233771984232238364, guid: a69796c0bb0495b41acc91d94befe66d, type: 3}
-  type: 0
-  career: 0
-  npcDescription: "\u4E0D\u597D\u8BF4"
+  age: 5
+  npcName: "\uFF1F\uFF1F\uFF1F"
+  sex: 1
+  hand: {fileID: 955719812875777746, guid: 5ef8b260ce7f3d841857c7e32b2ce914, type: 3}
+  type: 1
+  career: 1
+  species: 0
+  travelTo: 0
+  npcDescription: "\u7279\u6B8ANPC"
   greetingDialogues: []
   successDialogues: []
   refuseDialogues: []
   requestItems:
-  - {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
-  - {fileID: 11400000, guid: 7b5eefb295097974b8a2ec51ba448edb, type: 2}
+  - {fileID: 11400000, guid: 823e4213a11904b468dcf8214b8d3383, type: 2}
   offerItems:
   - {fileID: 11400000, guid: 823e4213a11904b468dcf8214b8d3383, type: 2}
-  - {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
-  minAppearRound: 0
-  maxAppearRound: 100
-  minPerRequestAwardGolds: 10
-  maxPerRequestAwardGolds: 20
-  minPerNonrequestAwardGolds: 5
-  maxPerNonrequestAwardGolds: 15
+  minAppearRound: 3
+  maxAppearRound: 10
+  minPerRequestAwardGolds: 1
+  maxPerRequestAwardGolds: 1
+  minPerNonrequestAwardGolds: 1
+  maxPerNonrequestAwardGolds: 1
   initialFavorability: 0
   reasonToFurture: []
   reasonToPast: []

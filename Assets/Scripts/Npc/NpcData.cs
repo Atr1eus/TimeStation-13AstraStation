@@ -15,20 +15,35 @@ public enum NpcSex
     Man,
     Woman
 }
+public enum NpcCareer
+{
+    Teacher,
+    Doctor,
+    None
+}
+public enum NpcSpecies
+{
+    Human,
+    Cat
+}
 [CreateAssetMenu(fileName = "New NPC", menuName = "Game/NPC")]
 public class NpcData : ScriptableObject
 {
     public int age;
     public string npcName;
     public NpcSex sex;
-    public GameObject hand;
-    public NpcType type;
-    [TextArea] public string npcDescription;
+    public GameObject hand; //手(剧情npc绑定)
+    public NpcType type; //普通/剧情
+    public NpcCareer career; //职业
+    public NpcSpecies species; //物种
+    public TravelTo travelTo; //去过去还是未来
+    [TextArea] public string npcDescription; //外貌等介绍
+
 
     [Header("对话配置")]
     public List<string> greetingDialogues; //初始对话列表
-    public List<string> successDialogues; //同意给予对话列表
-    public List<string> refuseDialogues; //拒绝给予对话列表
+    public List<string> successDialogues; //放行后对话列表
+    public List<string> refuseDialogues; //拒绝后对话列表
 
 
     [Header("交易配置")]
@@ -43,9 +58,17 @@ public class NpcData : ScriptableObject
     public int maxPerRequestAwardGolds; //每交易一个需求物品可能获得的最高金钱
     public int minPerNonrequestAwardGolds; //每交易一个非需求物品可能获得的最低金钱
     public int maxPerNonrequestAwardGolds; //每交易一个非需求物品可能获得的最高金钱
+    public int trueChoiceAwardGolds; //选择正确奖励金钱
+    public int falseChoicePunishGolds; //选择错误惩罚金钱
     [Header("Npc好感度配置")]
     public int initialFavorability;
-    
+
+    [Header("Npc去往过去/未来理由配置")]
+    public List<string> reasonToFurture; //去往未来理由列表
+    public List<string> reasonToPast; //去往过去理由列表
+
+
+
     [Header("NPC出现条件")]
     public bool isMoneyMore10K;
     public bool isRoundMore5;
