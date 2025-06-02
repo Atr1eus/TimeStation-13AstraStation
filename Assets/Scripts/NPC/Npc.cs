@@ -7,6 +7,7 @@ public enum NpcAttribute
 {
     Favorability
 }
+
 public class Npc
 {
     public NpcData data;

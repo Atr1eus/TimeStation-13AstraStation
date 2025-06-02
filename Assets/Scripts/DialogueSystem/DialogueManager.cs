@@ -8,6 +8,7 @@ public class DialogueManager : MonoBehaviour
 {
     Dialogue dialogueManager;
     List<DialogueGameState> gameStateVariables = new List<DialogueGameState>();
+    private Npc curNpc;
 
     [Header("对话设置")]
     public DialogueGraph graph;
@@ -29,6 +30,12 @@ public class DialogueManager : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
+        curNpc = GetComponent<Npc>();
+
+        if (curNpc == null)
+        {
+            Debug.LogWarning($"DialogueManager所在的GameObject缺少NPC组件", gameObject);
+        }
     }
 
     private void Start()
@@ -124,6 +131,7 @@ public class DialogueManager : MonoBehaviour
     public void OnNodeLeave(BaseNode node)
     {
         //Debug.Log("left " + node.name);
+        //GameStateHandler();//实时更新角色数据（例如好感度）
     }
 
     //绘制选项
@@ -145,6 +153,6 @@ public class DialogueManager : MonoBehaviour
     //游戏状态处理（获取角色属性判断是哪组对话）
     public void GameStateHandler()
     {
-
+        gameStateVariables.Add(new DialogueGameState(curNpc.attribute[NpcAttribute.Favorability], "Favorability")); //希望改写成通用接口
     }
 }

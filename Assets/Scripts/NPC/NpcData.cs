@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
-/// npc���������� ֻ����npc��ʲô
+/// npc数据配置类 只关心npc是什么
 /// </summary>
 public enum NpcType
 {
@@ -25,34 +25,34 @@ public class NpcData : ScriptableObject
     public NpcType type;
     [TextArea] public string npcDescription;
 
-    [Header("�Ի�����")]
-    public List<string> greetingDialogues; //��ʼ�Ի��б�
-    public List<string> successDialogues; //ͬ�����Ի��б�
-    public List<string> refuseDialogues; //�ܾ�����Ի��б�
+    [Header("对话配置")]
+    public List<string> greetingDialogues; //初始对话列表
+    public List<string> successDialogues; //同意给予对话列表
+    public List<string> refuseDialogues; //拒绝给予对话列表
 
 
-    [Header("��������")]
-    public List<ItemData> requestItems; //��ȡ��Ʒ�б�
-    public List<ItemData> offerItems; //������Ʒ�б�
+    [Header("交易配置")]
+    public List<ItemData> requestItems; //索取物品列表
+    public List<ItemData> offerItems; //带来物品列表
 
-    [Header("����ʱ������")]
-    public int minAppearRound; //������ֻغ�
-    public int maxAppearRound; //�������ֻغ�
-    [Header("Npc��Ǯ����")]
-    public int minPerRequestAwardGolds; //ÿ����һ��������Ʒ���ܻ�õ���ͽ�Ǯ
-    public int maxPerRequestAwardGolds; //ÿ����һ��������Ʒ���ܻ�õ���߽�Ǯ
-    public int minPerNonrequestAwardGolds; //ÿ����һ����������Ʒ���ܻ�õ���ͽ�Ǯ
-    public int maxPerNonrequestAwardGolds; //ÿ����һ����������Ʒ���ܻ�õ���߽�Ǯ
-    [Header("Npc�øж�����")]
+    [Header("出现时间配置")]
+    public int minAppearRound; //最早出现回合
+    public int maxAppearRound; //最晚出现回合
+    [Header("Npc金钱奖励")]
+    public int minPerRequestAwardGolds; //每交易一个需求物品可能获得的最低金钱
+    public int maxPerRequestAwardGolds; //每交易一个需求物品可能获得的最高金钱
+    public int minPerNonrequestAwardGolds; //每交易一个非需求物品可能获得的最低金钱
+    public int maxPerNonrequestAwardGolds; //每交易一个非需求物品可能获得的最高金钱
+    [Header("Npc好感度配置")]
     public int initialFavorability;
 
-    [Header("NPC��������")]
+    [Header("NPC出现条件")]
     public bool isMoneyMore10K;
     public bool isRoundMore5;
 
-    public string GetRandomGreeting() => greetingDialogues[Random.Range(0, greetingDialogues.Count)]; //��ȡ����к���
+    public string GetRandomGreeting() => greetingDialogues[Random.Range(0, greetingDialogues.Count)]; //获取随机招呼语
 
-    public ItemData GetRandomRequestItem() => requestItems[Random.Range(0, requestItems.Count)]; //��ȡ�����ƷҪ��
+    public ItemData GetRandomRequestItem() => requestItems[Random.Range(0, requestItems.Count)]; //获取随机物品要求
     public ItemData GetRandomOfferItem() => offerItems[Random.Range(0, offerItems.Count)];
     public string GetDescription() => npcDescription;
     public int GetRandomRequestAwardGolds() => Random.Range(minPerRequestAwardGolds, maxPerRequestAwardGolds + 1);
