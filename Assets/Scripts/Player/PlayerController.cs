@@ -10,6 +10,8 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 
     public bool CanAfford(ItemData item, int amount) => item.itemPrice * amount <= gold;
     public void Afford(ItemData item, int amount = 1) => gold -= item.itemPrice * amount;
+    public void AddGold(int gold) => this.gold += gold;
+    public void MinusGold(int gold) => this.gold -= gold;
     void Update()
     {
 

@@ -8,21 +8,158 @@ using UnityEngine.UI;
 public class TradingSceneManager : SceneManager
 {
     [SerializeField] private GameManager manager;
-    [Header("UI组件")]
+    [SerializeField] private NpcCardManager cardManager;
+    [Header("UI??")]
     [SerializeField] private Button loadRestSceneButton;
     [SerializeField] private Button nextNpcButton;
-
+    [SerializeField] private Button agreeButton;
+    [SerializeField] private Button disagreeButton;
+    [SerializeField] private Button giveButton;
+    [SerializeField] private Button item0Button;
+    [SerializeField] private Button item1Button;
+    [SerializeField] private Button item2Button;
+    [SerializeField] private Button exitBagButton;
+    [SerializeField] private Transform npcSpawnPos;
+    [SerializeField] private Transform ticketSpawnPos;
     protected override void Awake()
     {
         base.Awake();
-        InitializeButtons();
-    }
+        InitializeButtonsAwake();
 
-    private void InitializeButtons()
+    }
+    void Start()
+    {
+        GameManager.Instance.m_npcCard = FindObjectOfType<NpcCardManager>();
+        manager = GameManager.Instance;
+        NpcManager.Instance.handSpawnPoint = npcSpawnPos;
+        TicketManager.Instance.ticketContainer = ticketSpawnPos;
+        InitializeButtonsStart();
+        InitializeButtonStates();
+        //todo:下面这行暂时放这 白盒测试用
+        GameManager.Instance.OnNextRoundClick();
+    }
+    private void InitializeButtonsStart()
+    {
+        nextNpcButton?.onClick.AddListener(manager.OnNextNpcButtonClick);
+        agreeButton?.onClick.AddListener(manager.OnAgreeNpcButtonClick);
+        item0Button?.onClick.AddListener(manager.TESTOfferItem);
+        item1Button?.onClick.AddListener(manager.TESTOfferIte1);
+        item2Button?.onClick.AddListener(manager.TESTOfferItem2);
+
+    }
+    private void InitializeButtonsAwake()
     {
         loadRestSceneButton?.onClick.AddListener(() =>
         {
             StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
         });
+        nextNpcButton?.onClick.AddListener(InitializeButtonStates);
+        agreeButton?.onClick.AddListener(AgreeButtonState);
+        disagreeButton?.onClick.AddListener(OnDisagreeButtonClick);
+        giveButton?.onClick.AddListener(GiveButtonClickButtonState);
+        exitBagButton?.onClick.AddListener(AgreeButtonState);
+    }
+    public void OnDisagreeButtonClick()
+    {
+        bool isNext = manager.OnDisagreeNpcButtonClick();
+        InitializeButtonStates();
+        if (isNext) return;
+        StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
+    }
+    public void InitializeButtonStates()
+    {
+        UnuseButton(agreeButton);
+        UnuseButton(disagreeButton);
+        UnuseButton(nextNpcButton);
+        UnuseButton(loadRestSceneButton);
+        UnuseButton(giveButton);
+        UnuseButton(item0Button);
+        UnuseButton(item1Button);
+        UnuseButton(item2Button);
+        UnuseButton(exitBagButton);
+    }
+    public void DecidedNpcButtonState()
+    {
+        UseButton(agreeButton);
+        UseButton(disagreeButton);
+        if (RoundManager.Instance.canSelect)
+        {
+            UseButBanButton(nextNpcButton);
+            UnuseButton(loadRestSceneButton);
+        }
+        else
+        {
+            UseButBanButton(loadRestSceneButton);
+            UnuseButton(nextNpcButton);
+        }
+        UseButBanButton(giveButton);
+        UnuseButton(item0Button);
+        UnuseButton(item1Button);
+        UnuseButton(item2Button);
+        UnuseButton(exitBagButton);
+    }
+    public void GiveButtonClickButtonState()
+    {
+        UseButBanButton(agreeButton);
+        UseButBanButton(disagreeButton);
+        UseButBanButton(giveButton);
+        if (RoundManager.Instance.canSelect)
+        {
+            UseButBanButton(nextNpcButton);
+            UnuseButton(loadRestSceneButton);
+        }
+        else
+        {
+            UseButBanButton(loadRestSceneButton);
+            UnuseButton(nextNpcButton);
+        }
+        UseButton(item0Button);
+        UseButton(item1Button);
+        UseButton(item2Button);
+        UseButton(exitBagButton);
+    }
+    public void AgreeButtonState()
+    {
+        UseButBanButton(agreeButton);
+        UseButBanButton(disagreeButton);
+        UseButton(giveButton);
+        if (RoundManager.Instance.canSelect)
+        {
+            UseButton(nextNpcButton);
+            UnuseButton(loadRestSceneButton);
+        }
+        else
+        {
+            UseButton(loadRestSceneButton);
+            UnuseButton(nextNpcButton);
+        }
+        UnuseButton(item0Button);
+        UnuseButton(item1Button);
+        UnuseButton(item2Button);
+        UnuseButton(exitBagButton);
+    }
+    public void UseButBanButton(Button button)
+    {
+        UseButton(button);
+        BanButton(button);
+    }
+    public void BanButton(Button button)
+    {
+        button.interactable = false;
+        button.image.color = Color.gray;
+    }
+    public void UnuseButton(Button button)
+    {
+        button.interactable = false;
+        button.image.enabled = false;
+        button.GetComponentInChildren<Text>().enabled = false;
+    }
+    public void UseButton(Button button)
+    {
+
+        button.interactable = true;
+        button.image.enabled = true;
+        button.GetComponentInChildren<Text>().enabled = true;
+        button.image.color = Color.white;
     }
 }

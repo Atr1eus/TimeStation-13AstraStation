@@ -11,7 +11,11 @@ public class NpcCardUI : MonoBehaviour
     public Button chooseButton;
     public Image npcImage;
     public NpcCard npcCard;
-
+    NpcCardManager npcCardManager;
+    public void OnEnable()
+    {
+        npcCardManager = FindObjectOfType<NpcCardManager>();
+    }
     public void SetUp(NpcCard card)
     {
         npcCard = card;
@@ -20,7 +24,7 @@ public class NpcCardUI : MonoBehaviour
     }
     private void OnChooseButtonClick()
     {
-        NpcCardManager.Instance.SelectCard(npcCard);
+        npcCardManager.SelectCard(npcCard);
         NpcManager.Instance.InitializeCurrentNpc(npcCard);
     }
 }

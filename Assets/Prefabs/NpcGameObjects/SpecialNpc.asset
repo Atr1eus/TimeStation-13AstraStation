@@ -10,24 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cde76f8380f77f048bfe2f9ad604a5c8, type: 3}
-  m_Name: New NPC 8
+  m_Name: SpecialNpc
   m_EditorClassIdentifier: 
   age: 0
   npcName: 
   sex: 0
-  hand: {fileID: 0}
-  type: 0
+  hand: {fileID: 955719812875777746, guid: 5ef8b260ce7f3d841857c7e32b2ce914, type: 3}
+  type: 1
   career: 0
   species: 0
   travelTo: 0
-  npcDescription: 
+  npcDescription: "\u54C8\u57FA\u7C73"
   greetingDialogues: []
   successDialogues: []
   refuseDialogues: []
-  requestItems: []
-  offerItems: []
+  requestItems:
+  - {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
+  offerItems:
+  - {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
   minAppearRound: 0
-  maxAppearRound: 0
+  maxAppearRound: 100
   minPerRequestAwardGolds: 0
   maxPerRequestAwardGolds: 0
   minPerNonrequestAwardGolds: 0

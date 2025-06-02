@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,14 +11,19 @@ public enum GameState
 }
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
+    public List<NpcData> wholeNormalNpcDataList;
+    public List<NpcData> wholeStoryNpcDataList;
+    public List<ItemData> wholeItemDataList;
+    public List<GameObject> wholeNormalHandList;
+    public NpcCardManager m_npcCard;
     [Header("Systems")]
     [SerializeField] private PlayerController m_player;
     [SerializeField] private NpcManager m_npc;
     [SerializeField] private InventorySystem m_inventory;
     [SerializeField] private InventoryBrowser m_inventoryUI;
     [SerializeField] private RoundManager m_round;
-    [SerializeField] private NpcCardManager m_npcCard;
     [SerializeField] private SceneLoader m_sceneLoader;
+    [SerializeField] private TicketManager m_ticket;
 
     //todo:UIManager
 
@@ -28,31 +34,48 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     protected virtual void Start()
     {
     }
-    public void OnNextRoundClick()
+    public void OnNextRoundClick() //下一回合按钮点击事件
     {
-        m_npc.currentNpc.OnTradeExit();
+        if (m_npc.currentNpc != null) m_npc.currentNpc.OnTradeExit();
         m_npc.ClearCurrentNpc();
         m_round.StartNewRound();
         m_npcCard.InitializeRemainingNpcs(m_round.currentRoundNpcDatas);
         m_npcCard.InitializeCards(m_round.currentRoundNpcDatas);
     }
-    public void OnNextNpcButtonClick()
+    public void OnNextNpcButtonClick() //下一个npc按钮点击事件
     {
         if (!m_round.canSelect)
         {
             Debug.Log("无法再进行选择了");
             return;
         }
-        m_npc.currentNpc.OnTradeExit();
+        if (m_npc.currentNpc != null) m_npc.currentNpc.OnTradeExit();
+        Debug.Log("下一位");
         m_round.DecriseSelectionTimes();
         m_npcCard.LoadRemainingCards();
+        m_ticket.ClearCurrentTicket();
         m_npc.ClearCurrentNpc();
     }
-    public void OnAcceptNpcOfferButtonClick()
+    public void OnAgreeNpcButtonClick()
     {
-        m_inventory.GetNpcOfferItems(m_npc.currentNpc);
+        m_inventory.GetNpcOfferItems(m_npc.currentNpc); //不论是否正确，都会给予物品
+        m_npc.AgreeNpcAward(); //根据实际情况增加或减少金钱
 
         Debug.Log($"成功获取了{m_npc.currentNpc.currentOfferAmount}个{m_npc.currentNpc.currentOfferItem}");
+    }
+    public bool OnDisagreeNpcButtonClick()
+    {
+        m_npc.DisagreeNpcAward();
+        if (!m_round.canSelect) return false;
+        else
+        {
+            if (m_npc.currentNpc != null) m_npc.currentNpc.OnTradeExit();
+            m_round.DecriseSelectionTimes();
+            m_ticket.ClearCurrentTicket();
+            m_npcCard.LoadRemainingCards();
+            m_npc.ClearCurrentNpc();
+            return true;
+        }
     }
 
     public void OnInventoryBrowseButtonClick()
@@ -74,9 +97,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
 
     }
-    /// <summary>
-    /// 测试给予功能
-    /// </summary>
+    #region  测试一些功能
     public ItemData item0;
     public ItemData item1;
     public ItemData item2;
@@ -85,6 +106,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         if (InventorySystem.Instance.HasEnoughItem(item0, 2))
         {
             int money = NpcManager.Instance.currentNpc.AffordForItems(item0, 2);
+            m_inventory.RemoveItem(item0, 2);
             PlayerController.Instance.gold += money;
             Debug.Log($"交易了2个Item,获得了{money}元");
         }
@@ -96,6 +118,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         if (InventorySystem.Instance.HasEnoughItem(item1, 2))
         {
             int money = NpcManager.Instance.currentNpc.AffordForItems(item1, 2);
+            m_inventory.RemoveItem(item1, 2);
             PlayerController.Instance.gold += money;
             Debug.Log($"交易了2个Item1,获得了{money}元");
         }
@@ -107,11 +130,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         if (InventorySystem.Instance.HasEnoughItem(item2, 2))
         {
             int money = NpcManager.Instance.currentNpc.AffordForItems(item2, 2);
+            m_inventory.RemoveItem(item2, 2);
             PlayerController.Instance.gold += money;
             Debug.Log($"交易了2个Item2,获得了{money}元");
         }
         else Debug.Log("没有足够的Item2");
     }
+
+    #endregion
     protected virtual void Update()
     {
 

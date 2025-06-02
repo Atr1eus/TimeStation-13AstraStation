@@ -5,19 +5,20 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-public class NpcCardManager : SingletonMonoBehaviour<NpcCardManager>
+public class NpcCardManager : MonoBehaviour
 {
     public GameObject cardPrefab;
     public Transform cardContainer;
     public List<NpcCardUI> activeCards = new List<NpcCardUI>();
     public List<NpcData> remainingNpcs = new List<NpcData>();
+    [SerializeField] private TradingSceneManager scene; 
 
     public void InitializeCards(List<NpcData> npcs)
     {
         ClearCardList();
         float screenWidth = Screen.width;
-        float leftBorder = screenWidth / 6f;    // 左边界（1/6 处）
-        float rightBorder = screenWidth * 5f / 6f; // 右边界（5/6 处）
+        float leftBorder = screenWidth / 10f;    // 左边界（1/6 处）
+        float rightBorder = screenWidth * 9f / 10f; // 右边界（5/6 处）
         float totalSpace = rightBorder - leftBorder;
         float spacing = totalSpace / (npcs.Count + 1); // 卡牌间距
         for (int i = 0; i < npcs.Count; i++)
@@ -59,7 +60,12 @@ public class NpcCardManager : SingletonMonoBehaviour<NpcCardManager>
         }
         activeCards.Clear();
         remainingNpcs.Remove(selectedCard.npc);
+        if (selectedCard.npc.type == NpcType.Story)
+        {
+            NpcManager.Instance.npcDictionary[selectedCard.npc.name].isSelected = true;
+        }
         Destroy(selectedUI.gameObject);
+        scene.DecidedNpcButtonState();
         Debug.Log($"已选择 NPC: {selectedCard.npc.name}");
     }
     public void LoadRemainingCards()

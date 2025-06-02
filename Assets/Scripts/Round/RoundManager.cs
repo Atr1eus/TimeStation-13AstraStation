@@ -6,7 +6,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-
 public class RoundManager : SingletonMonoBehaviour<RoundManager>
 {
     [Header("回合配置")]
@@ -15,15 +14,19 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
     [SerializeField] private float roundDuration = 180f;//单回合持续时间
 
     [Header("当前回合状态")]
-    private int currentRound = 0; //回合数
-    private int remainingSelections; //剩余选择数
+    public int currentRound = 0; //回合数
+    public int remainingSelections; //剩余选择数
     private float roundTimer; //回合剩余时间
     private bool isRoundActive; //是否激活回合时间
     public bool canSelect = true;
+    public bool isSelected = false;
 
-    [Header("NPC池子")]
-    public List<NpcData> wholeNpcDatas = new List<NpcData>(); //总NPC池子
-    public List<NpcData> availableNpcDatas = new List<NpcData>(); //可出现NPC池子
+    [Header("NPC池子(无需填写)")]
+    public List<NpcData> wholeNormalNpcDatas = new List<NpcData>(); //总普通NPC池子
+    public List<NpcData> wholeStoryNpcDatas = new List<NpcData>();
+
+    public List<NpcData> availableNormalNpcDatas = new List<NpcData>(); //可出现NPC池子
+    public List<NpcData> availableStoryNpcDatas = new List<NpcData>();
 
     public List<NpcData> currentRoundNpcDatas = new List<NpcData>(); //本回合出现NPC
     public List<Npc> currentRoundNpcs = new List<Npc>();
@@ -41,33 +44,56 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         DecriseSelectionTimes();//回合开始选择一次 次数要减去
         roundTimer = roundDuration;
         isRoundActive = true;
-        InitializeAvaliableNpcDatas();
+        InitializeAvaliableNormalNpcDatas();
+        InitializeAvaliableStoryNpcDatas();
         InitializeRoundNpcDatas();
         InitializeRoundNpcs();
         OnRoundStart?.Invoke();
     }
-
-    public List<NpcData> InitializeAvaliableNpcDatas()//初始化本回合角色池
+    public void InitializeWholeNpcDatas()
     {
-        availableNpcDatas.Clear();
-        Debug.Log($"InitializeAvailableNpcs: currentRound={currentRound}, wholeNpcs.Count={wholeNpcDatas.Count}");
-        foreach (var npc in wholeNpcDatas)
+        wholeNormalNpcDatas = GameManager.Instance.wholeNormalNpcDataList;
+        wholeStoryNpcDatas = GameManager.Instance.wholeStoryNpcDataList;
+    }
+    public List<NpcData> InitializeAvaliableNormalNpcDatas()//初始化本回合角色池
+    {
+        availableNormalNpcDatas.Clear();
+        foreach (var npc in wholeNormalNpcDatas)
         {
             if (NpcAppearConditions.CanNpcAppear(npc) && npc.minAppearRound <= currentRound
                  && npc.maxAppearRound >= currentRound)
             {
-                availableNpcDatas.Add(npc);
+                availableNormalNpcDatas.Add(npc);
             }
         }
-        return availableNpcDatas;
+        return availableNormalNpcDatas;
+    }
+    public List<NpcData> InitializeAvaliableStoryNpcDatas()
+    {
+        availableStoryNpcDatas.Clear();
+        foreach (var npc in wholeStoryNpcDatas)
+        {
+            if (NpcAppearConditions.CanNpcAppear(npc) && npc.minAppearRound <= currentRound
+                && npc.maxAppearRound >= currentRound && NpcManager.Instance.npcDictionary[npc.name].isSelected == false)
+            {
+                availableStoryNpcDatas.Add(npc);
+            }
+        }
+        return availableStoryNpcDatas;
     }
     public List<NpcData> InitializeRoundNpcDatas()//初始化本回合角色
     {
-        OutOfOrder(availableNpcDatas);
-        for (int i = 0; i < selectionsPerRound && i < availableNpcDatas.Count; i++)
+        OutOfOrder(availableNormalNpcDatas);
+        int count = 0;
+        for (; count < selectionsPerRound && count < availableStoryNpcDatas.Count; count++) //优先选取剧情npc出现
         {
-            currentRoundNpcDatas.Add(availableNpcDatas[i]);
+            currentRoundNpcDatas.Add(availableStoryNpcDatas[count]);
         }
+        for (; count < selectionsPerRound && count < availableNormalNpcDatas.Count; count++)
+        {
+            currentRoundNpcDatas.Add(availableNormalNpcDatas[count]);
+        }
+        OutOfOrder(currentRoundNpcDatas);
         return currentRoundNpcDatas;
     }
     public List<Npc> InitializeRoundNpcs()
@@ -104,8 +130,14 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
 
     public void ClearCurrentNpc()
     {
-        availableNpcDatas.Clear();
+        availableNormalNpcDatas.Clear();
+        availableStoryNpcDatas.Clear();
         currentRoundNpcDatas.Clear();
         currentRoundNpcs.Clear();
+    }
+    protected override void Awake()
+    {
+        base.Awake();
+        InitializeWholeNpcDatas();
     }
 }

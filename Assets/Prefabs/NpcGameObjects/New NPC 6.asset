@@ -9,27 +9,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7e6be5f878d8d94f93f637d411a1b91, type: 3}
+  m_Script: {fileID: 11500000, guid: cde76f8380f77f048bfe2f9ad604a5c8, type: 3}
   m_Name: New NPC 6
   m_EditorClassIdentifier: 
   age: 0
   npcName: 
   sex: 0
-  hand: {fileID: 1233771984232238364, guid: a69796c0bb0495b41acc91d94befe66d, type: 3}
+  hand: {fileID: 0}
   type: 0
-  npcDescription: "\u5973\u5B69\u5B50\u7684\u58F0\u97F3"
+  career: 0
+  species: 0
+  travelTo: 0
+  npcDescription: 
   greetingDialogues: []
   successDialogues: []
   refuseDialogues: []
-  requestItems:
-  - {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
-  offerItems:
-  - {fileID: 11400000, guid: 823e4213a11904b468dcf8214b8d3383, type: 2}
+  requestItems: []
+  offerItems: []
   minAppearRound: 0
-  maxAppearRound: 100
-  minPerRequestAwardGolds: 80
-  maxPerRequestAwardGolds: 300
-  minPerNonrequestAwardGolds: 20
-  maxPerNonrequestAwardGolds: 60
+  maxAppearRound: 0
+  minPerRequestAwardGolds: 0
+  maxPerRequestAwardGolds: 0
+  minPerNonrequestAwardGolds: 0
+  maxPerNonrequestAwardGolds: 0
+  trueChoiceAwardGolds: 0
+  falseChoicePunishGolds: 0
+  initialFavorability: 0
+  reasonToFurture: []
+  reasonToPast: []
   isMoneyMore10K: 0
   isRoundMore5: 0
