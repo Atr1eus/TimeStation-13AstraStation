@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+[System.Serializable]
 public class PlayerController : SingletonMonoBehaviour<PlayerController>
 {
     public int gold = 200;
