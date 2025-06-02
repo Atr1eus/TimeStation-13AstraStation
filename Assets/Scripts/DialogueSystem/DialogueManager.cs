@@ -152,6 +152,6 @@ public class DialogueManager : MonoBehaviour
     //游戏状态处理（获取角色属性判断是哪组对话）
     public void GameStateHandler()
     {
-        gameStateVariables.Add(new DialogueGameState(curNpc.attribute[NpcAttribute.Favorability], "Favorability")); //希望改写成通用接口
+        gameStateVariables.Add(new DialogueGameState(curNpc.favorability, "Favorability")); //希望改写成通用接口
     }
 }

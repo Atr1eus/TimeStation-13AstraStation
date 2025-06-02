@@ -6,12 +6,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+[System.Serializable]
 public class RoundManager : SingletonMonoBehaviour<RoundManager>
 {
     [Header("回合配置")]
-    [SerializeField] private int selectionsPerRound = 5; //单回合npc出现数
-    [SerializeField] private int maxSelectionsPerRound = 2;//单回合最多可选择npc数
-    [SerializeField] private float roundDuration = 180f;//单回合持续时间
+    [SerializeField] public int selectionsPerRound = 5; //单回合npc出现数
+    [SerializeField] public int maxSelectionsPerRound = 2;//单回合最多可选择npc数
+    [SerializeField] public float roundDuration = 180f;//单回合持续时间
 
     [Header("当前回合状态")]
     public int currentRound = 0; //回合数

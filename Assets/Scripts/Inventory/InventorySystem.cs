@@ -3,6 +3,7 @@ using UnityEngine;
 /// <summary>
 /// ≤÷ø‚œµÕ≥
 /// </summary>
+[System.Serializable]
 public class InventorySystem : SingletonMonoBehaviour<InventorySystem>
 {
     public List<Item> items;

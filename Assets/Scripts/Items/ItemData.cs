@@ -10,13 +10,14 @@ public enum ItemType
 /// 物品数据类
 /// </summary>
 [CreateAssetMenu(fileName = "New Item", menuName = "Items/Item Data")]
+[System.Serializable]
 public class ItemData : ScriptableObject
 {
-    public string itemName; 
+    public string itemName;
     public string itemID; //物品唯一标识
     public int itemPrice;
     public GameObject prefab;
-    [TextArea]public string itemDescription; //物品描述
+    [TextArea] public string itemDescription; //物品描述
 
     [Header("索要/交易配置")]
     public int minRequestAmount = 1;

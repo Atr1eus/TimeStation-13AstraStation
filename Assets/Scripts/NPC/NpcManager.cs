@@ -3,6 +3,8 @@ using UnityEngine;
 /// <summary>
 /// npc管理类 只关心npc在什么时候做
 /// </summary>
+
+[System.Serializable]
 public class NpcManager : SingletonMonoBehaviour<NpcManager>
 {
     public List<NpcData> npcDatas = new List<NpcData>();
