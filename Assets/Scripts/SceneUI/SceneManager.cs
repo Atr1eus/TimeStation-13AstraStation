@@ -70,6 +70,11 @@ public class SceneManager : MonoBehaviour
     }
     #endregion
 
+    public void UseButBanButton(Button button)
+    {
+        UseButton(button);
+        BanButton(button);
+    }
     public void BanButton(Button button)
     {
         button.interactable = false;
@@ -88,5 +93,13 @@ public class SceneManager : MonoBehaviour
         button.image.enabled = true;
         button.GetComponentInChildren<Text>().enabled = true;
         button.image.color = Color.white;
+    }
+    public void UseImage(Image image)
+    {
+        image.gameObject.SetActive(true);
+    }
+    public void UnuseImage(Image image)
+    {
+        image.gameObject.SetActive(false);
     }
 }

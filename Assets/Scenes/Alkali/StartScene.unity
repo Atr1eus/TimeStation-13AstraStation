@@ -1246,6 +1246,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gold: 200
   lastRoundGold: 0
+  trainCountRank: 1
+  customerCountRank: 1
+  trainRankUpNeedMoney: 050000000500000005000000
+  customerCountRankUpNeedMoney: 050000000500000005000000
 --- !u!4 &1525159886
 Transform:
   m_ObjectHideFlags: 0

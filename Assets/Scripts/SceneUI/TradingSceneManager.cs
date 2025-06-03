@@ -24,7 +24,6 @@ public class TradingSceneManager : SceneManager
     protected override void Awake()
     {
         base.Awake();
-        InitializeButtonsAwake();
 
     }
     void Start()
@@ -33,13 +32,29 @@ public class TradingSceneManager : SceneManager
         manager = GameManager.Instance;
         NpcManager.Instance.handSpawnPoint = npcSpawnPos;
         TicketManager.Instance.ticketContainer = ticketSpawnPos;
-        InitializeButtonsStart();
+        InitializeButtonsEvent();
         InitializeButtonStates();
-        //todo:下面这行暂时放这 白盒测试用
         GameManager.Instance.OnNextRoundClick();
     }
-    private void InitializeButtonsStart()
+    private void InitializeButtonsEvent()
     {
+        loadRestSceneButton?.onClick.RemoveAllListeners();
+        nextNpcButton?.onClick.RemoveAllListeners();
+        agreeButton?.onClick.RemoveAllListeners();
+        disagreeButton?.onClick.RemoveAllListeners();
+        giveButton?.onClick.RemoveAllListeners();
+        exitBagButton.onClick.RemoveAllListeners();
+        item0Button?.onClick.RemoveAllListeners();
+        item1Button?.onClick.RemoveAllListeners();
+        item2Button?.onClick.RemoveAllListeners();
+
+        loadRestSceneButton?.onClick.AddListener(() =>
+        {
+            SaveSystem.GameSave();
+            StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
+        });
+
+        disagreeButton?.onClick.AddListener(OnDisagreeButtonClick);
         nextNpcButton?.onClick.AddListener(manager.OnNextNpcButtonClick);
         agreeButton?.onClick.AddListener(manager.OnAgreeNpcButtonClick);
         item0Button?.onClick.AddListener(manager.TESTOfferItem);
@@ -50,16 +65,6 @@ public class TradingSceneManager : SceneManager
         giveButton?.onClick.AddListener(GiveButtonClickButtonState);
         exitBagButton?.onClick.AddListener(AgreeButtonState);
 
-    }
-    private void InitializeButtonsAwake()
-    {
-        loadRestSceneButton?.onClick.AddListener(() =>
-        {
-            SaveSystem.GameSave();
-            StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
-        });
-
-        disagreeButton?.onClick.AddListener(OnDisagreeButtonClick);
     }
     public void OnDisagreeButtonClick()
     {
@@ -141,10 +146,5 @@ public class TradingSceneManager : SceneManager
         UnuseButton(item1Button);
         UnuseButton(item2Button);
         UnuseButton(exitBagButton);
-    }
-    public void UseButBanButton(Button button)
-    {
-        UseButton(button);
-        BanButton(button);
     }
 }

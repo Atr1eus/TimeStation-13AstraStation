@@ -205,6 +205,14 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         lastRoundMaxSelectionsPerRound = 0;
         lastRound = 0;
     }
+    public void AddMaxSelectionsPerRound()
+    {
+        maxSelectionsPerRound ++;
+    }
+    public void AddSelectionsPerRound()
+    {
+        selectionsPerRound ++;
+    }
 
     protected override void Awake()
     {
