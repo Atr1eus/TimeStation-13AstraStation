@@ -77,6 +77,7 @@ public class DialogueManager : SingletonMonoBehaviour<DialogueManager>
                 {
                     Debug.LogWarning("NO GRAPH!!!");
                 }
+                Debug.Log("开始对话");
                 dialogueManager.StartDialogue(m_graph); // 开始对话
             }
             else if(dialogueManager.IsRunning)
@@ -172,7 +173,7 @@ public class DialogueManager : SingletonMonoBehaviour<DialogueManager>
     //游戏状态处理（获取角色属性判断是哪组对话）
     public void GameStateHandler()
     {
-        Debug.Log("in");
+        Debug.Log("获取角色数据用于对话分支");
         
         if (npcmanager == null)
         {
@@ -191,6 +192,6 @@ public class DialogueManager : SingletonMonoBehaviour<DialogueManager>
         gameStateVariables.Add(new DialogueGameState(curNpc.bit_0, "bit_0"));
         gameStateVariables.Add(new DialogueGameState(curNpc.bit_1, "bit_1"));
         gameStateVariables.Add(new DialogueGameState(curNpc.bit_2, "bit_2"));
-        Debug.Log("alreadychanged!");
+        Debug.Log("已获取");
     }
 }

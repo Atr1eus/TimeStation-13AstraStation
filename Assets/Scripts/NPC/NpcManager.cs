@@ -61,6 +61,7 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     }
     public void InitializeCurrentNpc(NpcCard npcCard)//npcCard选择事件 根据玩家的选择定义currentNpc
     {
+        Debug.Log("开始初始化角色！");
         NpcData npcdata = npcCard.npc;
         Npc npc = npcDictionary[npcdata.name];
         npcObj = Instantiate(npc.hand, handSpawnPoint.position, Quaternion.identity);

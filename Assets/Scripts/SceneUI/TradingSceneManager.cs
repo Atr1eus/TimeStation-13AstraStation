@@ -113,10 +113,11 @@ public class TradingSceneManager : SceneManager
             UseButBanButton(loadRestSceneButton);
             UnuseButton(nextNpcButton);
         }
-        UseButton(item0Button);
-        UseButton(item1Button);
-        UseButton(item2Button);
-        UseButton(exitBagButton);
+        GameManager.Instance.OnInventoryBrowseButtonClick();
+        //UseButton(item0Button);
+        //UseButton(item1Button);
+        //UseButton(item2Button);
+        //UseButton(exitBagButton);
     }
     public void AgreeButtonState()
     {

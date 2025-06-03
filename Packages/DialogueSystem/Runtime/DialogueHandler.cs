@@ -86,6 +86,10 @@ namespace DialogueSystem
 
         public DialogueHandler(DialogueUI ui, DialogueSettings settings = null, DialogueCallbackActions callbackActions = null, DialogueDictionary dictionary = null, MonoBehaviour monoBehaviour = null)
         {
+            if(ui == null)
+            {
+                Debug.Log("No UI!");
+            }
             this.ui = ui;
             this.settings = settings ?? new DialogueSettings();
             this.callbackActions = callbackActions ?? new DialogueCallbackActions();
@@ -233,7 +237,7 @@ namespace DialogueSystem
         {
             if (currentTextNode == null)
             {
-                Debug.Log("1");
+                //Debug.Log("1");
                 InvokeCallbacks(DialogueEventType.OnTextNodeEnter);
                 currentTextNode = CurrentNode;
                 TextNode textNode = currentTextNode as TextNode;
@@ -250,19 +254,19 @@ namespace DialogueSystem
             }
             else
             {
-                Debug.Log("2");
+                //Debug.Log("2");
                 BaseNode nextNode = GetNextNode(currentTextNode);
                 currentTextNode = null;
                 if (nextNode != null)
                 {
-                    Debug.Log("3");
+                    //Debug.Log("3");
                     CurrentNode = nextNode;
                     InvokeCallbacks(DialogueEventType.OnTextNodeLeave);
                     TraverseGraph();
                 }
                 else
                 {
-                    Debug.Log("4");
+                    //Debug.Log("4");
                     EndDialogue();
                 }
                 
@@ -604,7 +608,13 @@ namespace DialogueSystem
 
         public void DisplayText(string text, TextEffects.TextDisplayMode textAnimation, float? typewriterSpeedOverride = null)
         {
+            //if (ui._textGameObject == null)
+            //{
+            //    Debug.LogError("Dialogue text GameObject is invalid in DialogueUI.");
+            //    return;
+            //}
             if (textAnimation != TextEffects.TextDisplayMode.INSTANT) CurrentState = DialogueState.Animating;
+            //Debug.Log(text);
             ui.SetDialogueText(text, textAnimation, InvokeCallbacks, typewriterSpeedOverride);
         }
 

@@ -8,7 +8,7 @@ namespace DialogueSystem
     public class DialogueUI
     {
         private GameObject _paneGameObject;
-        private GameObject _textGameObject;
+        public GameObject _textGameObject;
         private TMP_Text _text;
 
         public TextEffects textEffects { get; private set; }
@@ -25,6 +25,7 @@ namespace DialogueSystem
             if (dialogueText != null)
             {
                 _textGameObject = dialogueText;
+                //DontDestroyOnLoad(_textGameObject);
                 _text = _textGameObject.GetComponent<TMP_Text>();
                 if (_text == null)
                 {
@@ -51,12 +52,21 @@ namespace DialogueSystem
 
         public void SetDialogueTextGameObject(GameObject gameObject)
         {
+            Debug.Log("Setting new dialogue text GameObject: " + gameObject.name);
             _textGameObject = gameObject;
             _text = _textGameObject.GetComponent<TMP_Text>();
             if (_text == null)
             {
                 _text = _textGameObject.AddComponent<TMP_Text>();
             }
+            // 如果 textEffects 已存在，先销毁它
+            //if (textEffects != null)
+            //{
+            //    UnityEngine.Object.Destroy(textEffects);
+            //}
+            //// 在新的 _textGameObject 上重新创建并初始化 textEffects
+            //textEffects = _textGameObject.AddComponent<TextEffects>();
+            //textEffects.Init(theme, settings, callbackActions);
         }
 
         public void Reset()
@@ -66,6 +76,15 @@ namespace DialogueSystem
 
         public void SetDialogueText(string text, TextEffects.TextDisplayMode mode, Action<DialogueEventType> callback, float? typewriterSpeedOverride = null)
         {
+            if (_textGameObject == null)
+            {
+                Debug.Log("重新创建。。");
+                _textGameObject = Dialogue.instance.dialogueTextGameObject;
+                Debug.Log("创建成功");
+                //Debug.LogError("Dialogue text GameObject is null or has been destroyed.");
+                //return;
+            }
+            Debug.Log("SetDialogueText called with _textGameObject: " + _textGameObject.name + ", textEffects on: " + textEffects.gameObject.name);
             ShowDialoguePane(true);
             callback(DialogueEventType.OnTextStart);
             switch (mode)

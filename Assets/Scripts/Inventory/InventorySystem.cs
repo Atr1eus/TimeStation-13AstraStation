@@ -7,6 +7,7 @@ public class InventorySystem : SingletonMonoBehaviour<InventorySystem>
 {
     public List<Item> items;
     public List<ItemData> datas;
+    
     public void AddItem(Item item) //增加物品操作
     {
         foreach (var it in items)

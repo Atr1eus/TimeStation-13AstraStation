@@ -1,3 +1,4 @@
+using DialogueSystem;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using Unity.VisualScripting;
@@ -20,11 +21,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private PlayerController m_player;
     [SerializeField] private NpcManager m_npc;
     [SerializeField] private InventorySystem m_inventory;
-    [SerializeField] private InventoryBrowser m_inventoryUI;
+    [SerializeField] private InventoryItemUI m_inventoryUI;
     [SerializeField] private RoundManager m_round;
     [SerializeField] private SceneLoader m_sceneLoader;
     [SerializeField] private TicketManager m_ticket;
     [SerializeField] private DialogueManager m_dialogue;
+    [SerializeField] private Dialogue i_dialogue;
 
     //todo:UIManager
 
@@ -91,7 +93,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void OnInventoryBrowseButtonClick()
     {
-        m_inventoryUI.OnInventoryBrowseButtonClick();
+        if(m_inventoryUI == null)
+        {
+            Debug.LogWarning("ÎÞ£¡");
+        }
+        m_inventoryUI.OpenPanel();
         foreach (Item item in m_inventory.items)
         {
             Debug.Log($"ÓµÓÐ{item.data.name}{item.amount}¸ö");
