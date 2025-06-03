@@ -22,8 +22,11 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     {
         base.Awake();
         InitializeNpcDatas();
-        currentNpc = FindObjectOfType<NpcController>();
         InitializeNpcs();
+    }
+    void Start()
+    {
+        currentNpc = FindObjectOfType<NpcController>();
     }
     public void InitializeNpcDatas()
     {
@@ -42,14 +45,15 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     {
         foreach (NpcData npcData in npcDatas)
         {
-            npcDictionary.Add(npcData.name, new Npc(npcData));
+            npcDictionary.Add(npcData.npcName, new Npc(npcData));
+            lastRoundNpcDictionary.Add(npcData.npcName, new Npc(npcData));
         }
     }
     public void SpawnNpc(int rule) //0为随机生成 1为顺序生成 废弃功能 暂时留着
     {
         //每次生成重新实例化NPC，初始化控制器
         NpcData npcdata = rule == 0 ? GetNpcInRandom() : GetNpcInOrder();
-        Npc npc = npcDictionary[npcdata.name];
+        Npc npc = npcDictionary[npcdata.npcName];
         GameObject npcObj = Instantiate(npc.data.hand, handSpawnPoint.position, Quaternion.identity);
         currentNpc = npcObj.AddComponent<NpcController>();
         currentNpc.InitializeController(npc);
@@ -58,7 +62,7 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     public void SpawnNpc(NpcData npcdata) //直接根据NPC生成 不与NpcCard产生关联 半废弃
     {
         GameObject npcObj = Instantiate(npcdata.hand, handSpawnPoint.position, Quaternion.identity);
-        Npc npc = npcDictionary[npcdata.name];
+        Npc npc = npcDictionary[npcdata.npcName];
         currentNpc = npcObj.AddComponent<NpcController>();
         currentNpc.InitializeController(npc);
         currentNpc.OnTradeEnter();
@@ -66,7 +70,7 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     public void InitializeCurrentNpc(NpcCard npcCard)//npcCard选择事件 根据玩家的选择定义currentNpc
     {
         NpcData npcdata = npcCard.npc;
-        Npc npc = npcDictionary[npcdata.name];
+        Npc npc = npcDictionary[npcdata.npcName];
         npcObj = Instantiate(npc.hand, handSpawnPoint.position, Quaternion.identity);
         currentNpc = npcObj.AddComponent<NpcController>();
         currentNpc.InitializeController(npc);
@@ -77,12 +81,12 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         if (npc.ticket.travelTo != npc.data.travelTo) npc.ticket.isTrueTicket = false;
         RoundManager.Instance.isSelected = true;
         currentNpc.OnTradeEnter();
-        Debug.Log($"currentNpc:{currentNpc.npc.data.name}");
+        Debug.Log($"currentNpc:{currentNpc.npc.data.npcName}");
     }
     public void InitializeCurrentStoryNpc(NpcCard npcCard)
     {
         NpcData npcdata = npcCard.npc;
-        Npc npc = npcDictionary[npcdata.name];
+        Npc npc = npcDictionary[npcdata.npcName];
         npcObj = Instantiate(npc.hand, handSpawnPoint.position, Quaternion.identity);
         currentNpc = npcObj.AddComponent<NpcController>();
         currentNpc.InitializeController(npc);

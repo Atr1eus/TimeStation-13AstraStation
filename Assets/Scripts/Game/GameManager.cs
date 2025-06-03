@@ -25,19 +25,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private SceneLoader m_sceneLoader;
     [SerializeField] private TicketManager m_ticket;
 
-    //todo:UIManager
-
-    protected override void Awake()
-    {
-        base.Awake();
-    }
     protected virtual void Start()
     {
     }
     public void OnNextRoundClick() //下一回合按钮点击事件
     {
-        if (m_npc.currentNpc != null) m_npc.currentNpc.OnTradeExit();
-        CurrentDataToLastRound();
+        if (m_round.currentRound != 0) CurrentDataToLastRound();
         m_npc.ClearCurrentNpc(); //清除当前npc
         m_round.StartNewRound(); //开始新的回合
         m_npcCard.InitializeRemainingNpcs(m_round.currentRoundNpcDatas);
@@ -139,23 +132,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void ClearDatasBeforeLoading()
     {
-        ClearNpcBeforeLoading();
         m_round.ClearBeforeLoading();
         m_inventory.ClearBeforeLoading();
         m_player.ClearBeforeLoading();
-    }
-    public void ClearNpcBeforeLoading()
-    {
-        foreach (var data in wholeStoryNpcDataList)
-        {
-            m_npc.npcDictionary[data.name].ClearNpc();
-            m_npc.lastRoundNpcDictionary[data.name].ClearNpc();
-        }
-        foreach (var data in wholeNormalNpcDataList)
-        {
-            m_npc.npcDictionary[data.name].ClearNpc();
-            m_npc.lastRoundNpcDictionary[data.name].ClearNpc();
-        }
     }
     protected virtual void Update()
     {

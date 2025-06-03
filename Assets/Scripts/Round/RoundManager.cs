@@ -86,11 +86,11 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         availableStoryNpcDatas.Clear();
         foreach (var npcData in wholeStoryNpcDatas)
         {
-            Npc npc = NpcManager.Instance.npcDictionary[npcData.name];
+            Npc npc = NpcManager.Instance.npcDictionary[npcData.npcName];
             if (NpcAppearConditions.CanNpcAppear(npcData) && npcData.storyNpcMinAppearRounds[npc.selectedTimes] <= currentRound
                 && npcData.storyNpcMaxAppearRounds[npc.selectedTimes] >= currentRound
-                && NpcManager.Instance.npcDictionary[npcData.name].isSelected[npc.selectedTimes] == false
-                && NpcManager.Instance.npcDictionary[npcData.name].canAppera[npc.selectedTimes]
+                && NpcManager.Instance.npcDictionary[npcData.npcName].isSelected[npc.selectedTimes] == false
+                && NpcManager.Instance.npcDictionary[npcData.npcName].canAppera[npc.selectedTimes]
                 && npc.selectedTimes < npc.data.ticket.Count)
             {
                 availableStoryNpcDatas.Add(npcData);
@@ -117,7 +117,7 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
     {
         foreach (var npcdata in currentRoundNpcDatas)
         {
-            currentRoundNpcs.Add(NpcManager.Instance.npcDictionary[npcdata.name]);
+            currentRoundNpcs.Add(NpcManager.Instance.npcDictionary[npcdata.npcName]);
         }
         return currentRoundNpcs;
     }
@@ -179,7 +179,7 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
     }
     public void AddCurrentRoundSelectedNpc(NpcData data)
     {
-        Npc npc = NpcManager.Instance.npcDictionary[data.name];
+        Npc npc = NpcManager.Instance.npcDictionary[data.npcName];
         currentSelectedNpcs.Add(npc);
     }
     public void ClearCurrentNpc()

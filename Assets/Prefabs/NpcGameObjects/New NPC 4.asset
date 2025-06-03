@@ -13,21 +13,13 @@ MonoBehaviour:
   m_Name: New NPC 4
   m_EditorClassIdentifier: 
   age: 0
-  npcName: 
+  npcName: npc4
   sex: 0
-  hand: {fileID: 0}
   type: 0
-  career: 0
-  species: 0
   travelTo: 0
-  npcDescription: 
-  greetingDialogues: []
-  successDialogues: []
-  refuseDialogues: []
+  npcDialogue: {fileID: 0}
   requestItems: []
   offerItems: []
-  minAppearRound: 0
-  maxAppearRound: 0
   minPerRequestAwardGolds: 0
   maxPerRequestAwardGolds: 0
   minPerNonrequestAwardGolds: 0
@@ -35,6 +27,15 @@ MonoBehaviour:
   trueChoiceAwardGolds: 0
   falseChoicePunishGolds: 0
   initialFavorability: 0
+  hand: {fileID: 0}
+  ticket: []
+  storyNpcDescriptions: []
+  storyNpcMinAppearRounds: 
+  storyNpcMaxAppearRounds: 
+  storyNpcReasons: []
+  npcDescription: 
+  minAppearRound: 0
+  maxAppearRound: 0
   reasonToFurture: []
   reasonToPast: []
   isMoneyMore10K: 0

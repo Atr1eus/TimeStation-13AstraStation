@@ -32,6 +32,7 @@ MonoBehaviour:
   hand: {fileID: 955719812875777746, guid: 5ef8b260ce7f3d841857c7e32b2ce914, type: 3}
   ticket:
   - {fileID: 11400000, guid: a3bd48a32c94e0943bb6ce0d9d4326e3, type: 2}
+  - {fileID: 11400000, guid: 561037b83cf156c4b91df8f2f33a8a13, type: 2}
   storyNpcDescriptions:
   - "\u54C8\u57FA\u7C73"
   storyNpcMinAppearRounds: 000000000300000005000000

@@ -31,35 +31,33 @@ public class StoryNpcDatas
 }
 
 
-public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
+public static class SaveSystem
 {
-    [Header("Systems")]
-    [SerializeField] private PlayerController m_player;
-    [SerializeField] private NpcManager m_npc;
-    [SerializeField] private InventorySystem m_inventory;
-    [SerializeField] private InventoryBrowser m_inventoryUI;
-    [SerializeField] private RoundManager m_round;
-    [SerializeField] private SceneLoader m_sceneLoader;
-    [SerializeField] private TicketManager m_ticket;
-    [SerializeField] private GameManager m_gameManager;
+    private static PlayerController m_player => PlayerController.Instance;
+    private static NpcManager m_npc => NpcManager.Instance;
+    private static InventorySystem m_inventory => InventorySystem.Instance;
+    private static RoundManager m_round => RoundManager.Instance;
+    private static SceneLoader m_sceneLoader => SceneLoader.Instance;
+    private static TicketManager m_ticket => TicketManager.Instance;
+    private static GameManager m_gameManager => GameManager.Instance;
 
-    public void GameSave()
+    public static void GameSave()
     {
         Save();
     }
-    public void GameLoad()
+    public static void GameLoad()
     {
         Load();
     }
-    public void Save()
+    public static void Save()
     {
         SaveGlobalData();
     }
-    public void Load()
+    public static void Load()
     {
         LoadGlobalData();
     }
-    public void SaveGlobalData()
+    public static void SaveGlobalData()
     {
         GameData gameData = new GameData { currentRoundData = new RoundData(), lastRoundData = new RoundData() };
         SaveCurrentRoundData(gameData.currentRoundData);
@@ -73,7 +71,7 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
         File.WriteAllText(savePath, encryptedJson);
         Debug.Log("全局存储成功!");
     }
-    public bool LoadGlobalData()
+    public static bool LoadGlobalData()
     {
         string savePath = Path.Combine(Application.persistentDataPath, "global_save.json");
         if (!File.Exists(savePath)) return false;
@@ -97,7 +95,7 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
         }
     }
     #region Save具体操作
-    public void SaveCurrentRoundData(RoundData roundData)
+    public static void SaveCurrentRoundData(RoundData roundData)
     {
         roundData.currentRound = m_round.currentRound;
         roundData.gold = m_player.gold;
@@ -118,7 +116,7 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
 
 
     }
-    public void SaveLastRoundData(RoundData roundData)
+    public static void SaveLastRoundData(RoundData roundData)
     {
         roundData.currentRound = m_round.lastRound;
         roundData.maxSelectionsPerRound = m_round.lastRoundMaxSelectionsPerRound;
@@ -138,7 +136,7 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
         roundData.items = itemSaveEntries;
     }
 
-    public void SaveCurrentInventoryData(List<ItemSaveEntry> itemSaveEntry)
+    public static void SaveCurrentInventoryData(List<ItemSaveEntry> itemSaveEntry)
     {
 
         foreach (Item item in m_inventory.items)
@@ -150,7 +148,7 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
             });
         }
     }
-    public void SaveLastInventoryData(List<ItemSaveEntry> itemSaveEntry)
+    public static void SaveLastInventoryData(List<ItemSaveEntry> itemSaveEntry)
     {
         foreach (Item item in m_inventory.lastRoundItems)
         {
@@ -164,15 +162,15 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
 
 
 
-    public void SaveCurrentNpcData(List<NpcDataEntry> normalNpcData, List<NpcDataEntry> storyNpcData)
+    public static void SaveCurrentNpcData(List<NpcDataEntry> normalNpcData, List<NpcDataEntry> storyNpcData)
     {
         foreach (var data in m_gameManager.wholeNormalNpcDataList)
         {
-            Npc npc = m_npc.npcDictionary[data.name];
+            Npc npc = m_npc.npcDictionary[data.npcName];
             NpcDataEntry npcDataEntry = new NpcDataEntry
             {
                 favorability = npc.favorability,
-                npcName = npc.data.name,
+                npcName = npc.data.npcName,
                 selectedTimes = npc.selectedTimes,
                 isSelected = npc.isSelected,
                 bit_0 = npc.bit_0,
@@ -184,11 +182,11 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
         }
         foreach (var data in m_gameManager.wholeStoryNpcDataList)
         {
-            Npc npc = m_npc.npcDictionary[data.name];
+            Npc npc = m_npc.npcDictionary[data.npcName];
             NpcDataEntry npcDataEntry = new NpcDataEntry
             {
                 favorability = npc.favorability,
-                npcName = npc.data.name,
+                npcName = npc.data.npcName,
                 selectedTimes = npc.selectedTimes,
                 isSelected = npc.isSelected,
                 bit_0 = npc.bit_0,
@@ -199,15 +197,15 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
             storyNpcData.Add(npcDataEntry);
         }
     }
-    public void SaveLastNpcData(List<NpcDataEntry> normalNpcData, List<NpcDataEntry> storyNpcData)
+    public static void SaveLastNpcData(List<NpcDataEntry> normalNpcData, List<NpcDataEntry> storyNpcData)
     {
         foreach (var data in m_gameManager.wholeNormalNpcDataList)
         {
-            Npc npc = m_npc.lastRoundNpcDictionary[data.name];
+            Npc npc = m_npc.lastRoundNpcDictionary[data.npcName];
             NpcDataEntry npcDataEntry = new NpcDataEntry
             {
                 favorability = npc.favorability,
-                npcName = npc.data.name,
+                npcName = npc.data.npcName,
                 selectedTimes = npc.selectedTimes,
                 isSelected = npc.isSelected,
                 bit_0 = npc.bit_0,
@@ -219,11 +217,11 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
         }
         foreach (var data in m_gameManager.wholeStoryNpcDataList)
         {
-            Npc npc = m_npc.lastRoundNpcDictionary[data.name];
+            Npc npc = m_npc.lastRoundNpcDictionary[data.npcName];
             NpcDataEntry npcDataEntry = new NpcDataEntry
             {
                 favorability = npc.favorability,
-                npcName = npc.data.name,
+                npcName = npc.data.npcName,
                 selectedTimes = npc.selectedTimes,
                 isSelected = npc.isSelected,
                 bit_0 = npc.bit_0,
@@ -235,7 +233,7 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
         }
     }
     #endregion
-    public void LoadCurrentRoundData(RoundData data)
+    public static void LoadCurrentRoundData(RoundData data)
     {
         m_player.gold = data.gold;
         m_round.currentRound = data.currentRound;
@@ -245,7 +243,7 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
         LoadCurrentInventory(data.items);
 
     }
-    public void LoadLastRoundData(RoundData data)
+    public static void LoadLastRoundData(RoundData data)
     {
         m_player.lastRoundGold = data.gold;
         m_round.lastRound = data.currentRound;
@@ -254,7 +252,7 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
         LoadLastNpcData(data.normalNpcData, data.storyNpcData);
         LoadLastInventory(data.items);
     }
-    public void LoadCurrentNpcData(List<NpcDataEntry> normalNpc, List<NpcDataEntry> storyNpc)
+    public static void LoadCurrentNpcData(List<NpcDataEntry> normalNpc, List<NpcDataEntry> storyNpc)
     {
         for (int i = 0; i < normalNpc.Count; i++)
         {
@@ -263,11 +261,11 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
         }
         for (int i = 0; i < storyNpc.Count; i++)
         {
-            NpcDataEntry npc = normalNpc[i];
+            NpcDataEntry npc = storyNpc[i];
             LoadCurrentNpcDatas(npc);
         }
     }
-    public void LoadLastNpcData(List<NpcDataEntry> normalNpc, List<NpcDataEntry> storyNpc)
+    public static void LoadLastNpcData(List<NpcDataEntry> normalNpc, List<NpcDataEntry> storyNpc)
     {
         for (int i = 0; i < normalNpc.Count; i++)
         {
@@ -276,11 +274,11 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
         }
         for (int i = 0; i < storyNpc.Count; i++)
         {
-            NpcDataEntry npc = normalNpc[i];
+            NpcDataEntry npc = storyNpc[i];
             LoadLastNpcDatas(npc);
         }
     }
-    public void LoadCurrentNpcDatas(NpcDataEntry npc)
+    public static void LoadCurrentNpcDatas(NpcDataEntry npc)
     {
         m_npc.npcDictionary[npc.npcName].favorability = npc.favorability;
         m_npc.npcDictionary[npc.npcName].isSelected = npc.isSelected;
@@ -290,7 +288,7 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
         m_npc.npcDictionary[npc.npcName].bit_2 = npc.bit_2;
         m_npc.npcDictionary[npc.npcName].branchNumber = npc.branchNumber;
     }
-    public void LoadLastNpcDatas(NpcDataEntry npc)
+    public static void LoadLastNpcDatas(NpcDataEntry npc)
     {
         m_npc.lastRoundNpcDictionary[npc.npcName].favorability = npc.favorability;
         m_npc.lastRoundNpcDictionary[npc.npcName].isSelected = npc.isSelected;
@@ -302,7 +300,7 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
     }
 
 
-    public void LoadCurrentInventory(List<ItemSaveEntry> items)
+    public static void LoadCurrentInventory(List<ItemSaveEntry> items)
     {
         foreach (ItemSaveEntry entry in items)
         {
@@ -310,7 +308,7 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
             m_inventory.AddItem(itemData, entry.amount);
         }
     }
-    public void LoadLastInventory(List<ItemSaveEntry> items)
+    public static void LoadLastInventory(List<ItemSaveEntry> items)
     {
         foreach (ItemSaveEntry entry in items)
         {
@@ -318,7 +316,7 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
             m_inventory.AddItemToLast(itemData, entry.amount);
         }
     }
-    private ItemData FindItemDataById(string itemId)
+    private static ItemData FindItemDataById(string itemId)
     {
         foreach (var item in m_gameManager.wholeItemDataList)
         {

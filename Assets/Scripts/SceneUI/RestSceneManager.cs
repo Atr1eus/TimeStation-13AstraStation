@@ -27,11 +27,12 @@ public class RestSceneManager : SceneManager
         {
             StartCoroutine(TransitionToScene(SceneLoader.GameScene.TradingArea));
         });
+        SaveButton?.onClick.AddListener(() => SaveSystem.GameSave());
+        LoadButton?.onClick.AddListener(() => SaveSystem.GameLoad());
+        LoadButton?.onClick.AddListener(() => StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea)));
     }
     private void InitializeButtonsStart()
     {
 
-        SaveButton?.onClick.AddListener(() => SaveSystem.Instance.GameSave());
-        LoadButton?.onClick.AddListener(() => SaveSystem.Instance.GameLoad());
     }
 }

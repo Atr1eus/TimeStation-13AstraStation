@@ -13,23 +13,15 @@ MonoBehaviour:
   m_Name: New NPC 1
   m_EditorClassIdentifier: 
   age: 0
-  npcName: 
+  npcName: npc1
   sex: 0
-  hand: {fileID: 1755731916373887472, guid: 70738a2a99fc02c45812d8ff2627d882, type: 3}
   type: 0
-  career: 0
-  species: 0
   travelTo: 0
-  npcDescription: "\u5BC6\u96C6\u54C8"
-  greetingDialogues: []
-  successDialogues: []
-  refuseDialogues: []
+  npcDialogue: {fileID: 0}
   requestItems:
   - {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
   offerItems:
   - {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
-  minAppearRound: 0
-  maxAppearRound: 100
   minPerRequestAwardGolds: 0
   maxPerRequestAwardGolds: 0
   minPerNonrequestAwardGolds: 0
@@ -37,6 +29,15 @@ MonoBehaviour:
   trueChoiceAwardGolds: 0
   falseChoicePunishGolds: 0
   initialFavorability: 0
+  hand: {fileID: 1755731916373887472, guid: 70738a2a99fc02c45812d8ff2627d882, type: 3}
+  ticket: []
+  storyNpcDescriptions: []
+  storyNpcMinAppearRounds: 
+  storyNpcMaxAppearRounds: 
+  storyNpcReasons: []
+  npcDescription: "\u5BC6\u96C6\u54C8"
+  minAppearRound: 0
+  maxAppearRound: 100
   reasonToFurture: []
   reasonToPast: []
   isMoneyMore10K: 0

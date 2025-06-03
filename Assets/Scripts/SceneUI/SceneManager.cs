@@ -12,7 +12,7 @@ public class SceneManager : MonoBehaviour
 
     protected CanvasGroup fadeCanvasGroup;
     protected bool isTransitioning;
-    private bool isStartScene = false;
+    protected bool isStartScene = false;
     protected virtual void Awake()
     {
         InitializeFadeImage();
@@ -33,7 +33,7 @@ public class SceneManager : MonoBehaviour
         fadeCanvasGroup = fadeImage.GetComponent<CanvasGroup>() ??
                         fadeImage.gameObject.AddComponent<CanvasGroup>();
 
-        fadeCanvasGroup.alpha = 1f;
+        fadeCanvasGroup.alpha = 0f;
         fadeImage.color = Color.black;
     }
 
@@ -69,4 +69,24 @@ public class SceneManager : MonoBehaviour
         isTransitioning = false;
     }
     #endregion
+
+    public void BanButton(Button button)
+    {
+        button.interactable = false;
+        button.image.color = Color.gray;
+    }
+    public void UnuseButton(Button button)
+    {
+        button.interactable = false;
+        button.image.enabled = false;
+        button.GetComponentInChildren<Text>().enabled = false;
+    }
+    public void UseButton(Button button)
+    {
+
+        button.interactable = true;
+        button.image.enabled = true;
+        button.GetComponentInChildren<Text>().enabled = true;
+        button.image.color = Color.white;
+    }
 }

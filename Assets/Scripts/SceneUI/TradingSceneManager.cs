@@ -55,6 +55,7 @@ public class TradingSceneManager : SceneManager
     {
         loadRestSceneButton?.onClick.AddListener(() =>
         {
+            SaveSystem.GameSave();
             StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
         });
 
@@ -145,24 +146,5 @@ public class TradingSceneManager : SceneManager
     {
         UseButton(button);
         BanButton(button);
-    }
-    public void BanButton(Button button)
-    {
-        button.interactable = false;
-        button.image.color = Color.gray;
-    }
-    public void UnuseButton(Button button)
-    {
-        button.interactable = false;
-        button.image.enabled = false;
-        button.GetComponentInChildren<Text>().enabled = false;
-    }
-    public void UseButton(Button button)
-    {
-
-        button.interactable = true;
-        button.image.enabled = true;
-        button.GetComponentInChildren<Text>().enabled = true;
-        button.image.color = Color.white;
     }
 }
