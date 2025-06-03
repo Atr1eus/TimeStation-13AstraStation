@@ -9,12 +9,14 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
 {
     public List<NpcData> npcDatas = new List<NpcData>();
     public Dictionary<string, Npc> npcDictionary = new Dictionary<string, Npc>();
+    public Dictionary<string, Npc> lastRoundNpcDictionary = new Dictionary<string, Npc>();
     public Transform handSpawnPoint;
     private int npcIndex = -1;
     public NpcController currentNpc;
     public GameObject npcObj;
     private NpcData GetNpcInRandom() => npcDatas[Random.Range(0, npcDatas.Count)]; //在列表中随机选取npc
     private NpcData GetNpcInOrder() => npcDatas[++npcIndex % npcDatas.Count]; // 在列表中顺序选取npc
+    public int nowTicketIdx = 0;
 
     protected override void Awake()
     {
@@ -38,7 +40,7 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     }
     public void InitializeNpcs()
     {
-        foreach (var npcData in npcDatas)
+        foreach (NpcData npcData in npcDatas)
         {
             npcDictionary.Add(npcData.name, new Npc(npcData));
         }
@@ -68,12 +70,26 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         npcObj = Instantiate(npc.hand, handSpawnPoint.position, Quaternion.identity);
         currentNpc = npcObj.AddComponent<NpcController>();
         currentNpc.InitializeController(npc);
-        npc.ticket = TicketManager.Instance.GetRandomTicket();
+        if (RoundManager.Instance.isRandomTicket[nowTicketIdx++])
+            npc.ticket = TicketManager.Instance.GetRandomTicket();
+        else npc.ticket = TicketManager.Instance.GetTrueTicket();
         TicketManager.Instance.InitializeTicket();
         if (npc.ticket.travelTo != npc.data.travelTo) npc.ticket.isTrueTicket = false;
         RoundManager.Instance.isSelected = true;
         currentNpc.OnTradeEnter();
         Debug.Log($"currentNpc:{currentNpc.npc.data.name}");
+    }
+    public void InitializeCurrentStoryNpc(NpcCard npcCard)
+    {
+        NpcData npcdata = npcCard.npc;
+        Npc npc = npcDictionary[npcdata.name];
+        npcObj = Instantiate(npc.hand, handSpawnPoint.position, Quaternion.identity);
+        currentNpc = npcObj.AddComponent<NpcController>();
+        currentNpc.InitializeController(npc);
+        currentNpc.npc.ticket = TicketManager.Instance.GetStoryNpcTicket(npc);
+        TicketManager.Instance.InitializeTicket(npc.ticket);
+        nowTicketIdx++;
+        currentNpc.OnTradeEnter();
     }
     public void AgreeNpcAward()
     {
@@ -106,6 +122,10 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
             Destroy(currentNpc.gameObject);
         }
         currentNpc = null;
+    }
+    public void CurrentNpcDataToLastRound()
+    {
+        lastRoundNpcDictionary = npcDictionary;
     }
 
 }

@@ -3,6 +3,7 @@ using System.IO;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 
 [Serializable]
@@ -10,23 +11,11 @@ public class PlayerData
 {
     public int gold;
 }
-[Serializable]
+
+
 public class InventorySaveData
 {
     public List<ItemSaveEntry> items = new List<ItemSaveEntry>();
-}
-[System.Serializable]
-public class ItemSaveEntry
-{
-    public string itemId;  // 对应 ItemData 的唯一标识
-    public int amount;
-}
-[Serializable]
-public class RoundData
-{
-    public int currendRound;
-    public int selectionsPerRound;
-    public int maxSelectionsPerRound;
 }
 
 [Serializable]
@@ -41,14 +30,7 @@ public class StoryNpcDatas
     public List<NpcDataEntry> data;
 }
 
-[Serializable]
-public class NpcDataEntry
-{
-    public int favorability;
-    public int selectedTimes;
-    public bool isSelected;
-    public string npcName;
-}
+
 public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
 {
     [Header("Systems")]
@@ -63,221 +45,277 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
 
     public void GameSave()
     {
-        SavePlayerData();
-        SaveInventory();
-        SaveRound();
-        SaveStoryNpc();
-        SaveNormalNpc();
+        Save();
     }
     public void GameLoad()
     {
-        LoadPlayerData();
-        LoadInventory();
-        LoadRound();
-        LoadStoryNpc();
-        LoadNormalNpc();
+        Load();
     }
-    public void SaveStoryNpc()
+    public void Save()
     {
-        StoryNpcDatas npcData = new StoryNpcDatas { data = new List<NpcDataEntry>() };
-        foreach (var data in m_gameManager.wholeStoryNpcDataList)
-        {
-            Npc npc = m_npc.npcDictionary[data.name];
-            NpcDataEntry npcDataEntry = new NpcDataEntry
-            {
-                favorability = npc.favorability,
-                npcName = npc.data.name,
-                selectedTimes = npc.selectedTimes,
-                isSelected = npc.isSelected
-            };
-            npcData.data.Add(npcDataEntry);
-        }
-        string json = JsonConvert.SerializeObject(npcData, Formatting.Indented);
-        string savePath = Path.Combine(Application.persistentDataPath, "storyNpc_save.json");
+        SaveGlobalData();
+    }
+    public void Load()
+    {
+        LoadGlobalData();
+    }
+    public void SaveGlobalData()
+    {
+        GameData gameData = new GameData { currentRoundData = new RoundData(), lastRoundData = new RoundData() };
+        SaveCurrentRoundData(gameData.currentRoundData);
+        SaveLastRoundData(gameData.lastRoundData);
 
+
+        string json = JsonConvert.SerializeObject(gameData, Formatting.Indented);
+        string savePath = Path.Combine(Application.persistentDataPath, "global_save.json");
         string encryptedJson = EncryptionUtility.Encrypt(json);
+
         File.WriteAllText(savePath, encryptedJson);
+        Debug.Log("全局存储成功!");
     }
-    public bool LoadStoryNpc()
+    public bool LoadGlobalData()
     {
-        foreach (var data in m_gameManager.wholeStoryNpcDataList)
-        {
-            m_npc.npcDictionary[data.name].ClearNpc();
-        }
-        string savePath = Path.Combine(Application.persistentDataPath, "storyNpc_save.json");
-        if (!File.Exists(savePath))
-        {
-            Debug.Log("无存档文件，返回默认值");
-            return false;
-        }
+        string savePath = Path.Combine(Application.persistentDataPath, "global_save.json");
+        if (!File.Exists(savePath)) return false;
         try
         {
-            //读取json文件
             string encryptedJson = File.ReadAllText(savePath);
             string json = EncryptionUtility.Decrypt(encryptedJson);
-            //反序列化json文件中的data
-            NormalNpcDatas data = JsonConvert.DeserializeObject<NormalNpcDatas>(json);
-            for (int i = 0; i < data.data.Count; i++)
-            {
-                NpcDataEntry npc = data.data[i];
-                m_npc.npcDictionary[npc.npcName].favorability = npc.favorability;
-                m_npc.npcDictionary[npc.npcName].isSelected = npc.isSelected;
-                m_npc.npcDictionary[npc.npcName].selectedTimes = npc.selectedTimes;
-            }
+            GameData saveData = JsonConvert.DeserializeObject<GameData>(json);
+            m_gameManager.ClearDatasBeforeLoading();
+
+            LoadCurrentRoundData(saveData.currentRoundData);
+            LoadLastRoundData(saveData.lastRoundData);
+            Debug.Log("读取存档成功!");
+
             return true;
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"读取失败: {e.Message}");
+            Debug.LogError($"读取存档失败: {e.Message}");
             return false;
         }
     }
-    public void SaveNormalNpc()
+    #region Save具体操作
+    public void SaveCurrentRoundData(RoundData roundData)
     {
-        StoryNpcDatas npcData = new StoryNpcDatas { data = new List<NpcDataEntry>() };
-        foreach (var data in m_gameManager.wholeNormalNpcDataList)
-        {
-            Npc npc = m_npc.npcDictionary[data.name];
-            NpcDataEntry npcDataEntry = new NpcDataEntry
-            {
-                favorability = npc.favorability,
-                npcName = npc.data.name,
-                selectedTimes = npc.selectedTimes,
-                isSelected = npc.isSelected
-            };
-            npcData.data.Add(npcDataEntry);
-        }
-        string json = JsonConvert.SerializeObject(npcData, Formatting.Indented);
-        string savePath = Path.Combine(Application.persistentDataPath, "normalNpc_save.json");
+        roundData.currentRound = m_round.currentRound;
+        roundData.gold = m_player.gold;
+        roundData.maxSelectionsPerRound = m_round.maxSelectionsPerRound;
+        roundData.selectionsPerRound = m_round.selectionsPerRound;
 
-        string encryptedJson = EncryptionUtility.Encrypt(json);
-        File.WriteAllText(savePath, encryptedJson);
+
+        List<NpcDataEntry> normalNpcDatas = new List<NpcDataEntry>();
+        List<NpcDataEntry> storyNpcDatas = new List<NpcDataEntry>();
+        List<ItemSaveEntry> itemSaveEntries = new List<ItemSaveEntry>();
+        SaveCurrentNpcData(normalNpcDatas, storyNpcDatas);
+        SaveCurrentInventoryData(itemSaveEntries);
+
+
+        roundData.storyNpcData = storyNpcDatas;
+        roundData.normalNpcData = normalNpcDatas;
+        roundData.items = itemSaveEntries;
+
+
     }
-    public bool LoadNormalNpc()
+    public void SaveLastRoundData(RoundData roundData)
     {
-        foreach (var data in m_gameManager.wholeNormalNpcDataList)
-        {
-            m_npc.npcDictionary[data.name].ClearNpc();
-        }
-        string savePath = Path.Combine(Application.persistentDataPath, "normalNpc_save.json");
-        if (!File.Exists(savePath))
-        {
-            Debug.Log("无存档文件，返回默认值");
-            return false;
-        }
-        try
-        {
-            //读取json文件
-            string encryptedJson = File.ReadAllText(savePath);
-            string json = EncryptionUtility.Decrypt(encryptedJson);
-            //反序列化json文件中的data
-            NormalNpcDatas data = JsonConvert.DeserializeObject<NormalNpcDatas>(json);
-            for (int i = 0; i < data.data.Count; i++)
-            {
-                NpcDataEntry npc = data.data[i];
-                m_npc.npcDictionary[npc.npcName].favorability = npc.favorability;
-                m_npc.npcDictionary[npc.npcName].isSelected = npc.isSelected;
-                m_npc.npcDictionary[npc.npcName].selectedTimes = npc.selectedTimes;
-            }
-            return true;
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"读取失败: {e.Message}");
-            return false;
-        }
-    }
-    public void SaveRound()
-    {
-        var saveData = new RoundData
-        {
-            currendRound = m_round.currentRound,
-            maxSelectionsPerRound = m_round.maxSelectionsPerRound,
-            selectionsPerRound = m_round.selectionsPerRound
-        };
-        string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
-        string savePath = Path.Combine(Application.persistentDataPath, "round_save.json");
-        string encryptedJson = EncryptionUtility.Encrypt(json);
-        File.WriteAllText(savePath, encryptedJson);
-        Debug.Log("回合信息已保存");
-    }
-    public bool LoadRound()
-    {
-        m_round.currentRound = 0;
-        m_round.maxSelectionsPerRound = 0;
-        m_round.selectionsPerRound = 0;
-        string savePath = Path.Combine(Application.persistentDataPath, "round_save.json");
-        //无存档
-        if (!File.Exists(savePath))
-        {
-            Debug.Log("无存档文件，返回默认值");
-            return false;
-        }
-        try
-        {
-            //读取json文件
-            string encryptedJson = File.ReadAllText(savePath);
-            string json = EncryptionUtility.Decrypt(encryptedJson);
-            //反序列化json文件中的data
-            RoundData data = JsonConvert.DeserializeObject<RoundData>(json);
-            m_round.currentRound = data.currendRound;
-            m_round.selectionsPerRound = data.selectionsPerRound;
-            m_round.maxSelectionsPerRound = data.maxSelectionsPerRound;
-            return true;
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"读取失败: {e.Message}");
-            return false;
-        }
+        roundData.currentRound = m_round.lastRound;
+        roundData.maxSelectionsPerRound = m_round.lastRoundMaxSelectionsPerRound;
+        roundData.selectionsPerRound = m_round.lastRoundSelectionsPerRound;
+        roundData.gold = m_player.lastRoundGold;
+
+
+        List<NpcDataEntry> normalNpcDatas = new List<NpcDataEntry>();
+        List<NpcDataEntry> storyNpcDatas = new List<NpcDataEntry>();
+        List<ItemSaveEntry> itemSaveEntries = new List<ItemSaveEntry>();
+        SaveLastNpcData(normalNpcDatas, storyNpcDatas);
+        SaveLastInventoryData(itemSaveEntries);
+
+
+        roundData.storyNpcData = storyNpcDatas;
+        roundData.normalNpcData = normalNpcDatas;
+        roundData.items = itemSaveEntries;
     }
 
-    public void SaveInventory()
+    public void SaveCurrentInventoryData(List<ItemSaveEntry> itemSaveEntry)
     {
-        var saveData = new InventorySaveData();
 
         foreach (Item item in m_inventory.items)
         {
-            saveData.items.Add(new ItemSaveEntry
+            itemSaveEntry.Add(new ItemSaveEntry
             {
                 itemId = item.data.itemID, // 假设 ItemData 有唯一 itemID
                 amount = item.amount
             });
         }
-
-        string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
-        string savePath = Path.Combine(Application.persistentDataPath, "inventory_save.json");
-        string encryptedJson = EncryptionUtility.Encrypt(json);
-        File.WriteAllText(savePath, encryptedJson);
-        Debug.Log("库存已保存");
     }
-    public bool LoadInventory()
+    public void SaveLastInventoryData(List<ItemSaveEntry> itemSaveEntry)
     {
-        string savePath = Path.Combine(Application.persistentDataPath, "inventory_save.json");
-        if (!File.Exists(savePath)) return false;
-
-        try
+        foreach (Item item in m_inventory.lastRoundItems)
         {
-            string encryptedJson = File.ReadAllText(savePath);
-            string json = EncryptionUtility.Decrypt(encryptedJson);
-            InventorySaveData saveData = JsonConvert.DeserializeObject<InventorySaveData>(json);
-
-            // 清空当前库存
-            m_inventory.items.Clear();
-            m_inventory.datas.Clear();
-
-            // 根据ID还原ItemData引用
-            foreach (ItemSaveEntry entry in saveData.items)
+            itemSaveEntry.Add(new ItemSaveEntry
             {
-                ItemData itemData = FindItemDataById(entry.itemId);
-                m_inventory.AddItem(itemData, entry.amount);
-            }
-            return true;
+                itemId = item.data.itemID, // 假设 ItemData 有唯一 itemID
+                amount = item.amount
+            });
         }
-        catch (System.Exception e)
+    }
+
+
+
+    public void SaveCurrentNpcData(List<NpcDataEntry> normalNpcData, List<NpcDataEntry> storyNpcData)
+    {
+        foreach (var data in m_gameManager.wholeNormalNpcDataList)
         {
-            Debug.LogError($"读取库存失败: {e.Message}");
-            return false;
+            Npc npc = m_npc.npcDictionary[data.name];
+            NpcDataEntry npcDataEntry = new NpcDataEntry
+            {
+                favorability = npc.favorability,
+                npcName = npc.data.name,
+                selectedTimes = npc.selectedTimes,
+                isSelected = npc.isSelected,
+                bit_0 = npc.bit_0,
+                bit_1 = npc.bit_1,
+                bit_2 = npc.bit_2,
+                branchNumber = npc.branchNumber
+            };
+            normalNpcData.Add(npcDataEntry);
+        }
+        foreach (var data in m_gameManager.wholeStoryNpcDataList)
+        {
+            Npc npc = m_npc.npcDictionary[data.name];
+            NpcDataEntry npcDataEntry = new NpcDataEntry
+            {
+                favorability = npc.favorability,
+                npcName = npc.data.name,
+                selectedTimes = npc.selectedTimes,
+                isSelected = npc.isSelected,
+                bit_0 = npc.bit_0,
+                bit_1 = npc.bit_1,
+                bit_2 = npc.bit_2,
+                branchNumber = npc.branchNumber
+            };
+            storyNpcData.Add(npcDataEntry);
+        }
+    }
+    public void SaveLastNpcData(List<NpcDataEntry> normalNpcData, List<NpcDataEntry> storyNpcData)
+    {
+        foreach (var data in m_gameManager.wholeNormalNpcDataList)
+        {
+            Npc npc = m_npc.lastRoundNpcDictionary[data.name];
+            NpcDataEntry npcDataEntry = new NpcDataEntry
+            {
+                favorability = npc.favorability,
+                npcName = npc.data.name,
+                selectedTimes = npc.selectedTimes,
+                isSelected = npc.isSelected,
+                bit_0 = npc.bit_0,
+                bit_1 = npc.bit_1,
+                bit_2 = npc.bit_2,
+                branchNumber = npc.branchNumber
+            };
+            normalNpcData.Add(npcDataEntry);
+        }
+        foreach (var data in m_gameManager.wholeStoryNpcDataList)
+        {
+            Npc npc = m_npc.lastRoundNpcDictionary[data.name];
+            NpcDataEntry npcDataEntry = new NpcDataEntry
+            {
+                favorability = npc.favorability,
+                npcName = npc.data.name,
+                selectedTimes = npc.selectedTimes,
+                isSelected = npc.isSelected,
+                bit_0 = npc.bit_0,
+                bit_1 = npc.bit_1,
+                bit_2 = npc.bit_2,
+                branchNumber = npc.branchNumber
+            };
+            storyNpcData.Add(npcDataEntry);
+        }
+    }
+    #endregion
+    public void LoadCurrentRoundData(RoundData data)
+    {
+        m_player.gold = data.gold;
+        m_round.currentRound = data.currentRound;
+        m_round.maxSelectionsPerRound = data.maxSelectionsPerRound;
+        m_round.selectionsPerRound = data.selectionsPerRound;
+        LoadCurrentNpcData(data.normalNpcData, data.storyNpcData);
+        LoadCurrentInventory(data.items);
+
+    }
+    public void LoadLastRoundData(RoundData data)
+    {
+        m_player.lastRoundGold = data.gold;
+        m_round.lastRound = data.currentRound;
+        m_round.lastRoundMaxSelectionsPerRound = data.maxSelectionsPerRound;
+        m_round.lastRoundSelectionsPerRound = data.selectionsPerRound;
+        LoadLastNpcData(data.normalNpcData, data.storyNpcData);
+        LoadLastInventory(data.items);
+    }
+    public void LoadCurrentNpcData(List<NpcDataEntry> normalNpc, List<NpcDataEntry> storyNpc)
+    {
+        for (int i = 0; i < normalNpc.Count; i++)
+        {
+            NpcDataEntry npc = normalNpc[i];
+            LoadCurrentNpcDatas(npc);
+        }
+        for (int i = 0; i < storyNpc.Count; i++)
+        {
+            NpcDataEntry npc = normalNpc[i];
+            LoadCurrentNpcDatas(npc);
+        }
+    }
+    public void LoadLastNpcData(List<NpcDataEntry> normalNpc, List<NpcDataEntry> storyNpc)
+    {
+        for (int i = 0; i < normalNpc.Count; i++)
+        {
+            NpcDataEntry npc = normalNpc[i];
+            LoadLastNpcDatas(npc);
+        }
+        for (int i = 0; i < storyNpc.Count; i++)
+        {
+            NpcDataEntry npc = normalNpc[i];
+            LoadLastNpcDatas(npc);
+        }
+    }
+    public void LoadCurrentNpcDatas(NpcDataEntry npc)
+    {
+        m_npc.npcDictionary[npc.npcName].favorability = npc.favorability;
+        m_npc.npcDictionary[npc.npcName].isSelected = npc.isSelected;
+        m_npc.npcDictionary[npc.npcName].selectedTimes = npc.selectedTimes;
+        m_npc.npcDictionary[npc.npcName].bit_0 = npc.bit_0;
+        m_npc.npcDictionary[npc.npcName].bit_1 = npc.bit_1;
+        m_npc.npcDictionary[npc.npcName].bit_2 = npc.bit_2;
+        m_npc.npcDictionary[npc.npcName].branchNumber = npc.branchNumber;
+    }
+    public void LoadLastNpcDatas(NpcDataEntry npc)
+    {
+        m_npc.lastRoundNpcDictionary[npc.npcName].favorability = npc.favorability;
+        m_npc.lastRoundNpcDictionary[npc.npcName].isSelected = npc.isSelected;
+        m_npc.lastRoundNpcDictionary[npc.npcName].selectedTimes = npc.selectedTimes;
+        m_npc.lastRoundNpcDictionary[npc.npcName].bit_0 = npc.bit_0;
+        m_npc.lastRoundNpcDictionary[npc.npcName].bit_1 = npc.bit_1;
+        m_npc.lastRoundNpcDictionary[npc.npcName].bit_2 = npc.bit_2;
+        m_npc.lastRoundNpcDictionary[npc.npcName].branchNumber = npc.branchNumber;
+    }
+
+
+    public void LoadCurrentInventory(List<ItemSaveEntry> items)
+    {
+        foreach (ItemSaveEntry entry in items)
+        {
+            ItemData itemData = FindItemDataById(entry.itemId);
+            m_inventory.AddItem(itemData, entry.amount);
+        }
+    }
+    public void LoadLastInventory(List<ItemSaveEntry> items)
+    {
+        foreach (ItemSaveEntry entry in items)
+        {
+            ItemData itemData = FindItemDataById(entry.itemId);
+            m_inventory.AddItemToLast(itemData, entry.amount);
         }
     }
     private ItemData FindItemDataById(string itemId)
@@ -291,44 +329,7 @@ public class SaveSystem : SingletonMonoBehaviour<SaveSystem>
         }
         return null;
     }
-    // 保存金币数据
-    public void SavePlayerData()
-    {
-        string savePath = Path.Combine(Application.persistentDataPath, "player_save.json");
-        PlayerData data = new PlayerData { gold = m_player.gold };
-        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
 
-        string encryptedJson = EncryptionUtility.Encrypt(json);
-        File.WriteAllText(savePath, encryptedJson);
-        Debug.Log($"金币已保存: {m_player.gold}");
-    }
-    public bool LoadPlayerData()
-    {
-        m_player.gold = 0;
-        string savePath = Path.Combine(Application.persistentDataPath, "player_save.json");
-        //无存档
-        if (!File.Exists(savePath))
-        {
-            Debug.Log("无存档文件，返回默认值");
-            return false;
-        }
-        try
-        {
-            //读取json文件
-            string encryptedJson = File.ReadAllText(savePath);
-            string json = EncryptionUtility.Decrypt(encryptedJson);
-            //反序列化json文件中的data
-            PlayerData data = JsonConvert.DeserializeObject<PlayerData>(json);
-            m_player.gold = data.gold;
-            Debug.Log($"金币已读取: {m_player.gold}");
-            return true;
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"读取失败: {e.Message}");
-            return false;
-        }
-    }
 
 
 }

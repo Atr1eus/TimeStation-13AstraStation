@@ -14,9 +14,9 @@ public class TicketUI : MonoBehaviour
     public Text travelDateText;
     public void SetUp(Ticket ticket)
     {
-        nameText.text = "姓名：" + ticket.npc.name;
+        nameText.text = "姓名：" + ticket.npc.npcName;
         ageText.text = "年龄：" + ticket.npc.age;
-        sexText.text = "性别：" + ticket.npc.sex == "Man" ? "男" : "女";
+        sexText.text = "性别：" + ((ticket.npc.sex == NpcSex.Man) ? "男" : "女");
         targetDateText.text = "目的时间：" + ticket.targetDate;
         travelDateText.text = "出发时间：" + ticket.leaveDate;
 

@@ -14,20 +14,32 @@ public class Npc
     public GameObject hand;
     public Ticket ticket;
     public int selectedTimes;
-    public bool isSelected = false;
+    public List<bool> isSelected = new List<bool>();
+    public List<bool> canAppera = new List<bool> { true };
     public int favorability;
+    public int bit_0;
+    public int bit_1;
+    public int bit_2;
+    public int branchNumber;
     public Npc(NpcData data)
     {
         this.data = data;
         favorability = data.initialFavorability;
         selectedTimes = 0;
-        if (data.type == NpcType.Story) hand = data.hand;
+        if (data.type == NpcType.Story)
+        {
+            hand = data.hand;
+            ticket = new Ticket(this);
+            ticket.data = data.ticket[selectedTimes];
+        }
         else hand = GetRandomHand();
+        isSelected.Add(false);
     }
-    public void Select()
+    public void Select(bool result)
     {
-        selectedTimes++;
-        isSelected = true;
+        isSelected[selectedTimes++] = true;
+        canAppera.Add(result == ticket.isTrueTicket ? true : false);
+        isSelected.Add(false);
     }
     public GameObject GetRandomHand()
     {
@@ -36,7 +48,7 @@ public class Npc
     public void ClearNpc()
     {
         selectedTimes = 0;
-        isSelected = false;
+        isSelected.Clear();
         favorability = 0;
     }
 

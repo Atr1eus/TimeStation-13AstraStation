@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class RoundManager : SingletonMonoBehaviour<RoundManager>
 {
+    public int lastRoundSelectionsPerRound;
+    public int lastRoundMaxSelectionsPerRound;
+    public int lastRound;
     [Header("回合配置")]
     [SerializeField] public int selectionsPerRound = 5; //单回合npc出现数
     [SerializeField] public int maxSelectionsPerRound = 2;//单回合最多可选择npc数
@@ -17,6 +20,7 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
     [Header("当前回合状态")]
     public int currentRound = 0; //回合数
     public int remainingSelections; //剩余选择数
+    public int currentCanSelectNpcNum;
     private float roundTimer; //回合剩余时间
     private bool isRoundActive; //是否激活回合时间
     public bool canSelect = true;
@@ -30,7 +34,13 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
     public List<NpcData> availableStoryNpcDatas = new List<NpcData>();
 
     public List<NpcData> currentRoundNpcDatas = new List<NpcData>(); //本回合出现NPC
+
     public List<Npc> currentRoundNpcs = new List<Npc>();
+
+
+    public List<Npc> currentSelectedNpcs = new List<Npc>();
+
+    public List<bool> isRandomTicket = new List<bool>();
 
     public UnityEvent OnRoundStart;
     public UnityEvent OnRoundEnd;
@@ -42,14 +52,16 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         currentRound++;
         remainingSelections = maxSelectionsPerRound;
         canSelect = true;
-        DecriseSelectionTimes();//回合开始选择一次 次数要减去
         roundTimer = roundDuration;
         isRoundActive = true;
+        currentCanSelectNpcNum = selectionsPerRound;
+        InitializeRandomTicketList();
         InitializeAvaliableNormalNpcDatas();
         InitializeAvaliableStoryNpcDatas();
         InitializeRoundNpcDatas();
         InitializeRoundNpcs();
         OnRoundStart?.Invoke();
+
     }
     public void InitializeWholeNpcDatas()
     {
@@ -72,12 +84,16 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
     public List<NpcData> InitializeAvaliableStoryNpcDatas()
     {
         availableStoryNpcDatas.Clear();
-        foreach (var npc in wholeStoryNpcDatas)
+        foreach (var npcData in wholeStoryNpcDatas)
         {
-            if (NpcAppearConditions.CanNpcAppear(npc) && npc.minAppearRound <= currentRound
-                && npc.maxAppearRound >= currentRound && NpcManager.Instance.npcDictionary[npc.name].isSelected == false)
+            Npc npc = NpcManager.Instance.npcDictionary[npcData.name];
+            if (NpcAppearConditions.CanNpcAppear(npcData) && npcData.storyNpcMinAppearRounds[npc.selectedTimes] <= currentRound
+                && npcData.storyNpcMaxAppearRounds[npc.selectedTimes] >= currentRound
+                && NpcManager.Instance.npcDictionary[npcData.name].isSelected[npc.selectedTimes] == false
+                && NpcManager.Instance.npcDictionary[npcData.name].canAppera[npc.selectedTimes]
+                && npc.selectedTimes < npc.data.ticket.Count)
             {
-                availableStoryNpcDatas.Add(npc);
+                availableStoryNpcDatas.Add(npcData);
             }
         }
         return availableStoryNpcDatas;
@@ -106,6 +122,20 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         return currentRoundNpcs;
     }
 
+    public List<bool> InitializeRandomTicketList()
+    {
+        for (int i = 0; i < maxSelectionsPerRound; i++)
+        {
+            isRandomTicket.Add(false);
+        }
+        for (int i = 0; i < selectionsPerRound - maxSelectionsPerRound; i++)
+        {
+            isRandomTicket.Add(true);
+        }
+        OutOfOrder(isRandomTicket);
+        return isRandomTicket;
+    }
+
     public List<NpcData> OutOfOrder(List<NpcData> Npcs) //随机打乱Npc池
     {
         System.Random randomNum = new System.Random();
@@ -123,19 +153,59 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         }
         return Npcs;
     }
+
+    public List<bool> OutOfOrder(List<bool> list) //随机打乱ticket池
+    {
+        System.Random randomNum = new System.Random();
+        int index = 0;
+        bool temp;
+        for (int i = 0; i < list.Count; i++)
+        {
+            index = randomNum.Next(0, list.Count);
+            if (index != i)
+            {
+                temp = list[i];
+                list[i] = list[index];
+                list[index] = temp;
+            }
+        }
+        return list;
+    }
+
     public void DecriseSelectionTimes() //减一次选择机会
     {
         --remainingSelections;
         canSelect = remainingSelections > 0;
     }
-
+    public void AddCurrentRoundSelectedNpc(NpcData data)
+    {
+        Npc npc = NpcManager.Instance.npcDictionary[data.name];
+        currentSelectedNpcs.Add(npc);
+    }
     public void ClearCurrentNpc()
     {
         availableNormalNpcDatas.Clear();
         availableStoryNpcDatas.Clear();
         currentRoundNpcDatas.Clear();
         currentRoundNpcs.Clear();
+        currentSelectedNpcs.Clear();
     }
+    public void CurrentRoundDataToLastRound()
+    {
+        lastRound = currentRound;
+        lastRoundMaxSelectionsPerRound = maxSelectionsPerRound;
+        lastRoundSelectionsPerRound = selectionsPerRound;
+    }
+    public void ClearBeforeLoading()
+    {
+        currentRound = 0;
+        maxSelectionsPerRound = 0;
+        selectionsPerRound = 0;
+        lastRoundSelectionsPerRound = 0;
+        lastRoundMaxSelectionsPerRound = 0;
+        lastRound = 0;
+    }
+
     protected override void Awake()
     {
         base.Awake();

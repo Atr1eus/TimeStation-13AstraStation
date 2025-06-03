@@ -45,6 +45,10 @@ public class TradingSceneManager : SceneManager
         item0Button?.onClick.AddListener(manager.TESTOfferItem);
         item1Button?.onClick.AddListener(manager.TESTOfferIte1);
         item2Button?.onClick.AddListener(manager.TESTOfferItem2);
+        nextNpcButton?.onClick.AddListener(InitializeButtonStates);
+        agreeButton?.onClick.AddListener(AgreeButtonState);
+        giveButton?.onClick.AddListener(GiveButtonClickButtonState);
+        exitBagButton?.onClick.AddListener(AgreeButtonState);
 
     }
     private void InitializeButtonsAwake()
@@ -53,18 +57,17 @@ public class TradingSceneManager : SceneManager
         {
             StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
         });
-        nextNpcButton?.onClick.AddListener(InitializeButtonStates);
-        agreeButton?.onClick.AddListener(AgreeButtonState);
+
         disagreeButton?.onClick.AddListener(OnDisagreeButtonClick);
-        giveButton?.onClick.AddListener(GiveButtonClickButtonState);
-        exitBagButton?.onClick.AddListener(AgreeButtonState);
     }
     public void OnDisagreeButtonClick()
     {
-        bool isNext = manager.OnDisagreeNpcButtonClick();
+        manager.OnDisagreeNpcButtonClick();
+        if (RoundManager.Instance.currentCanSelectNpcNum <= 0)
+        {
+            StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
+        }
         InitializeButtonStates();
-        if (isNext) return;
-        StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
     }
     public void InitializeButtonStates()
     {
@@ -80,19 +83,19 @@ public class TradingSceneManager : SceneManager
     }
     public void DecidedNpcButtonState()
     {
-        UseButton(agreeButton);
         UseButton(disagreeButton);
         if (RoundManager.Instance.canSelect)
         {
-            UseButBanButton(nextNpcButton);
+            UseButton(agreeButton);
             UnuseButton(loadRestSceneButton);
         }
         else
         {
-            UseButBanButton(loadRestSceneButton);
-            UnuseButton(nextNpcButton);
+            UseButBanButton(agreeButton);
+            UseButton(loadRestSceneButton);
         }
-        UseButBanButton(giveButton);
+        UnuseButton(nextNpcButton);
+        UnuseButton(giveButton);
         UnuseButton(item0Button);
         UnuseButton(item1Button);
         UnuseButton(item2Button);
@@ -103,7 +106,7 @@ public class TradingSceneManager : SceneManager
         UseButBanButton(agreeButton);
         UseButBanButton(disagreeButton);
         UseButBanButton(giveButton);
-        if (RoundManager.Instance.canSelect)
+        if (RoundManager.Instance.canSelect && RoundManager.Instance.currentCanSelectNpcNum > 0)
         {
             UseButBanButton(nextNpcButton);
             UnuseButton(loadRestSceneButton);
@@ -111,7 +114,7 @@ public class TradingSceneManager : SceneManager
         else
         {
             UseButBanButton(loadRestSceneButton);
-            UnuseButton(nextNpcButton);
+            UseButBanButton(nextNpcButton);
         }
         UseButton(item0Button);
         UseButton(item1Button);
@@ -123,7 +126,7 @@ public class TradingSceneManager : SceneManager
         UseButBanButton(agreeButton);
         UseButBanButton(disagreeButton);
         UseButton(giveButton);
-        if (RoundManager.Instance.canSelect)
+        if (RoundManager.Instance.canSelect && RoundManager.Instance.currentCanSelectNpcNum > 0)
         {
             UseButton(nextNpcButton);
             UnuseButton(loadRestSceneButton);
@@ -131,7 +134,7 @@ public class TradingSceneManager : SceneManager
         else
         {
             UseButton(loadRestSceneButton);
-            UnuseButton(nextNpcButton);
+            UseButton(nextNpcButton);
         }
         UnuseButton(item0Button);
         UnuseButton(item1Button);

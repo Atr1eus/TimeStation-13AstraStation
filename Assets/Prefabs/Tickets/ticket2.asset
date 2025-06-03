@@ -9,14 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ace8696ab49bf2d4e8b1d598419f29ea, type: 3}
-  m_Name: New Ticket
+  m_Script: {fileID: 11500000, guid: 8293c2e56cb548b4fac8a42d7588432c, type: 3}
+  m_Name: ticket2
   m_EditorClassIdentifier: 
-  ticketPic: {fileID: 0}
+  npc: {fileID: 0}
+  targetDate: 
+  travelTo: 0
+  ticketGraph: {fileID: 0}
   ticketIssuer: 0
-  targetDate:
-  - 3050.10.08
-  to: 0
-  leaveDate:
-  - 4070.6.01
-  leaveRound: 00000000
+  isTrueTicket: 0

@@ -548,6 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   datas: []
+  lastRoundDatas: []
 --- !u!4 &518646264
 Transform:
   m_ObjectHideFlags: 0
@@ -1469,11 +1470,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ef4dbd1d0c79a4a9b71bcf84566c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionsPerRound: 5
+  lastRoundSelectionsPerRound: 0
+  lastRoundMaxSelectionsPerRound: 0
+  lastRound: 0
+  selectionsPerRound: 4
   maxSelectionsPerRound: 2
   roundDuration: 180
   currentRound: 0
   remainingSelections: 0
+  currentCanSelectNpcNum: 0
   canSelect: 1
   isSelected: 0
   wholeNormalNpcDatas: []
@@ -1992,6 +1997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gold: 200
+  lastRoundGold: 0
 --- !u!4 &1049866127
 Transform:
   m_ObjectHideFlags: 0
@@ -2810,7 +2816,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 374.9, y: -210}
+  m_AnchoredPosition: {x: 374.9, y: -73}
   m_SizeDelta: {x: 193.2733, y: 78.7216}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1868933418
@@ -3176,6 +3182,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcf0b780e4199a4e8fac290a8b205ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_player: {fileID: 1049866126}
+  m_npc: {fileID: 1022357577}
+  m_inventory: {fileID: 518646263}
+  m_inventoryUI: {fileID: 0}
+  m_round: {fileID: 726485253}
+  m_sceneLoader: {fileID: 96767315}
+  m_ticket: {fileID: 1390428709}
+  m_gameManager: {fileID: 375653880}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

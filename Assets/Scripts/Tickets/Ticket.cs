@@ -8,6 +8,7 @@ public enum Issuer
 }
 public class Ticket
 {
+    public TicketData data;
     public NpcData npc;
     public string targetDate;
     public string leaveDate;
@@ -19,5 +20,13 @@ public class Ticket
     public Ticket()
     {
         isTrueTicket = true;
+    }
+    public Ticket(Npc npc)
+    {
+        isTrueTicket = true;
+        if (npc.data.type == NpcType.Story)
+        {
+            this.npc = npc.data;
+        }
     }
 }

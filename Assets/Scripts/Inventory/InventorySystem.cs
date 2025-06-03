@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
 /// 仓库系统
@@ -6,8 +7,10 @@ using UnityEngine;
 [System.Serializable]
 public class InventorySystem : SingletonMonoBehaviour<InventorySystem>
 {
-    public List<Item> items;
-    public List<ItemData> datas;
+    public List<Item> items = new List<Item>();
+    public List<ItemData> datas = new List<ItemData>();
+    public List<Item> lastRoundItems = new List<Item>();
+    public List<ItemData> lastRoundDatas = new List<ItemData>();
     public void AddItem(Item item) //增加物品操作
     {
         foreach (var it in items)
@@ -34,6 +37,20 @@ public class InventorySystem : SingletonMonoBehaviour<InventorySystem>
         Item item = new Item(itemdata, amount);
         items.Add(item);
         datas.Add(itemdata);
+    }
+    public void AddItemToLast(ItemData itemdata, int amount) //增加物品操作
+    {
+        foreach (var it in items)
+        {
+            if (it.data == itemdata)
+            {
+                it.amount += amount;
+                return;
+            }
+        }
+        Item item = new Item(itemdata, amount);
+        lastRoundItems.Add(item);
+        lastRoundDatas.Add(itemdata);
     }
     public bool RemoveItem(ItemData item, int removeAmount = 1)//移除一定数量的物品
     {
@@ -89,5 +106,17 @@ public class InventorySystem : SingletonMonoBehaviour<InventorySystem>
         base.Awake();
         items = new List<Item>();
         datas = new List<ItemData>();
+    }
+    public void CurrentInventoryDataToLastRound()
+    {
+        lastRoundItems = items;
+        lastRoundDatas = datas;
+    }
+    public void ClearBeforeLoading()
+    {
+        items.Clear();
+        datas.Clear();
+        lastRoundDatas.Clear();
+        lastRoundItems.Clear();
     }
 }

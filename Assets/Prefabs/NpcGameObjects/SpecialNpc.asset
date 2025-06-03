@@ -13,23 +13,15 @@ MonoBehaviour:
   m_Name: SpecialNpc
   m_EditorClassIdentifier: 
   age: 0
-  npcName: 
+  npcName: 11
   sex: 0
-  hand: {fileID: 955719812875777746, guid: 5ef8b260ce7f3d841857c7e32b2ce914, type: 3}
   type: 1
-  career: 0
-  species: 0
   travelTo: 0
-  npcDescription: "\u54C8\u57FA\u7C73"
-  greetingDialogues: []
-  successDialogues: []
-  refuseDialogues: []
+  npcDialogue: {fileID: 0}
   requestItems:
   - {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
   offerItems:
   - {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
-  minAppearRound: 0
-  maxAppearRound: 100
   minPerRequestAwardGolds: 0
   maxPerRequestAwardGolds: 0
   minPerNonrequestAwardGolds: 0
@@ -37,6 +29,17 @@ MonoBehaviour:
   trueChoiceAwardGolds: 0
   falseChoicePunishGolds: 0
   initialFavorability: 0
+  hand: {fileID: 955719812875777746, guid: 5ef8b260ce7f3d841857c7e32b2ce914, type: 3}
+  ticket:
+  - {fileID: 11400000, guid: a3bd48a32c94e0943bb6ce0d9d4326e3, type: 2}
+  storyNpcDescriptions:
+  - "\u54C8\u57FA\u7C73"
+  storyNpcMinAppearRounds: 000000000300000005000000
+  storyNpcMaxAppearRounds: 050000000700000009000000
+  storyNpcReasons: []
+  npcDescription: 
+  minAppearRound: 0
+  maxAppearRound: 0
   reasonToFurture: []
   reasonToPast: []
   isMoneyMore10K: 0

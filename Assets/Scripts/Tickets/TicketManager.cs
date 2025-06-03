@@ -33,6 +33,15 @@ public class TicketManager : SingletonMonoBehaviour<TicketManager>
     {
         wholeNormalNpcDataList = GameManager.Instance.wholeNormalNpcDataList;
     }
+    public Ticket GetTrueTicket()
+    {
+        currentTicket = new Ticket();
+        currentTicket.npc = NpcManager.Instance.currentNpc.npc.data;
+        currentTicket.ticketGraph = GetRandomTrueTicketGraph();
+        currentTicket.targetDate = GetRandomTrueTargetDate();
+        currentTicket.leaveDate = GetTrueLeaveDate(currentTicket);
+        return currentTicket;
+    }
     public void InitializeTicket()
     {
 
@@ -58,7 +67,41 @@ public class TicketManager : SingletonMonoBehaviour<TicketManager>
 
         ticketUI.SetUp(currentTicket);
     }
+    public void InitializeTicket(Ticket ticket)
+    {
 
+        float screenWidth = Screen.width;
+        float xPos = screenWidth / 10f;
+        float yPos = Screen.height / 2f; // 默认居中
+        currentTicketObj = Instantiate(ticketPrefab, ticketContainer);
+
+        RectTransform ticketRect = currentTicketObj.GetComponent<RectTransform>();
+        Vector2 screenPos = new Vector2(xPos, yPos);
+
+        Vector2 anchoredPos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            (RectTransform)ticketContainer,
+            screenPos,
+            null,
+            out anchoredPos
+        );
+        ticketRect.anchoredPosition = anchoredPos;
+
+
+        TicketUI ticketUI = currentTicketObj.GetComponent<TicketUI>();
+
+        ticketUI.SetUp(ticket);
+    }
+    public Ticket GetStoryNpcTicket(Npc npc)
+    {
+
+        npc.ticket.ticketGraph = npc.data.ticket[npc.selectedTimes].ticketGraph;
+        npc.ticket.travelTo = npc.data.ticket[npc.selectedTimes].travelTo;
+        npc.ticket.targetDate = npc.data.ticket[npc.selectedTimes].targetDate;
+        npc.ticket.isTrueTicket = npc.data.ticket[npc.selectedTimes].isTrueTicket;
+        npc.ticket.leaveDate = GetTrueLeaveDate(npc.ticket);
+        return npc.ticket;
+    }
     //随机生成票
     public Ticket GetRandomTicket()
     {
@@ -86,6 +129,7 @@ public class TicketManager : SingletonMonoBehaviour<TicketManager>
     {
         int index = Random.Range(0, ticket.Count);
         ticketIndex = index;
+        currentTicket.ticketIssuer = GetRandomIssure();
         return ticket[index];
     }
     public Issuer GetRandomIssure()
@@ -98,7 +142,17 @@ public class TicketManager : SingletonMonoBehaviour<TicketManager>
         }
         return ticketIssure[ticketIndex];
     }
-
+    public GameObject GetRandomTrueTicketGraph()
+    {
+        int index = Random.Range(0, ticket.Count);
+        ticketIndex = index;
+        currentTicket.ticketIssuer = GetTrueIssure();
+        return ticket[index];
+    }
+    public Issuer GetTrueIssure()
+    {
+        return ticketIssure[ticketIndex];
+    }
     public string GetRandomTargetDate()
     {
         int randomNum = Random.Range(0, targetDate.Count);
@@ -108,6 +162,17 @@ public class TicketManager : SingletonMonoBehaviour<TicketManager>
             randomNum = Random.Range(0, targetDate.Count);
         }
         currentTicket.travelTo = GetTravelTo(targetRound[randomNum]);
+        return targetDate[randomNum];
+    }
+    public string GetRandomTrueTargetDate()
+    {
+        int randomNum = Random.Range(0, targetDate.Count);
+        while (targetRound[randomNum] == RoundManager.Instance.currentRound && currentTicket.travelTo != NpcManager.Instance.currentNpc.npc.data.travelTo)
+        {
+            currentTicket.isTrueTicket = false;
+            randomNum = Random.Range(0, targetDate.Count);
+            currentTicket.travelTo = GetTravelTo(targetRound[randomNum]);
+        }
         return targetDate[randomNum];
     }
     public TravelTo GetTravelTo(int count)
@@ -143,7 +208,19 @@ public class TicketManager : SingletonMonoBehaviour<TicketManager>
         }
         return null;
     }
-    
+    public string GetTrueLeaveDate(Ticket ticket)
+    {
+        for (int i = 0; i < leaveRound.Count; i++)
+        {
+            if (leaveRound[i] == RoundManager.Instance.currentRound)
+            {
+                ticket.leaveRound = leaveRound[i];
+                return leaveDate[i];
+            }
+        }
+        return null;
+    }
+
     public void ClearCurrentTicket()
     {
         Destroy(currentTicketObj);
