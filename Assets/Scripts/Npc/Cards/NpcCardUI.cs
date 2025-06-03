@@ -24,7 +24,8 @@ public class NpcCardUI : MonoBehaviour
     }
     private void OnChooseButtonClick()
     {
-        npcCardManager.SelectCard(npcCard);
         NpcManager.Instance.InitializeCurrentNpc(npcCard);
+        npcCardManager.SelectCard(npcCard);
+        
     }
 }

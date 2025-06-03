@@ -24,6 +24,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private RoundManager m_round;
     [SerializeField] private SceneLoader m_sceneLoader;
     [SerializeField] private TicketManager m_ticket;
+    [SerializeField] private DialogueManager m_dialogue;
 
     //todo:UIManager
 
@@ -33,6 +34,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     protected virtual void Start()
     {
+        m_dialogue = FindObjectOfType<DialogueManager>();
+
+        if (m_dialogue == null)
+        {
+            Debug.LogError("场景中未找到DialogueManager组件");
+        }
+        else
+        {
+            Debug.Log($"找到DialogueManager: {m_dialogue.gameObject.name}");
+        }
     }
     public void OnNextRoundClick() //下一回合按钮点击事件
     {

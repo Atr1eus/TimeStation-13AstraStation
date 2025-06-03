@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using DialogueSystem;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : SingletonMonoBehaviour<DialogueManager>
 {
     Dialogue dialogueManager;
     List<DialogueGameState> gameStateVariables = new List<DialogueGameState>();
-    private Npc curNpc;
+    public bool isTalking;
 
-    [Header("对话设置")]
-    public DialogueGraph graph;
-    public DialogueTheme alternativeTheme;
+    [SerializeField] private NpcManager npcmanager;
+
+    [Header("对话流")]
+    public DialogueGraph m_graph;
 
     [Header("输入控制")]
     public KeyCode advanceKey = KeyCode.Space;
@@ -20,23 +21,22 @@ public class DialogueManager : MonoBehaviour
     public KeyCode themeTestKey = KeyCode.S;
     public KeyCode pauseKey = KeyCode.P;
 
-    [Header("UIHandler")]
+    [Header("UI")]
     public DialogueUIHandler UiHandler;
+    public DialogueTheme alternativeTheme;
 
-    [Header("事件处理器")]
+    [Header("事件处理")]
     public DialogueEventList eventHandler;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
-        //curNpc = GetComponent<Npc>();
-
-        if (curNpc == null)
-        {
-            Debug.LogWarning($"DialogueManager所在的GameObject缺少NPC组件", gameObject);
-        }
+        isTalking = false;
     }
+
+    
 
     private void Start()
     {
@@ -45,7 +45,6 @@ public class DialogueManager : MonoBehaviour
         dialogueManager.dialogueCallbackActions.OnNodeLeave += OnNodeLeave;
         dialogueManager.dialogueCallbackActions.OnNodeEnter += OnNodeEnter;
 
-        //GameStateHandler();
         dialogueManager.SetDialogGameState(gameStateVariables);
 
         dialogueManager.OnChoiceDraw += OnChoiceDraw;
@@ -58,26 +57,41 @@ public class DialogueManager : MonoBehaviour
         HandleInput();
     }
 
+    public void StartDialogue()
+    {
+        isTalking = true;
+        GameStateHandler();// 获取现在npc的数据，决定走那个对话
+    }
+
     //输入处理
     private void HandleInput()
     {
         // 对话推进控制
         if (Input.GetKeyDown(advanceKey))
         {
-            if (dialogueManager.IsRunning)
+            
+            if(!dialogueManager.IsRunning && isTalking)
             {
-                if (dialogueManager.isAnimating)
+                isTalking = false;
+                if (!m_graph)
                 {
-                    dialogueManager.EndLine(); // 跳过文本动画
+                    Debug.LogWarning("NO GRAPH!!!");
                 }
-                else if (dialogueManager.CurrentState != DialogueState.AwaitingEventResponse)
-                {
-                    dialogueManager.AdvanceDialogue(); // 推进对话
-                }
+                dialogueManager.StartDialogue(m_graph); // 开始对话
             }
-            else
+            else if(dialogueManager.IsRunning)
             {
-                dialogueManager.StartDialogue(); // 开始对话
+                if (dialogueManager.IsRunning)
+                {
+                    if (dialogueManager.isAnimating)
+                    {
+                        dialogueManager.EndLine(); // 跳过文本动画
+                    }
+                    else if (dialogueManager.CurrentState != DialogueState.AwaitingEventResponse)
+                    {
+                        dialogueManager.AdvanceDialogue(); // 推进对话
+                    }
+                }
             }
         }
 
@@ -105,6 +119,12 @@ public class DialogueManager : MonoBehaviour
                 dialogueManager.Pause(true);
             }
         }
+    }
+
+    public void SetGraph(DialogueGraph graph)
+    {
+        Debug.Log("对画图设置成功！");
+        m_graph = graph;
     }
 
     // 文本节点开始时的回调
@@ -152,6 +172,25 @@ public class DialogueManager : MonoBehaviour
     //游戏状态处理（获取角色属性判断是哪组对话）
     public void GameStateHandler()
     {
-        gameStateVariables.Add(new DialogueGameState(curNpc.attribute[NpcAttribute.Favorability], "Favorability")); //希望改写成通用接口
+        Debug.Log("in");
+        
+        if (npcmanager == null)
+        {
+            Debug.LogWarning("no npcmanager!");
+        }
+        if(npcmanager.currentNpc == null)
+        {
+            Debug.LogWarning("no npccontroller!");
+        }
+        if (npcmanager.currentNpc.npc == null)
+        {
+            Debug.LogWarning("no npc!");
+        }
+        Npc curNpc = npcmanager.currentNpc.npc;
+        gameStateVariables.Add(new DialogueGameState(curNpc.favorability, "Favorability"));
+        gameStateVariables.Add(new DialogueGameState(curNpc.bit_0, "bit_0"));
+        gameStateVariables.Add(new DialogueGameState(curNpc.bit_1, "bit_1"));
+        gameStateVariables.Add(new DialogueGameState(curNpc.bit_2, "bit_2"));
+        Debug.Log("alreadychanged!");
     }
 }

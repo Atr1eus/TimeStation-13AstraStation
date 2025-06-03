@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Event
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1784, y: 136}
+  position: {x: 1608, y: 616}
   ports:
     keys:
     - input
@@ -43,7 +43,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 453a1c7deb40b7b48ba2ba092e8aaaaa
+  id: 2bafa41598f8fe247ab023e081544baf
   nodeName: Event node
   processed: 0
   entered: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 8d87ef10b0d11944a97032c328f960e6
+  id: f08db7a9879106c46ae79d38a923d7c4
   nodeName: Event node
   processed: 0
   entered: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: b6056ea6cf34bc14a91634c84a26119c
+  id: e3fe03a60fdc6f8479edf685f1ad1d10
   nodeName: Text node
   processed: 0
   entered: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
     value: 
   audioClip: {fileID: 0}
   syncTypewriter: 0
-  text: "\u4F60\u597D\u5440\uFF0C\u5C0F\u59D1\u5A18\uFF0C\u4F60\u5E94\u8BE5\u77E5\u9053\u6211\u7684\u6765\u610F\uFF0C\u4F5C\u4E3A\u4E00\u53EA\u4E13\u4E1A\u7684\u9B54\u6CD5\u732B\u54AA\uFF0C\u6211\u4E00\u76F4\u6709\u4E00\u4E2A\u4FE1\u6761"
+  text: "\u5C0F\u59D1\u5A18\uFF0C\u6211\u60F3\u4F60\u5E94\u8BE5\u77E5\u9053\u6211\u7684\u6765\u610F\uFF0C\u4F5C\u4E3A\u4E00\u53EA\u4E13\u4E1A\u7684\u9B54\u6CD5\u732B\u54AA\uFF0C\u6211\u4E00\u76F4\u6709\u4E00\u4E2A\u4FE1\u6761"
   WaitForInput: 1
   output: 0
 --- !u!114 &-7231823351749106430
@@ -210,7 +210,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 0055e0878d6777549ba6492b7fdd88ee
+  id: 44d7112cb82b49845974de42aa5bdce3
   nodeName: Event node
   processed: 0
   entered: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 1d5d818b61730284eb92ac43b3022aaf
+  id: cdb8831208bd589408b7e76cce7a8a81
   nodeName: Text node
   processed: 0
   entered: 0
@@ -348,7 +348,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 0f006d7fa04ab5f4da26e24e31aae5e7
+  id: 21062af135612a34a8bf76f4eaf06afa
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -358,7 +358,7 @@ MonoBehaviour:
     text: "\u3002\u3002\u3002"
     choiceNumber: 0
   - choiceName: 
-    text: "\u53EF\u662F\u4F60\u600E\u4E48\u770B\u90FD\u53EA\u662F\u4E00\u53EA\u732B\uFF0C\u5982\u679C\u8FD9\u6837\u8981\u82B1\u8D39\u4E00\u4E2A\u5E2D\u4F4D\u7684\u8BDD\u3002\u3002\u3002"
+    text: "\u53EF\u662F\u4F60\u600E\u4E48\u770B\u90FD\u53EA\u662F\u4E00\u53EA\u732B"
     choiceNumber: 0
   input: 0
 --- !u!114 &-2393458709817996576
@@ -428,7 +428,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 57b848f4ec629df49b615dcfee8a81fc
+  id: d1573c3b2b2adfb4ebb71b90389b5901
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -497,7 +497,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: a280482d7613fa04d8dbad1c49105fc1
+  id: 601dfe0efabb6054c91e82d780b04f80
   nodeName: Condition
   processed: 0
   entered: 0
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_Name: Text
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 5752, y: -8}
+  position: {x: 5384, y: 24}
   ports:
     keys:
     - input
@@ -554,7 +554,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 83213eb7f2a3151499d591afbf23b058
+  id: f03afc09218482a42abda134fba17f21
   nodeName: Text node
   processed: 0
   entered: 0
@@ -602,7 +602,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 4ed934e6f729e204eab359cb27cfbbd0
+  id: 92efe565a9cea744aab0e1fe7f6cf7a7
   nodeName: Branch
   processed: 0
   entered: 0
@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Name: Text
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 2296, y: 488}
+  position: {x: 2136, y: 952}
   ports:
     keys:
     - input
@@ -660,7 +660,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 1c3127fb62d5c3e4184214c7d76bf8b7
+  id: e26879defab16614e9f27fce015d1ec1
   nodeName: Text node
   processed: 0
   entered: 0
@@ -754,7 +754,7 @@ MonoBehaviour:
   m_Name: Event
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 3000, y: 504}
+  position: {x: 3112, y: 1016}
   ports:
     keys:
     - input
@@ -781,7 +781,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: ef2276f9bea0ce9438cf2d8bbd27f121
+  id: 54ce6e70f84a911408ff2b88e18c4445
   nodeName: Event node
   processed: 0
   entered: 0
@@ -840,7 +840,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 85d2ed95b16c75c43821aec3ae292d07
+  id: 0df090cf742888740b483c4badf266c5
   nodeName: Text node
   processed: 0
   entered: 0
@@ -868,7 +868,7 @@ MonoBehaviour:
   m_Name: Text
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 2360, y: 168}
+  position: {x: 2136, y: 648}
   ports:
     keys:
     - input
@@ -898,7 +898,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: e82761c1078c57a4790e6ff705776962
+  id: 6472ec5007b01c9439a75eea596eeb3b
   nodeName: Text node
   processed: 0
   entered: 0
@@ -956,7 +956,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: ab08fa4cbab9d0f4cb5319c5120f8a7a
+  id: cdca142587ecd8d4689e4c08b6f810f0
   nodeName: Text node
   processed: 0
   entered: 0
@@ -968,7 +968,7 @@ MonoBehaviour:
     value: 
   audioClip: {fileID: 0}
   syncTypewriter: 0
-  text: "\u5982\u679C\u4F60\u548C\u6211\u4E00\u6837\u4E13\u4E1A\u7684\u8BDD\uFF0C\u5C31\u5FEB\u5FEB\u653E\u6211\u8FC7\u53BB\u5427\uFF0C\u65F6\u95F4\u53EF\u4E0D\u7B49\u4EBA\u554A"
+  text: "\u5982\u679C\u4F60\u548C\u6211\u4E00\u6837\u4E13\u4E1A\u7684\u8BDD\uFF0C\u5C31\u5FEB\u5FEB\u653E\u6211\u8FC7\u53BB\u5427\uFF0C\u65F6\u95F4\u53EF\u4E0D\u7B49\u4EBA"
   WaitForInput: 1
   output: 0
 --- !u!114 &1625701329302766861
@@ -984,7 +984,7 @@ MonoBehaviour:
   m_Name: Choice
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1240, y: 200}
+  position: {x: 1064, y: 776}
   ports:
     keys:
     - choices
@@ -1038,7 +1038,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 1ad35a3eba7ad6e4eb725cc679dbebdc
+  id: d1669afb7d8ea1e44ae640b4e8260c32
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -1094,7 +1094,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 2847479d39413ab439df046e60e1a043
+  id: dbe9b68396c55664cbc4796d45cbb095
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1122,7 +1122,7 @@ MonoBehaviour:
   m_Name: Event
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1768, y: 488}
+  position: {x: 1592, y: 968}
   ports:
     keys:
     - input
@@ -1152,7 +1152,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: bb4654cbd53d62b40b26826ef818d172
+  id: 0cdbfd50d5cb0ec489ae9ac08a6c82fe
   nodeName: Event node
   processed: 0
   entered: 0
@@ -1208,7 +1208,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 2ef9ae00bc2b651439d6e0e2a2bd035f
+  id: 418d0a5941cb6af47b4a2226e08455ae
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1279,7 +1279,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 158431e7ab75a524b856530ebfc03db3
+  id: 7ba870b4a5ff18245bc06e19a4081e40
   nodeName: Condition
   processed: 0
   entered: 0
@@ -1342,7 +1342,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 39bcd6ca8afdc3743869b9709eb3eb85
+  id: eaa4a726bd0315e4d9a411f917188790
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1370,7 +1370,7 @@ MonoBehaviour:
   m_Name: Text
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 536, y: 184}
+  position: {x: 344, y: 744}
   ports:
     keys:
     - input
@@ -1400,7 +1400,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 2c7a773a83d045840b7dbace14b0d1ff
+  id: 2bfa279ea504fc44494a278bad8d4ac7
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1412,7 +1412,7 @@ MonoBehaviour:
     value: 
   audioClip: {fileID: 0}
   syncTypewriter: 0
-  text: "\u597D\u4E86\u5C0F\u59D1\u5A18\uFF0C\u6700\u4E13\u4E1A\u7684\u730E\u624B\u53C8\u56DE\u6765\u4E86\uFF0C\u5FEB\u8BA9\u6211\u56DE\u53BB\u5427QAQ"
+  text: "\u597D\u4E86\u5C0F\u59D1\u5A18\uFF0C\u6700\u4E13\u4E1A\u7684\u730E\u624B\u53C8\u56DE\u6765\u4E86\uFF0C\u5FEB\u8BA9\u6211\u56DE\u53BB\u5427"
   WaitForInput: 1
   output: 0
 --- !u!114 &5212848227357826709
@@ -1428,7 +1428,7 @@ MonoBehaviour:
   m_Name: Event
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 3048, y: 136}
+  position: {x: 3064, y: 632}
   ports:
     keys:
     - input
@@ -1455,7 +1455,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: c48f93c4d5fee0447957e1e0910041ad
+  id: 3fa75ab2a36919040ad38cd8b470782b
   nodeName: Event node
   processed: 0
   entered: 0
@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_Name: Text
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -151.20253, y: 182.1}
+  position: {x: -360, y: 744}
   ports:
     keys:
     - input
@@ -1514,7 +1514,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 474153183a5339b4a8ce138ee8ca94bf
+  id: e63d02d2e4ec3c344802aeaf89215eb0
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1572,7 +1572,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: c91654bd2252f48428349482624b0e49
+  id: e1da91f512fea684ebf813c99f028ded
   nodeName: Event node
   processed: 0
   entered: 0

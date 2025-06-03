@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "com.github.siccity.xnode": "https://github.com/Siccity/xNode.git",
-    "com.larsellefsen.dialoguesystem": "https://github.com/LarsEllefsen/DialogueSystem.git",
     "com.unity.cinemachine": "2.10.3",
     "com.unity.collab-proxy": "2.8.2",
     "com.unity.feature.2d": "2.0.1",

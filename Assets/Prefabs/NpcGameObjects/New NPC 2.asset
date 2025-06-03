@@ -20,10 +20,8 @@ MonoBehaviour:
   career: 0
   species: 0
   travelTo: 0
-  npcDescription: 
-  greetingDialogues: []
-  successDialogues: []
-  refuseDialogues: []
+  npcDescription: "\u9752\u86D9\u72D7"
+  npcDialogue: {fileID: 11400000, guid: e4544cb2bf1d322469d98995d59e6888, type: 2}
   requestItems:
   - {fileID: 11400000, guid: 7b5eefb295097974b8a2ec51ba448edb, type: 2}
   offerItems:

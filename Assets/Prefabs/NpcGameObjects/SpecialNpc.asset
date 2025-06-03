@@ -21,9 +21,7 @@ MonoBehaviour:
   species: 0
   travelTo: 0
   npcDescription: "\u54C8\u57FA\u7C73"
-  greetingDialogues: []
-  successDialogues: []
-  refuseDialogues: []
+  npcDialogue: {fileID: 11400000, guid: 2ac02daed39eae246a1106ac4b361cb4, type: 2}
   requestItems:
   - {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
   offerItems:

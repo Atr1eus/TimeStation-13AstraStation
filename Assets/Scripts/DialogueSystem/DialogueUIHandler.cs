@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class DialogueUIHandler : MonoBehaviour
 {
     public Transform ChoicePanel;
-    public GameObject DialogueWindow;
+    //public GameObject DialogueWindow;
     public Button choiceButtonPrefab;
     public Transform NamePanel;
 

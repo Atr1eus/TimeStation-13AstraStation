@@ -43,7 +43,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 539d8037dfa0f5046a7793cc4f94acb7
+  id: 99275ce9d6e62864b8790f8917a5ac2e
   nodeName: Text node
   processed: 0
   entered: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 8c89f211e5a280b4a833ad261e407970
+  id: b107b3188c2236e46b25b87697d9a20f
   nodeName: Text node
   processed: 0
   entered: 0
@@ -158,13 +158,13 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: input
-        node: {fileID: 931038687958669610}
+        node: {fileID: 4124158324141588561}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 32c6654103c0c1646bd1a3a4dc19ea26
+  id: 60e4798c11d25474e8c07b067b54b658
   nodeName: Text node
   processed: 0
   entered: 0
@@ -209,7 +209,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: bcd250d05225aff4c914f982f682caf0
+  id: 8769a13a842932b42bcdc36ddd978213
   nodeName: Branch
   processed: 0
   entered: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   - {fileID: 8875584961589071493}
   - {fileID: -5703039246456782174}
   - {fileID: 6920529421594870945}
-  - {fileID: 931038687958669610}
+  - {fileID: 4124158324141588561}
   dialogueNodes:
   - {fileID: -1406497122811799601}
   - {fileID: -8936389048274184872}
@@ -250,7 +250,7 @@ MonoBehaviour:
   - {fileID: 8875584961589071493}
   - {fileID: -5703039246456782174}
   - {fileID: 6920529421594870945}
-  - {fileID: 931038687958669610}
+  - {fileID: 4124158324141588561}
   _branchNodes:
   - {fileID: -1406497122811799601}
 --- !u!114 &629568591579661935
@@ -296,7 +296,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 58a8cb12bf0cfc8449e1693678aefaed
+  id: 37614327a0a6d914eaf84668e67f5b38
   nodeName: Text node
   processed: 0
   entered: 0
@@ -311,80 +311,6 @@ MonoBehaviour:
   text: This is the false output branch.
   WaitForInput: 1
   output: 0
---- !u!114 &931038687958669610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e43e98fa1a3f7e4a9b5b6af3e085557, type: 3}
-  m_Name: Choice
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 6904, y: 1672}
-  ports:
-    keys:
-    - choices
-    - input
-    - choices 0
-    - choices 1
-    values:
-    - _fieldName: choices
-      _node: {fileID: 931038687958669610}
-      _typeQualifiedName: System.Collections.Generic.List`1[[DialogueSystem.DialogueChoice,
-        com.larsellefsen.dialoguesystem.runtime, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: input
-      _node: {fileID: 931038687958669610}
-      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: output
-        node: {fileID: -5703039246456782174}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: choices 0
-      _node: {fileID: 931038687958669610}
-      _typeQualifiedName: DialogueSystem.DialogueChoice, com.larsellefsen.dialoguesystem.runtime,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-    - _fieldName: choices 1
-      _node: {fileID: 931038687958669610}
-      _typeQualifiedName: DialogueSystem.DialogueChoice, com.larsellefsen.dialoguesystem.runtime,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-  id: 9b01dafa943e66847b065b7dda524ebf
-  nodeName: Choice Node
-  processed: 0
-  entered: 0
-  textPrompt: 
-  choices:
-  - choiceName: 
-    text: 1
-    choiceNumber: 0
-  - choiceName: 
-    text: 2
-    choiceNumber: 0
-  input: 0
 --- !u!114 &2192041326736385359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,7 +354,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 3dad58fadfc7ae2458a77ef7d8a1faa0
+  id: 57f8a6a9f9c8ecd4faef848369d901df
   nodeName: Text node
   processed: 0
   entered: 0
@@ -488,7 +414,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 3f2346bd0a2a6794a93370c79c72bf96
+  id: 9499d35786e43c047bbb7c7126e901a0
   nodeName: Text node
   processed: 0
   entered: 0
@@ -503,6 +429,55 @@ MonoBehaviour:
   text: This is the "true output" branch.
   WaitForInput: 1
   output: 0
+--- !u!114 &4124158324141588561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c99747b2f6d7043b538d32fa2294b6, type: 3}
+  m_Name: Timeline Event
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 6872, y: 1656}
+  ports:
+    keys:
+    - output
+    - input
+    values:
+    - _fieldName: output
+      _node: {fileID: 4124158324141588561}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input
+      _node: {fileID: 4124158324141588561}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: output
+        node: {fileID: -5703039246456782174}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  id: 56e26e9eb26de384882397b3303b5646
+  nodeName: TimelineEventNode
+  processed: 0
+  entered: 0
+  output: 0
+  input: 0
+  timelineEvent: 0
+  HideDialoguePanelOnResume: 1
+  PauseDialogueOnResume: 1
 --- !u!114 &6920529421594870945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,7 +524,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 70bed864e15aa704496918d511563629
+  id: ceac966898e351f4fa820f86117559fd
   nodeName: Text node
   processed: 0
   entered: 0
@@ -620,7 +595,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 1bb49be6f3f508e4c8ca6b3abe4c2edd
+  id: 61335111a6b86dc4faee66e852467e4c
   nodeName: Condition
   processed: 0
   entered: 0
@@ -680,7 +655,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 2e010f12a24b3e14db2e0ef302b3053b
+  id: cccdca8d61fe95b4082c75df566f18b0
   nodeName: Event node
   processed: 0
   entered: 0
@@ -692,4 +667,4 @@ MonoBehaviour:
     floatParameter: 2
     stringParameter: 
     boolParameter: 0
-  GoToNextNodeAutomatically: 0
+  GoToNextNodeAutomatically: 1

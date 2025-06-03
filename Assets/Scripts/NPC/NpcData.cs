@@ -1,3 +1,4 @@
+using DialogueSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,10 +42,7 @@ public class NpcData : ScriptableObject
 
 
     [Header("对话配置")]
-    public List<string> greetingDialogues; //初始对话列表
-    public List<string> successDialogues; //同意给予对话列表
-    public List<string> refuseDialogues; //拒绝给予对话列表
-
+    public DialogueGraph npcDialogue; //初始对话列表
 
     [Header("交易配置")]
     public List<ItemData> requestItems; //索取物品列表
@@ -71,7 +69,7 @@ public class NpcData : ScriptableObject
     public bool isMoneyMore10K;
     public bool isRoundMore5;
 
-    public string GetRandomGreeting() => greetingDialogues[Random.Range(0, greetingDialogues.Count)]; //获取随机招呼语
+    //public string GetRandomGreeting() => greetingDialogues[Random.Range(0, greetingDialogues.Count)]; //获取随机招呼语
 
     public ItemData GetRandomRequestItem() => requestItems[Random.Range(0, requestItems.Count)]; //获取随机物品要求
     public ItemData GetRandomOfferItem() => offerItems[Random.Range(0, offerItems.Count)];

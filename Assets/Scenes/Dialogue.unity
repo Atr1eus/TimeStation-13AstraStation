@@ -190,6 +190,119 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &149356046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 149356047}
+  - component: {fileID: 149356048}
+  - component: {fileID: 149356050}
+  - component: {fileID: 149356049}
+  - component: {fileID: 149356051}
+  m_Layer: 5
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &149356047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149356046}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1071913848}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &149356048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149356046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca32c6c5397c69a42ab060a809e571ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTalking: 0
+  m_graph: {fileID: 11400000, guid: 97e2e5ba5050da04f9e0a6450f73c597, type: 2}
+  advanceKey: 32
+  speedUpKey: 116
+  themeTestKey: 115
+  pauseKey: 112
+  UiHandler: {fileID: 149356050}
+  alternativeTheme: {fileID: 11400000, guid: 5e809003ec6d33448b781445114c9180, type: 2}
+  eventHandler: {fileID: 149356049}
+--- !u!114 &149356049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149356046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04727b72d236d04c86ac5dcfd99267c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &149356050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149356046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41ec92ec1941f34da9fb84e336eaa4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChoicePanel: {fileID: 1720196812}
+  choiceButtonPrefab: {fileID: 1217656281694813246, guid: 4dc239c5d3b37c142a5feb4c0b5785d9, type: 3}
+  NamePanel: {fileID: 0}
+--- !u!114 &149356051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149356046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22dd48bc460c8474f90e12a81b41a752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueGraph: {fileID: 0}
+  dialoguePane: {fileID: 1669114930}
+  dialogueTextGameObject: {fileID: 274896516}
+  theme: {fileID: 0}
+  settings: {fileID: 0}
+  dialogueCallbackActions:
+    OnTextNodeEndEvents:
+      m_PersistentCalls:
+        m_Calls: []
+    OnBranchNodeEndEvents:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDialogueGraphEndEvents:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEventNodeEndEvents:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &191661961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,19 +1265,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4396723845410645264, guid: 7bc9b8381a92f5646bad0db254e993f8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2058087979}
-    - targetCorrespondingSourceObject: {fileID: 4396723845410645264, guid: 7bc9b8381a92f5646bad0db254e993f8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2058087973}
-    - targetCorrespondingSourceObject: {fileID: 4396723845410645264, guid: 7bc9b8381a92f5646bad0db254e993f8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2058087976}
-    - targetCorrespondingSourceObject: {fileID: 4396723845410645264, guid: 7bc9b8381a92f5646bad0db254e993f8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2058087982}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bc9b8381a92f5646bad0db254e993f8, type: 3}
 --- !u!1 &1007560357
 GameObject:
@@ -1520,6 +1621,7 @@ RectTransform:
   - {fileID: 1720196812}
   - {fileID: 2051119190}
   - {fileID: 191661962}
+  - {fileID: 149356047}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2034,94 +2136,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051119189}
   m_CullTransparentMesh: 1
---- !u!1 &2058087972 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4396723845410645264, guid: 7bc9b8381a92f5646bad0db254e993f8, type: 3}
-  m_PrefabInstance: {fileID: 880486020}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2058087973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058087972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca32c6c5397c69a42ab060a809e571ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000, guid: 97e2e5ba5050da04f9e0a6450f73c597, type: 2}
-  alternativeTheme: {fileID: 0}
-  advanceKey: 32
-  speedUpKey: 116
-  themeTestKey: 115
-  pauseKey: 112
-  UiHandler: {fileID: 2058087976}
-  eventHandler: {fileID: 2058087982}
 --- !u!224 &2058087975 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2168253432588419431, guid: 7bc9b8381a92f5646bad0db254e993f8, type: 3}
   m_PrefabInstance: {fileID: 880486020}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2058087976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058087972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e41ec92ec1941f34da9fb84e336eaa4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChoicePanel: {fileID: 1720196812}
-  DialogueWindow: {fileID: 1669114930}
-  choiceButtonPrefab: {fileID: 1217656281694813246, guid: 4dc239c5d3b37c142a5feb4c0b5785d9, type: 3}
-  NamePanel: {fileID: 0}
---- !u!114 &2058087979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058087972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22dd48bc460c8474f90e12a81b41a752, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueGraph: {fileID: 11400000, guid: 97e2e5ba5050da04f9e0a6450f73c597, type: 2}
-  dialoguePane: {fileID: 1669114930}
-  dialogueTextGameObject: {fileID: 274896516}
-  theme: {fileID: 0}
-  settings: {fileID: 0}
-  dialogueCallbackActions:
-    OnTextNodeEndEvents:
-      m_PersistentCalls:
-        m_Calls: []
-    OnBranchNodeEndEvents:
-      m_PersistentCalls:
-        m_Calls: []
-    OnDialogueGraphEndEvents:
-      m_PersistentCalls:
-        m_Calls: []
-    OnEventNodeEndEvents:
-      m_PersistentCalls:
-        m_Calls: []
---- !u!114 &2058087982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058087972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f04727b72d236d04c86ac5dcfd99267c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2104453672
 GameObject:
   m_ObjectHideFlags: 0

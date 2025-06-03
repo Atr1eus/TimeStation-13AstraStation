@@ -8,13 +8,12 @@
       "hash": "d6effd70f5574369e3415c423ef3e621ea309564"
     },
     "com.larsellefsen.dialoguesystem": {
-      "version": "https://github.com/LarsEllefsen/DialogueSystem.git",
+      "version": "file:DialogueSystem",
       "depth": 0,
-      "source": "git",
+      "source": "embedded",
       "dependencies": {
         "com.unity.textmeshpro": "3.0.1"
-      },
-      "hash": "4b2e4ae820aae28bec10f46fa6aae3d577895a02"
+      }
     },
     "com.unity.2d.animation": {
       "version": "9.1.3",

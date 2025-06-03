@@ -71,6 +71,7 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         if (npc.ticket.travelTo != npc.data.travelTo) npc.ticket.isTrueTicket = false;
         RoundManager.Instance.isSelected = true;
         currentNpc.OnTradeEnter();
+        DialogueManager.Instance.SetGraph(npcdata.npcDialogue);
         Debug.Log($"currentNpc:{currentNpc.npc.data.name}");
     }
     public void AgreeNpcAward()
@@ -95,6 +96,15 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         PlayerController.Instance.AddGold(currentNpc.npc.data.trueChoiceAwardGolds);
         Debug.Log("你放过了一个正确的人");
     }
+    public void ChangeDialogueNumber(int num)
+    {
+        currentNpc.npc.branchNumber = num;
+    }
+    public void SetFavorability(int num)
+    {
+        currentNpc.npc.favorability = num;
+    }
+
     public void ClearCurrentNpc()
     {
         if (npcObj != null) Destroy(npcObj);

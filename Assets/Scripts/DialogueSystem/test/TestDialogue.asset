@@ -43,7 +43,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 337a7b181b0c5da45a3da592685c6caf
+  id: 0de0ca43510c70a4abd6b9f2bbaa376c
   nodeName: Event node
   processed: 0
   entered: 1
@@ -55,7 +55,7 @@ MonoBehaviour:
     floatParameter: 0
     stringParameter: 
     boolParameter: 0
-  GoToNextNodeAutomatically: 0
+  GoToNextNodeAutomatically: 1
 --- !u!114 &-7626721046057532874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 5d68fd71905039044b8a54143ba3af35
+  id: 61234b694fe047544bfd8a25fc198860
   nodeName: Text node
   processed: 0
   entered: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 3f932ce6cc37b874c958628775e442a3
+  id: 31041b003a082a9498e31fc0c68a5bd5
   nodeName: Text node
   processed: 1
   entered: 1
@@ -202,7 +202,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 95665ec286acb5a489ce588ccbb8dc88
+  id: bb87e55a427a8c24b8b081e365a9f53b
   nodeName: Branch
   processed: 1
   entered: 1
@@ -254,7 +254,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 374c401cd9490d4469b1915ff32d1caa
+  id: ea2b9c3c42c2bc94faf6985abbb0da50
   nodeName: Text node
   processed: 1
   entered: 1
@@ -353,7 +353,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 582c79bb0e41f344ba4ddee55daf2da7
+  id: 873e4bc7896374640ae38d2d4e294e72
   nodeName: Text node
   processed: 1
   entered: 1
@@ -411,7 +411,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 7721413470d83884a814b5df42b8e740
+  id: 3b75cf72c37dc0747bc8875ab85faa6e
   nodeName: Text node
   processed: 0
   entered: 0
@@ -469,7 +469,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: c6466a0324c06504287ca666fc4ea756
+  id: 3aa3bec66534e42478e5907090b07140
   nodeName: Text node
   processed: 1
   entered: 1
@@ -551,7 +551,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: a84904d73ee7c60499e09850d9ef2fec
+  id: f57ea17dec832874688d83e00a94fec4
   nodeName: Choice Node
   processed: 1
   entered: 1
@@ -607,7 +607,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: abc71fa37b3e58348a28cd97c829f3c1
+  id: f5a7d9c8ade16e04989823183a58d3a4
   nodeName: Text node
   processed: 1
   entered: 1
@@ -665,7 +665,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 7e35ee1f22222bf489f1592db4ef1976
+  id: 6fa95531f146f0b4f90964d00f2887b9
   nodeName: Event node
   processed: 1
   entered: 1
@@ -732,7 +732,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 3fde1b6647d975e468fe4ae4ab709e1c
+  id: 48e4fe8b1b3ffd04ab9ed4cdca6c1cd3
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -809,7 +809,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 3ca5d3f73336b74429df0ca8ce2e0b64
+  id: dd681e75f0107b04481562c253ddb1a4
   nodeName: Choice Node
   processed: 1
   entered: 1

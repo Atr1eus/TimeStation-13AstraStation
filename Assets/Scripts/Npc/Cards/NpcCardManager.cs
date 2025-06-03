@@ -52,6 +52,7 @@ public class NpcCardManager : MonoBehaviour
     }
     public void SelectCard(NpcCard selectedCard) //选择卡牌事件
     {
+        Debug.Log("SelectCard");
         NpcCardUI selectedUI = activeCards.Find(c => c.npcCard == selectedCard);
         activeCards.Remove(selectedUI);
         foreach (var card in activeCards)
@@ -65,7 +66,8 @@ public class NpcCardManager : MonoBehaviour
             NpcManager.Instance.npcDictionary[selectedCard.npc.name].isSelected = true;
         }
         Destroy(selectedUI.gameObject);
-        scene.DecidedNpcButtonState();
+        DialogueManager.Instance.StartDialogue();
+        //scene.DecidedNpcButtonState();
         Debug.Log($"已选择 NPC: {selectedCard.npc.name}");
     }
     public void LoadRemainingCards()
