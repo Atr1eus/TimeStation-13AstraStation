@@ -37,13 +37,13 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: input
-        node: {fileID: 615094879643557081}
+        node: {fileID: -988697326995503862}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: d945b88d8977b13449d90dd31dfc4b6f
+  id: 69a283691c9bc8d44a13030a16d426bf
   nodeName: Text node
   processed: 0
   entered: 0
@@ -58,6 +58,86 @@ MonoBehaviour:
   text: "\u6211\u662F\u7279\u522B\u4EBA\u7269\uFF01"
   WaitForInput: 1
   output: 0
+--- !u!114 &-988697326995503862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e43e98fa1a3f7e4a9b5b6af3e085557, type: 3}
+  m_Name: Choice
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 552, y: -56}
+  ports:
+    keys:
+    - choices
+    - input
+    - choices 0
+    - choices 1
+    values:
+    - _fieldName: choices
+      _node: {fileID: -988697326995503862}
+      _typeQualifiedName: System.Collections.Generic.List`1[[DialogueSystem.DialogueChoice,
+        com.larsellefsen.dialoguesystem.runtime, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input
+      _node: {fileID: -988697326995503862}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: output
+        node: {fileID: -4307038170096000528}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: choices 0
+      _node: {fileID: -988697326995503862}
+      _typeQualifiedName: DialogueSystem.DialogueChoice, com.larsellefsen.dialoguesystem.runtime,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 615094879643557081}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: choices 1
+      _node: {fileID: -988697326995503862}
+      _typeQualifiedName: DialogueSystem.DialogueChoice, com.larsellefsen.dialoguesystem.runtime,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 615094879643557081}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  id: 0bbcae581c3607e47a2299981d5b65bc
+  nodeName: Choice Node
+  processed: 0
+  entered: 0
+  textPrompt: 
+  choices:
+  - choiceName: 
+    text: "\u8BF7\u8FDB"
+    choiceNumber: 0
+  - choiceName: 
+    text: ssvgg
+    choiceNumber: 0
+  input: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,9 +154,11 @@ MonoBehaviour:
   - {fileID: 4570798023687691357}
   - {fileID: -4307038170096000528}
   - {fileID: 615094879643557081}
+  - {fileID: -988697326995503862}
   dialogueNodes:
   - {fileID: 4570798023687691357}
   - {fileID: -4307038170096000528}
+  - {fileID: -988697326995503862}
   _branchNodes:
   - {fileID: 4570798023687691357}
 --- !u!114 &615094879643557081
@@ -92,7 +174,7 @@ MonoBehaviour:
   m_Name: Event
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 778, y: -32.5}
+  position: {x: 1304, y: -120}
   ports:
     keys:
     - input
@@ -103,8 +185,11 @@ MonoBehaviour:
       _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
-      - fieldName: output
-        node: {fileID: -4307038170096000528}
+      - fieldName: choices 0
+        node: {fileID: -988697326995503862}
+        reroutePoints: []
+      - fieldName: choices 1
+        node: {fileID: -988697326995503862}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -119,7 +204,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: f8ac64b1586f4294bb9f29e903d984e4
+  id: 50866f31f20f5c54fbbf129bc952fd61
   nodeName: Event node
   processed: 0
   entered: 0
@@ -162,7 +247,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 969b36a8c26edaf4384398ebd6fa158b
+  id: 54abe97e44c32f040b9d61f33e2698cb
   nodeName: Branch
   processed: 0
   entered: 0
