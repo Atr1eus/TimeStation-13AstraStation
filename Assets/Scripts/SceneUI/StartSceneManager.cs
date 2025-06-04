@@ -8,9 +8,8 @@ using Newtonsoft.Json;
 using System.IO;
 public class StartSceneManager : SceneManager
 {
-    [SerializeField] private Button startButton;
-    [SerializeField] private Button loadButton;
-    [SerializeField] private Button quitButton;
+    [SerializeField] private Button startGameButton;
+    [SerializeField] private Button quitGameButton;
 
     protected override void Awake()
     {
@@ -26,17 +25,11 @@ public class StartSceneManager : SceneManager
     }
     private void InitializeButtonsAwake()
     {
-        loadButton?.onClick.AddListener(() =>
-        {
-            SaveSystem.GameLoad();
-
-            StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
-        });
-        startButton?.onClick.AddListener(() =>
+        startGameButton?.onClick.AddListener(() =>
         {
             StartCoroutine(TransitionToScene(SceneLoader.GameScene.TradingArea));
         });
-        quitButton?.onClick.AddListener(() => Application.Quit());
+        quitGameButton?.onClick.AddListener(() => Application.Quit());
     }
     private void InitializeButtonsStart()
     {
@@ -46,8 +39,7 @@ public class StartSceneManager : SceneManager
     private void InitializeLoadButton()
     {
         string savePath = Path.Combine(Application.persistentDataPath, "global_save.json");
-        if (!File.Exists(savePath)) BanButton(loadButton);
-        else UseButton(loadButton);
+
     }
 
 }
