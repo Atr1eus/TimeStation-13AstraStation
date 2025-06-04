@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Alkali/AlkaliTestMainGameScene.unity
     guid: 00beb197b7cb79e4990786e220f6d7f4
   - enabled: 1
-    path: Assets/Scenes/Alkali/AlkaliTestRestScene.unity
+    path: Assets/Scenes/Alkali/TestRestScene.unity
     guid: 5577c5753e0f4584f8ef2dd60942584e
   m_configObjects: {}
