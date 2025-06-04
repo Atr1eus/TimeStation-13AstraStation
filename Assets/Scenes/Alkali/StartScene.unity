@@ -315,9 +315,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenes:
   - sceneType: 1
-    sceneName: AlkaliTestMainGameScene
+    sceneName: TestMainGameScene
   - sceneType: 2
-    sceneName: AlkaliTestRestScene
+    sceneName: TestRestScene
 --- !u!4 &166451243
 Transform:
   m_ObjectHideFlags: 0
@@ -683,6 +683,8 @@ MonoBehaviour:
   m_round: {fileID: 110514482}
   m_sceneLoader: {fileID: 166451242}
   m_ticket: {fileID: 240006037}
+  m_dialogue: {fileID: 0}
+  i_dialogue: {fileID: 0}
   item0: {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
   item1: {fileID: 11400000, guid: 7b5eefb295097974b8a2ec51ba448edb, type: 2}
   item2: {fileID: 11400000, guid: 823e4213a11904b468dcf8214b8d3383, type: 2}
