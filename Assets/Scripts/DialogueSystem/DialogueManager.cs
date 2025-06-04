@@ -4,16 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using DialogueSystem;
 
-public class DialogueManager : SingletonMonoBehaviour<DialogueManager>
+public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager Instance { get; set; }
+
     Dialogue dialogueManager;
     List<DialogueGameState> gameStateVariables = new List<DialogueGameState>();
     public bool isTalking;
 
     [SerializeField] private NpcManager npcmanager;
 
-    [Header("对话流")]
+    [Header("对话设置")]
     public DialogueGraph m_graph;
+    //public GameObject Pane;
+    //public GameObject Text;
 
     [Header("输入控制")]
     public KeyCode advanceKey = KeyCode.Space;
@@ -28,9 +32,16 @@ public class DialogueManager : SingletonMonoBehaviour<DialogueManager>
     [Header("事件处理")]
     public DialogueEventList eventHandler;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         isTalking = false;
@@ -59,6 +70,16 @@ public class DialogueManager : SingletonMonoBehaviour<DialogueManager>
 
     public void StartDialogue()
     {
+        if (dialogueManager == null)
+        {
+            Debug.Log("Nodialogue!");
+        }
+        if (dialogueManager.dialoguePane == null && dialogueManager.dialogueTextGameObject == null)
+        {
+            Debug.Log("Re-register!");
+            dialogueManager.dialoguePane = UiHandler.Pane;
+            dialogueManager.dialogueTextGameObject = UiHandler.Text;
+        }
         isTalking = true;
         GameStateHandler();// 获取现在npc的数据，决定走那个对话
     }

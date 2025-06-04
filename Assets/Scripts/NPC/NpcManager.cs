@@ -72,6 +72,10 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         if (npc.ticket.travelTo != npc.data.travelTo) npc.ticket.isTrueTicket = false;
         RoundManager.Instance.isSelected = true;
         currentNpc.OnTradeEnter();
+        if(DialogueManager.Instance == null)
+        {
+            Debug.Log("NoManager!");
+        }
         DialogueManager.Instance.SetGraph(npcdata.npcDialogue);
         Debug.Log($"currentNpc:{currentNpc.npc.data.name}");
     }

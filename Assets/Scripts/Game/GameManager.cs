@@ -38,14 +38,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         m_dialogue = FindObjectOfType<DialogueManager>();
 
-        if (m_dialogue == null)
-        {
-            Debug.LogError("场景中未找到DialogueManager组件");
-        }
-        else
-        {
-            Debug.Log($"找到DialogueManager: {m_dialogue.gameObject.name}");
-        }
+        //if (m_dialogue == null)
+        //{
+        //    Debug.LogError("场景中未找到DialogueManager组件");
+        //}
+        //else
+        //{
+        //    Debug.Log($"找到DialogueManager: {m_dialogue.gameObject.name}");
+        //}
     }
     public void OnNextRoundClick() //下一回合按钮点击事件
     {
@@ -95,7 +95,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if(m_inventoryUI == null)
         {
-            Debug.LogWarning("无！");
+            //Debug.LogWarning("无！");
+            m_inventoryUI = InventoryItemUI.Instance;
         }
         m_inventoryUI.OpenPanel();
         foreach (Item item in m_inventory.items)

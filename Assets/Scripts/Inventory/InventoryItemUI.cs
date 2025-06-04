@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class InventoryItemUI : MonoBehaviour
 {
+    public static InventoryItemUI Instance { get; set; }
+
     public GameObject panel;          // 面板 GameObject
     public Transform content;         // ScrollView 的内容区域
     public GameObject itemUIPrefab;   // ItemUI 预制体
@@ -15,6 +17,14 @@ public class InventoryItemUI : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
         panel.SetActive(false);
     }
     void Start()

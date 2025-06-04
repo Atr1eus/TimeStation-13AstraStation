@@ -116,7 +116,7 @@ namespace DialogueSystem
 
         private void Awake()
         {
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
             if (instance != null && instance != this)
             {
                 Destroy(this.gameObject);
@@ -359,51 +359,5 @@ namespace DialogueSystem
                 }
             }
         }
-
-
-        //private void OnEnable()
-        //{
-        //    SceneManager.sceneLoaded += OnSceneLoaded;
-        //}
-
-        //private void OnDisable()
-        //{
-        //    SceneManager.sceneLoaded -= OnSceneLoaded;
-        //}
-
-        //private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        //{
-        //    RebindUIReferences();
-        //    Debug.Log($"场景 '{scene.name}' 加载完成，已重绑定UI引用");
-        //}
-
-        //public void RebindUIReferences()
-        //{
-        //    // 1. 查找关键的UI对象
-        //    GameObject FindInScene(string name) => GameObject.Find(name);
-        //    GameObject FindByTag(string tag) => GameObject.FindGameObjectWithTag(tag);
-
-        //    // 2. 优先使用标签查找（更可靠）
-        //    dialoguePane = FindByTag("DialoguePane") ?? FindInScene("DialoguePanel");
-        //    dialogueTextGameObject = FindByTag("DialogueText") ?? FindInScene("DialogueText");
-
-        //    // 3. 重构UI对象
-        //    if (dialoguePane != null && dialogueTextGameObject != null)
-        //    {
-        //        Ui = new DialogueUI(dialogueTextGameObject, dialoguePane, theme, settings, dialogueCallbackActions);
-
-        //        // 4. 重新应用主题
-        //        if (theme != null)
-        //        {
-        //            Ui.SetTheme(theme);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Debug.LogWarning($"UI引用重绑定失败: " +
-        //            $"DialoguePane: {dialoguePane != null} | " +
-        //            $"DialogueText: {dialogueTextGameObject != null}");
-        //    }
-        //}
     }
 }
