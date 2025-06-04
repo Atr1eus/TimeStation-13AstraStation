@@ -51,6 +51,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
+        npcmanager = NpcManager.Instance;
         dialogueManager = Dialogue.instance;
 
         dialogueManager.dialogueCallbackActions.OnNodeLeave += OnNodeLeave;
@@ -198,7 +199,8 @@ public class DialogueManager : MonoBehaviour
         
         if (npcmanager == null)
         {
-            Debug.LogWarning("no npcmanager!");
+            npcmanager = NpcManager.Instance;
+            //Debug.LogWarning("no npcmanager!");
         }
         if(npcmanager.currentNpc == null)
         {

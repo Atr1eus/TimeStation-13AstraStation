@@ -64,7 +64,8 @@ public class NpcCardManager : MonoBehaviour
         RoundManager.Instance.currentCanSelectNpcNum--;
         RoundManager.Instance.AddCurrentRoundSelectedNpc(selectedUI.npcCard.npc);
         Destroy(selectedUI.gameObject);
-        scene.DecidedNpcButtonState();
+        DialogueManager.Instance.StartDialogue();
+        //scene.DecidedNpcButtonState();
         Debug.Log($"ÒÑÑ¡Ôñ NPC: {selectedCard.npc.npcName}");
     }
     public void LoadRemainingCards()
