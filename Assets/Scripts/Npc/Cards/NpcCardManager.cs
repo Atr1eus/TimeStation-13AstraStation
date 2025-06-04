@@ -52,6 +52,7 @@ public class NpcCardManager : MonoBehaviour
     }
     public void SelectCard(NpcCard selectedCard) //Ñ¡Ôñ¿¨ÅÆÊÂ¼þ
     {
+        Debug.Log("SelectCard");
         NpcCardUI selectedUI = activeCards.Find(c => c.npcCard == selectedCard);
         activeCards.Remove(selectedUI);
         foreach (var card in activeCards)

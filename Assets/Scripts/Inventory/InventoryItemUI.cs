@@ -5,36 +5,65 @@ using UnityEngine.UI;
 
 public class InventoryItemUI : MonoBehaviour
 {
+    public static InventoryItemUI Instance { get; set; }
+
+    public GameObject panel;          // 面板 GameObject
+    public Transform content;         // ScrollView 的内容区域
+    public GameObject itemUIPrefab;   // ItemUI 预制体
+    public Button closeButton;         // 打开面板的按钮
+
+    [SerializeField] private TradingSceneManager tradingSceneManager;
+
     // Start is called before the first frame update
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+        panel.SetActive(false);
+    }
     void Start()
     {
-        
+        //ClosePanel();
+        closeButton.onClick.AddListener(ClosePanel);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OpenPanel()
     {
-        
+        if (panel != null)
+        {
+            Debug.LogWarning("无panel！");
+        }
+        panel.SetActive(true);
+        RefreshUI();
     }
 
-    [Header("UI Components")]
-    public Text nameText;
-    public Text descriptionText;
-    public Text amountText;
-    public Image background;
-    public Image divider;
-
-    public void SetData(string name, string description, string amount)
+    public void ClosePanel()
     {
-        nameText.text = name;
-        descriptionText.text = description;
-        amountText.text = amount;
+        panel.SetActive(false);
+        tradingSceneManager.AgreeButtonState();
     }
 
-    public void SetAsHeader()
+    public void RefreshUI()
     {
-        // 设置背景和分隔线的样式
-        background.color = new Color(0.2f, 0.2f, 0.2f, 1f);
-        divider.color = new Color(0.8f, 0.8f, 0.8f, 1f);
+        // 清空现有内容
+        foreach (Transform child in content)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // 动态生成物品 UI
+        foreach (var item in InventorySystem.Instance.items)
+        {
+            GameObject itemUIObj = Instantiate(itemUIPrefab, content);
+            ItemUI itemUI = itemUIObj.GetComponent<ItemUI>();
+            itemUI.SetData(item);
+        }
+
     }
 }

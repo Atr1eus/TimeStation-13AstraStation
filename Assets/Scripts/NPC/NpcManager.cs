@@ -69,6 +69,7 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     }
     public void InitializeCurrentNpc(NpcCard npcCard)//npcCard选择事件 根据玩家的选择定义currentNpc
     {
+        Debug.Log("开始初始化角色！");
         NpcData npcdata = npcCard.npc;
         Npc npc = npcDictionary[npcdata.npcName];
         npcObj = Instantiate(npc.hand, handSpawnPoint.position, Quaternion.identity);
@@ -81,6 +82,7 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         if (npc.ticket.travelTo != npc.data.travelTo) npc.ticket.isTrueTicket = false;
         RoundManager.Instance.isSelected = true;
         currentNpc.OnTradeEnter();
+        DialogueManager.Instance.SetGraph(npcdata.npcDialogue);
         Debug.Log($"currentNpc:{currentNpc.npc.data.npcName}");
     }
     public void InitializeCurrentStoryNpc(NpcCard npcCard)
@@ -94,6 +96,8 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         TicketManager.Instance.InitializeTicket(npc.ticket);
         nowTicketIdx++;
         currentNpc.OnTradeEnter();
+        DialogueManager.Instance.SetGraph(npcdata.npcDialogue);
+        Debug.Log($"currentNpc:{currentNpc.npc.data.npcName}");
     }
     public void AgreeNpcAward()
     {
@@ -117,6 +121,15 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         PlayerController.Instance.AddGold(currentNpc.npc.data.trueChoiceAwardGolds);
         Debug.Log("你放过了一个正确的人");
     }
+    public void ChangeDialogueNumber(int num)
+    {
+        currentNpc.npc.branchNumber = num;
+    }
+    public void SetFavorability(int num)
+    {
+        currentNpc.npc.favorability = num;
+    }
+
     public void ClearCurrentNpc()
     {
         if (npcObj != null) Destroy(npcObj);

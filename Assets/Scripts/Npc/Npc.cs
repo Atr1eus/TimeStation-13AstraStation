@@ -25,6 +25,10 @@ public class Npc
     {
         this.data = data;
         favorability = data.initialFavorability;
+        bit_0 = 0;
+        bit_1 = 0;
+        bit_2 = 0;
+        branchNumber = 0;
         selectedTimes = 0;
         if (data.type == NpcType.Story)
         {

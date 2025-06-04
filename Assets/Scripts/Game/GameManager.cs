@@ -1,3 +1,4 @@
+using DialogueSystem;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using Unity.VisualScripting;
@@ -20,13 +21,25 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private PlayerController m_player;
     [SerializeField] private NpcManager m_npc;
     [SerializeField] private InventorySystem m_inventory;
-    [SerializeField] private InventoryBrowser m_inventoryUI;
+    [SerializeField] private InventoryItemUI m_inventoryUI;
     [SerializeField] private RoundManager m_round;
     [SerializeField] private SceneLoader m_sceneLoader;
     [SerializeField] private TicketManager m_ticket;
+    [SerializeField] private DialogueManager m_dialogue;
+    [SerializeField] private Dialogue i_dialogue;
 
     protected virtual void Start()
     {
+        m_dialogue = FindObjectOfType<DialogueManager>();
+
+        //if (m_dialogue == null)
+        //{
+        //    Debug.LogError("场景中未找到DialogueManager组件");
+        //}
+        //else
+        //{
+        //    Debug.Log($"找到DialogueManager: {m_dialogue.gameObject.name}");
+        //}
     }
     public void OnNextRoundClick() //下一回合按钮点击事件
     {
@@ -72,7 +85,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void OnInventoryBrowseButtonClick()
     {
-        m_inventoryUI.OnInventoryBrowseButtonClick();
+        if(m_inventoryUI == null)
+        {
+            //Debug.LogWarning("无！");
+            m_inventoryUI = InventoryItemUI.Instance;
+        }
+        m_inventoryUI.OpenPanel();
         foreach (Item item in m_inventory.items)
         {
             Debug.Log($"拥有{item.data.name}{item.amount}个");
