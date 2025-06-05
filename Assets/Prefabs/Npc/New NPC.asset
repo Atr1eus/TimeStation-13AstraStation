@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde76f8380f77f048bfe2f9ad604a5c8, type: 3}
+  m_Name: New NPC
+  m_EditorClassIdentifier: 
+  age: 0
+  npcName: npc0
+  sex: 0
+  type: 0
+  travelTo: 0
+  npcDialogue: {fileID: 11400000, guid: 6a47fb8f09e08a74cbc7695d9efe57c8, type: 2}
+  requestItems:
+  - {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
+  - {fileID: 11400000, guid: 7b5eefb295097974b8a2ec51ba448edb, type: 2}
+  - {fileID: 11400000, guid: 823e4213a11904b468dcf8214b8d3383, type: 2}
+  offerItems:
+  - {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
+  - {fileID: 11400000, guid: 7b5eefb295097974b8a2ec51ba448edb, type: 2}
+  - {fileID: 11400000, guid: 823e4213a11904b468dcf8214b8d3383, type: 2}
+  minPerRequestAwardGolds: 23
+  maxPerRequestAwardGolds: 43
+  minPerNonrequestAwardGolds: 10
+  maxPerNonrequestAwardGolds: 17
+  trueChoiceAwardGolds: 0
+  falseChoicePunishGolds: 0
+  initialFavorability: -9
+  hand: {fileID: 1233771984232238364, guid: a69796c0bb0495b41acc91d94befe66d, type: 3}
+  ticket: []
+  storyNpcDescriptions: []
+  storyNpcMinAppearRounds: 00000000
+  storyNpcMaxAppearRounds: 00000000
+  storyNpcReasons:
+  - 
+  storyNpcBackPack: []
+  storyNpcFollowUpPlot: []
+  npcDescription: "\u662F\u4E2A\u778E\u5B50"
+  minAppearRound: 1
+  maxAppearRound: 100
+  reason: 
+  isMoneyMore10K: 0
+  isRoundMore5: 0
+  backPack: 

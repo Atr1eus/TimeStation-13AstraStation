@@ -4,7 +4,6 @@ using UnityEngine;
 using XNode;
 using System.Linq;
 using UnityEditor;
-
 namespace DialogueSystem
 {
     [CreateAssetMenu(menuName = "Dialogue System/Dialogue Graph")]
@@ -23,8 +22,6 @@ namespace DialogueSystem
             Node originalNode = base.AddNode(type);
             dialogueNodes.Add(originalNode as BaseNode);
             if (type == typeof(BranchNode)) _branchNodes.Add(originalNode as BranchNode);
-            EditorUtility.SetDirty(this);
-            AssetDatabase.SaveAssets();
             return originalNode;
         }
 
@@ -33,8 +30,6 @@ namespace DialogueSystem
             BaseNode baseNode = node as BaseNode;
             if (baseNode.NodeType == "BranchNode") _branchNodes.Remove(node as BranchNode);
             dialogueNodes.Remove(baseNode);
-            EditorUtility.SetDirty(this);
-            AssetDatabase.SaveAssets();
             base.RemoveNode(node);
         }
 

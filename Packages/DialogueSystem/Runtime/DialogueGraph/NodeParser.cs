@@ -2,11 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
+
 using UnityEngine;
+
 using XNode;
 
-namespace DialogueSystem {
+namespace DialogueSystem
+{
     public class NodeParser
     {
         public void GenerateScript(DialogueGraph graph)
@@ -45,10 +50,10 @@ namespace DialogueSystem {
         }
     }
 
+#if UNITY_EDITOR
     public class TestWindow : EditorWindow
     {
         public NodeParser parser = new NodeParser();
-
 
         [MenuItem("Window/Test Window")]
         public static void ShowWindow()
@@ -75,14 +80,17 @@ namespace DialogueSystem {
             if (GUILayout.Button("try save graph"))
             {
                 DialogueGraph graph = (DialogueGraph)AssetDatabase.LoadAssetAtPath("Assets/DialogueSystem/Samples/A.asset", typeof(DialogueGraph));
-                EditorUtility.SetDirty(graph);
 
+#if UNITY_EDITOR
+                EditorUtility.SetDirty(graph);
+#endif
             }
         }
 
 
     }
 
+#endif
     [Serializable]
     public class DialogueScript
     {

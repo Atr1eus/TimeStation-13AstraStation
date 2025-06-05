@@ -21,6 +21,7 @@ public class RoundData
     public List<NpcDataEntry> storyNpcData;
     public List<ItemSaveEntry> items = new List<ItemSaveEntry>();
     public int currentRound; //目前回合数
+    public string currentDate;
     public int selectionsPerRound; //每回合可选择次数
     public int maxSelectionsPerRound; //每回合可提供选择数
 }

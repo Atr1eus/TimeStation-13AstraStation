@@ -101,6 +101,7 @@ public static class SaveSystem
         roundData.gold = m_player.gold;
         roundData.maxSelectionsPerRound = m_round.maxSelectionsPerRound;
         roundData.selectionsPerRound = m_round.selectionsPerRound;
+        roundData.currentDate = DateExtensions.GetDate();
 
 
         List<NpcDataEntry> normalNpcDatas = new List<NpcDataEntry>();
@@ -122,6 +123,7 @@ public static class SaveSystem
         roundData.maxSelectionsPerRound = m_round.lastRoundMaxSelectionsPerRound;
         roundData.selectionsPerRound = m_round.lastRoundSelectionsPerRound;
         roundData.gold = m_player.lastRoundGold;
+        roundData.currentDate = DateExtensions.ToGameDateString(-1);
 
 
         List<NpcDataEntry> normalNpcDatas = new List<NpcDataEntry>();
@@ -236,6 +238,7 @@ public static class SaveSystem
     public static void LoadCurrentRoundData(RoundData data)
     {
         m_player.gold = data.gold;
+        DateExtensions.ToGameDate(data.currentRound - m_round.currentRound);
         m_round.currentRound = data.currentRound;
         m_round.maxSelectionsPerRound = data.maxSelectionsPerRound;
         m_round.selectionsPerRound = data.selectionsPerRound;
@@ -246,6 +249,7 @@ public static class SaveSystem
     public static void LoadLastRoundData(RoundData data)
     {
         m_player.lastRoundGold = data.gold;
+        DateExtensions.ToGameDate(data.currentRound - m_round.currentRound - 1);
         m_round.lastRound = data.currentRound;
         m_round.lastRoundMaxSelectionsPerRound = data.maxSelectionsPerRound;
         m_round.lastRoundSelectionsPerRound = data.selectionsPerRound;

@@ -43,20 +43,22 @@ public class NpcData : ScriptableObject
     public List<int> storyNpcMinAppearRounds;
     public List<int> storyNpcMaxAppearRounds;
     public List<string> storyNpcReasons;
+    public List<string> storyNpcBackPack;
+    public List<string> storyNpcFollowUpPlot;
+    public List<bool> shouldAgreeList;
 
     [Header("仅路边npc配置")]
     public string npcDescription;
     public int minAppearRound; //最早出现回合
     public int maxAppearRound; //最晚出现回合
-    public List<string> reasonToFurture;
-    public List<string> reasonToPast;
+    public string reason;
+    public string backPack;
 
     [Header("该npc出现条件")]
     public bool isMoneyMore10K;
     public bool isRoundMore5;
 
 
-    
     public ItemData GetRandomRequestItem() => requestItems[Random.Range(0, requestItems.Count)]; //获取随机物品要求
     public ItemData GetRandomOfferItem() => offerItems[Random.Range(0, offerItems.Count)];
     public string GetDescription() => npcDescription;

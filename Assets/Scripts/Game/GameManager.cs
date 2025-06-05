@@ -16,6 +16,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public List<NpcData> wholeStoryNpcDataList;
     public List<ItemData> wholeItemDataList;
     public List<GameObject> wholeNormalHandList;
+    public List<string> wholeNormalReasonsList;
     public NpcCardManager m_npcCard;
     [Header("Systems")]
     [SerializeField] private PlayerController m_player;
@@ -85,7 +86,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void OnInventoryBrowseButtonClick()
     {
-        if(m_inventoryUI == null)
+        if (m_inventoryUI == null)
         {
             //Debug.LogWarning("ÎÞ£¡");
             m_inventoryUI = InventoryItemUI.Instance;

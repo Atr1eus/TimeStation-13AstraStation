@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Dialogue.unity
-    guid: 7a2fd375bc11c7e429675e2f18a0d7c9
-  - enabled: 1
-    path: Assets/Scenes/Alkali/TestRestScene.unity
-    guid: 5577c5753e0f4584f8ef2dd60942584e
+    path: Assets/Scenes/Alkali/StartScene.unity
+    guid: bd7a8e99c89bc65458f9b953971c0ace
   - enabled: 1
     path: Assets/Scenes/Alkali/TestMainGameScene.unity
     guid: 585760e2e30b58348a7119ca02a9fc87
+  - enabled: 1
+    path: Assets/Scenes/Alkali/TestRestScene.unity
+    guid: 5577c5753e0f4584f8ef2dd60942584e
   m_configObjects: {}

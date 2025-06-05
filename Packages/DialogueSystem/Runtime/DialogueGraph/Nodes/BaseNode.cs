@@ -18,7 +18,9 @@ namespace DialogueSystem
 
         protected override void Init()
         {
+#if UNITY_EDITOR
             id = UnityEditor.GUID.Generate().ToString();
+#endif
             processed = false;
             entered = false;
             base.Init();
