@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde76f8380f77f048bfe2f9ad604a5c8, type: 3}
+  m_Name: BIAN 6
+  m_EditorClassIdentifier: 
+  age: 1
+  npcName: "\u6124\u6012\u9E1F"
+  sex: 0
+  type: 0
+  travelTo: 0
+  npcDialogue: {fileID: 11400000, guid: 43c3cc634f352bc458bf80307ef43114, type: 2}
+  requestItems: []
+  offerItems: []
+  minPerRequestAwardGolds: 0
+  maxPerRequestAwardGolds: 0
+  minPerNonrequestAwardGolds: 0
+  maxPerNonrequestAwardGolds: 0
+  trueChoiceAwardGolds: 10
+  falseChoicePunishGolds: 5
+  initialFavorability: 0
+  hand: {fileID: 0}
+  ticket: []
+  storyNpcDescriptions: []
+  storyNpcMinAppearRounds: 
+  storyNpcMaxAppearRounds: 
+  storyNpcReasons: []
+  storyNpcBackPack: []
+  storyNpcFollowUpPlot: []
+  shouldAgreeList: 
+  npcDescription: "\u66FE\u7ECF\u98CE\u9761\u4E00\u65F6\u7684\u5C0F\u9E1F"
+  minAppearRound: 2
+  maxAppearRound: 30
+  reason: "\u6740\u732A"
+  backPack: "\u5F39\u5F13"
+  isMoneyMore10K: 0
+  isRoundMore5: 0

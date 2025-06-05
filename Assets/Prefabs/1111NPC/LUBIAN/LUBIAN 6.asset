@@ -24,8 +24,8 @@ MonoBehaviour:
   maxPerRequestAwardGolds: 0
   minPerNonrequestAwardGolds: 0
   maxPerNonrequestAwardGolds: 0
-  trueChoiceAwardGolds: 0
-  falseChoicePunishGolds: 0
+  trueChoiceAwardGolds: 10
+  falseChoicePunishGolds: 5
   initialFavorability: 0
   hand: {fileID: 0}
   ticket: []

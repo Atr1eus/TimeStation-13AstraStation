@@ -41,7 +41,7 @@ public class NpcCardManager : MonoBehaviour
             activeCards.Add(cardUI);
 
             // 启动缩放动画协程
-            StartCoroutine(ScaleCardAnimation(cardObj.transform, 0.2f, new Vector3(2, 2, 2)));
+            StartCoroutine(ScaleCardAnimation(cardObj.transform, 0.2f, new Vector3(1, 1, 1)));
         }
     }
     private IEnumerator ScaleCardAnimation(Transform cardTransform, float duration, Vector3 targetScale)
@@ -76,8 +76,6 @@ public class NpcCardManager : MonoBehaviour
         RoundManager.Instance.currentCanSelectNpcNum--;
         RoundManager.Instance.AddCurrentRoundSelectedNpc(selectedUI.npcCard.npc);
         Destroy(selectedUI.gameObject);
-        scene.OnOpenApplicationButtonClick();
-        scene.OnOpenTicketButtonClick();
         DialogueManager.Instance.StartDialogue();
         DialogueManager.Instance.HandleSpaceKeyPress();
         scene.DecidedNpcButtonState();

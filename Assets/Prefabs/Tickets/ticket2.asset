@@ -16,5 +16,5 @@ MonoBehaviour:
   targetDate: 2025.5.30
   travelTo: 0
   ticketGraph: {fileID: 6786028991675438802, guid: c9dd3cd5c3d08c141862e5334ccde71d, type: 3}
-  ticketIssuer: 0
+  ticketIssuer: "\u53D1\u884C\u65B9"
   isTrueTicket: 1

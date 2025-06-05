@@ -41,6 +41,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         //{
         //    Debug.Log($"找到DialogueManager: {m_dialogue.gameObject.name}");
         //}
+
     }
     public void OnNextRoundClick() //下一回合按钮点击事件
     {
@@ -67,12 +68,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     public void OnAgreeNpcButtonClick()
     {
-        m_inventory.GetNpcOfferItems(m_npc.currentNpc); //不论是否正确，都会给予物品
+        // m_inventory.GetNpcOfferItems(m_npc.currentNpc); //不论是否正确，都会给予物品
         m_npc.AgreeNpcAward(); //根据实际情况增加或减少金钱
         m_round.DecriseSelectionTimes();
         m_npc.currentNpc.npc.Select(true);
 
-        Debug.Log($"成功获取了{m_npc.currentNpc.currentOfferAmount}个{m_npc.currentNpc.currentOfferItem}");
     }
     public void OnDisagreeNpcButtonClick()
     {

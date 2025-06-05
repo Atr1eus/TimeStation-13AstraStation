@@ -86,15 +86,15 @@ public class InventorySystem : SingletonMonoBehaviour<InventorySystem>
         }
         return false;
     }
-    public bool GetNpcOfferItems(NpcController npc)
-    {
-        return GetNpcOfferItems(npc.currentOfferItem, npc.currentOfferAmount);
-    }
-    public bool GetNpcOfferItems(ItemData offerItem, int offerAmount)
-    {
-        AddItem(offerItem, offerAmount);
-        return true;
-    }
+    // public bool GetNpcOfferItems(NpcController npc)
+    // {
+    //     return GetNpcOfferItems(npc.currentOfferItem, npc.currentOfferAmount);
+    // }
+    // public bool GetNpcOfferItems(ItemData offerItem, int offerAmount)
+    // {
+    //     AddItem(offerItem, offerAmount);
+    //     return true;
+    // }
     public bool GiveNpcRequestItems(ItemData requestItem, int requestAmount)
     {
         if (!HasEnoughItem(requestItem, requestAmount)) return false;

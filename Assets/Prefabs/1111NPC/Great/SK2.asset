@@ -25,12 +25,12 @@ MonoBehaviour:
   maxPerRequestAwardGolds: 0
   minPerNonrequestAwardGolds: 0
   maxPerNonrequestAwardGolds: 0
-  trueChoiceAwardGolds: 0
-  falseChoicePunishGolds: 0
+  trueChoiceAwardGolds: 10
+  falseChoicePunishGolds: 5
   initialFavorability: 0
   hand: {fileID: 0}
   ticket:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 74484d46f4996dd4589a2088ee4c511e, type: 2}
   storyNpcDescriptions:
   - "\u4E00\u4E2A\u7565\u663E\u5931\u771F\u7684\u7AE5\u771F\u97F3"
   storyNpcMinAppearRounds: 06000000
@@ -39,7 +39,8 @@ MonoBehaviour:
   - "\u4EAB\u53D7\u7F8E\u98DF"
   storyNpcBackPack:
   - "\u8BB8\u591A\u73BB\u7483\u73E0\uFF0C\u91D1\u94B1\uFF0C\u5C0F\u86CB\u7CD5"
-  storyNpcFollowUpPlot: []
+  storyNpcFollowUpPlot:
+  - 
   shouldAgreeList: 01
   npcDescription: 
   minAppearRound: 0

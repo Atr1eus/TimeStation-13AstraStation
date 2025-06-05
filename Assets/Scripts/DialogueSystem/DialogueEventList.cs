@@ -54,6 +54,13 @@ public class DialogueEventList : MonoBehaviour
                 scene.OnDialogueEnd();
                 break;
 
+            case "Agree":
+                scene.DialogueAgree();
+                break;
+
+            case "DisAgree":
+                scene.DialigueDisagree();
+                break;
             case "ChangeDialogueNumber": // 更改对话组
                 ChangeDialogueNumber(myEvent.intParameter, myEvent.stringParameter);
                 break;

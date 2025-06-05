@@ -9,7 +9,7 @@ public class NpcController : MonoBehaviour
     public float npcSpawnTime { get; protected set; } //当前npc的创建时间
     private bool isTradeFinish = false; //交换是否结束
     public bool isRequestSuccess = false; //是否获取到了需要的物品
-    public ItemData currentOfferItem { get; protected set; } //当前npc给予物品
+    // public ItemData currentOfferItem { get; protected set; } //当前npc给予物品
     public int currentOfferAmount { get; protected set; }
     public ItemData currentRequestItem { get; protected set; } //当前npc索求物品
     public int currentRequestAmount { get; protected set; } 
@@ -22,11 +22,11 @@ public class NpcController : MonoBehaviour
         npcSpawnTime = Time.time;
         isRequestSuccess = false;
         isTradeFinish = false;
-        InitializeRandomOfferItem();
-        InitializeRandomRequestItem();
+        // InitializeRandomOfferItem();
+        // InitializeRandomRequestItem();
         perRequestAwardGolds = npc.data.GetRandomRequestAwardGolds();
         perNonrequestAwardGolds = npc.data.GetRandomNonrequestAwardGolds();
-        Debug.Log($"{npc.data.name}向你索要{currentRequestAmount}个{currentRequestItem.name},他给你带来了{currentOfferAmount}个{currentOfferItem.name}");
+        // Debug.Log($"{npc.data.name}向你索要{currentRequestAmount}个{currentRequestItem.name},他给你带来了{currentOfferAmount}个{currentOfferItem.name}");
     }
     public int AffordForItems(ItemData itemdata,int amount) //计算Npc获得物品后给予玩家的金钱
     {
@@ -50,20 +50,18 @@ public class NpcController : MonoBehaviour
         }
         return total;
     }
-    public void InitializeRandomOfferItem()
-    {
-        //初始化随机OfferItem
-        currentOfferItem = npc.data.GetRandomOfferItem();
-        currentOfferAmount = Random.Range(currentOfferItem.minOfferAmount, currentOfferItem.maxOfferAmount + 1);
-        //todo：UI显示
-    }
-    public void InitializeRandomRequestItem()
-    {
-        //初始化随机RequestItem
-        currentRequestItem = npc.data.GetRandomRequestItem();
-        currentRequestAmount = Random.Range(currentRequestItem.minRequestAmount, currentRequestItem.maxOfferAmount + 1);
-        //todo：UI显示
-    }
+    // public void InitializeRandomOfferItem()
+    // {
+    //     //初始化随机OfferItem
+    //     currentOfferItem = npc.data.GetRandomOfferItem();
+    //     currentOfferAmount = Random.Range(currentOfferItem.minOfferAmount, currentOfferItem.maxOfferAmount + 1);
+    // }
+    // public void InitializeRandomRequestItem()
+    // {
+    //     //初始化随机RequestItem
+    //     currentRequestItem = npc.data.GetRandomRequestItem();
+    //     currentRequestAmount = Random.Range(currentRequestItem.minRequestAmount, currentRequestItem.maxOfferAmount + 1);
+    // }
 
     public void OnTradeEnter() //交易开始行为
     {

@@ -54,7 +54,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 0cc7dc4dc3f5f664e8ecae80c8d17089
+  id: 5c67130d7c5c2944282a6f0a03fc6907
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 64a25e1016dc6a446a9e3425fa81312b
+  id: e050ed152593ba54e9954b6bf2d39e72
   nodeName: Text node
   processed: 0
   entered: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 923fd13399c73224ba66268b71251b17
+  id: 8dd1037f9a2bc744b81b69cdcb44d3d3
   nodeName: Text node
   processed: 0
   entered: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 93652098905cc284cb00531a2fb19f05
+  id: 2cd832cc534bb5e4ead99ec30f0d6985
   nodeName: Text node
   processed: 0
   entered: 0
@@ -281,7 +281,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 701e17cb259ffe44d9be59916cda98ac
+  id: 35fa24c59d2615940b9ebc1e25656c2e
   nodeName: Text node
   processed: 0
   entered: 0
@@ -296,6 +296,62 @@ MonoBehaviour:
   text: "\u8D70\u7684\u90FD\u7D2F\u4E86"
   WaitForInput: 1
   output: 0
+--- !u!114 &-6139167300936753742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d109d159ef73fa1408f6a4a9eefef82c, type: 3}
+  m_Name: Event
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 18507.586, y: 431.66046}
+  ports:
+    keys:
+    - input
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: -6139167300936753742}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: output
+        node: {fileID: 5514150287751291735}
+        reroutePoints: []
+      - fieldName: output
+        node: {fileID: 3892468853256197993}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: -6139167300936753742}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  id: eaa9af652f902414789f39ac58f7825b
+  nodeName: Event node
+  processed: 0
+  entered: 0
+  input: 0
+  output: 0
+  events:
+  - eventName: EndDialogue
+    intParameter: 0
+    floatParameter: 0
+    stringParameter: 
+    boolParameter: 0
+  GoToNextNodeAutomatically: 1
 --- !u!114 &-4964031494883209509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,7 +395,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 68d724c12ddb405458acb99f7c918bbc
+  id: 71375cc52fe27b549a22ab9feb71cd8e
   nodeName: Text node
   processed: 0
   entered: 0
@@ -408,7 +464,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 371cce0326d9ab048818364ce51ae274
+  id: 69ec456e808cfcd4ea6648a1c7cc714c
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -472,7 +528,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 2155d709b92dd70428eeeb7e4a164feb
+  id: 8cda3cbc5b39657418bdf10424f2e73c
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -525,7 +581,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 05278d22f6c6ea44fbb0ff0e157f795e
+  id: f05aa6c399d7cb548b2c313ef9999c94
   nodeName: Text node
   processed: 0
   entered: 0
@@ -570,21 +626,12 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: c0081e544f61c7b478b89af12c89c175
+  id: d1a5aae326d0d8f458334648832a3c52
   nodeName: Branch
   processed: 0
   entered: 0
   output: 0
-  branchCondition:
-  - type: 0
-    variable: 
-    numberCondition: 0
-    stringCondition: 0
-    boolCondition: 0
-    floatTarget: 0
-    stringTarget: 
-    boolTarget: 0
-    intTarget: 0
+  branchCondition: []
 --- !u!114 &-561452934678894444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,7 +675,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: ba2dd19fbac1ecc4193c45434fd648ad
+  id: b282e2fe0f8873742ba055a88a4a879b
   nodeName: Text node
   processed: 0
   entered: 0
@@ -686,7 +733,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 164067cb8e0bb5246ba2977419d43634
+  id: 0107f556a526c054dab63f95777d22f2
   nodeName: Text node
   processed: 0
   entered: 0
@@ -739,6 +786,7 @@ MonoBehaviour:
   - {fileID: 3547870121126421371}
   - {fileID: 8276127660967211200}
   - {fileID: 5514150287751291735}
+  - {fileID: -6139167300936753742}
   dialogueNodes:
   - {fileID: -1019308862327215561}
   - {fileID: -8805802222766175229}
@@ -765,6 +813,7 @@ MonoBehaviour:
   - {fileID: 3547870121126421371}
   - {fileID: 8276127660967211200}
   - {fileID: 5514150287751291735}
+  - {fileID: -6139167300936753742}
   _branchNodes:
   - {fileID: -1019308862327215561}
 --- !u!114 &658136483410431183
@@ -810,7 +859,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 57c93afda65f134468448fa4e5ec26c1
+  id: 040b7c8491732e14a90ddb9eff8a6867
   nodeName: Text node
   processed: 0
   entered: 0
@@ -892,7 +941,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 3ba5c2d8c6541974d81dbfd79e5e8c82
+  id: 06e2eb0c85bf6314cbd9137416ab08fa
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -948,7 +997,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: d9ba5e5eaca67b844ba64996fb238ee0
+  id: f3eabc50a9181d14c84bc9610b5c5e63
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1006,7 +1055,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 252ec609f8222b3499b1da2ed0eac3af
+  id: caa8b73feefb7f9438175813f6cdae00
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1056,12 +1105,15 @@ MonoBehaviour:
       _node: {fileID: 3892468853256197993}
       _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      connections: []
+      connections:
+      - fieldName: input
+        node: {fileID: -6139167300936753742}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 26c6610aeb425bb4fab897dc635b6e36
+  id: 60e4fbbb660dbaa44b0d65f84277b683
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1119,7 +1171,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: b8fad9a7328b7ec4683eda08bcfb7b4f
+  id: e4822f9448532c14fbbaf9e84f62b623
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1177,7 +1229,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: fc36cab9f4214014981b291a7be4f993
+  id: aa5229b97f53378488fc89f96285a39b
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1235,7 +1287,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 657bb28776a15494697d2b6ab9ce6c94
+  id: 7dd0aa018fc6fc84d8714ebe23683bd4
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1285,12 +1337,15 @@ MonoBehaviour:
       _node: {fileID: 5514150287751291735}
       _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      connections: []
+      connections:
+      - fieldName: input
+        node: {fileID: -6139167300936753742}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 821816a1d08d88d49aadde5ded04acf7
+  id: 36379d2d4ffa3b047ad7c8bfe71c7a39
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1348,7 +1403,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 9b4ed20a2d2d8b142bd228d526b6cf33
+  id: 64a081c64d63baf4ba5e6a8d30f8eb46
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1417,7 +1472,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: a3af9034aa4ffd5438092eed1900ec2f
+  id: 4cd3e94636a6c444f9e49db08c4c8608
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -1470,7 +1525,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 0c5d94cf367037a45a5393440548ad8f
+  id: c97d1c5d7ceac8c44b0969dc6a4f9676
   nodeName: Text node
   processed: 0
   entered: 0
@@ -1528,7 +1583,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 158df7e33f57c084aa8a12004533fafd
+  id: 5e5183e50e3e82b48a9b6c575a2fe312
   nodeName: Text node
   processed: 0
   entered: 0

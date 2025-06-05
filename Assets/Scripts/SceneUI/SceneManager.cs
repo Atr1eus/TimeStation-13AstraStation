@@ -6,6 +6,23 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class SceneManager : MonoBehaviour
 {
+
+    [SerializeField] protected Text currentRoundText;
+    [SerializeField] protected Text diskText;
+    [SerializeField] protected Text positionText;
+    [SerializeField] protected Text customerText;
+
+    protected virtual void Start()
+    {
+        if (currentRoundText != null)
+            currentRoundText.text = RoundManager.Instance.currentRound.ToString();
+    }
+    protected virtual void Update()
+    {
+        if (diskText != null)
+            diskText.text = PlayerController.Instance.gold.ToString() + "/" + PlayerController.Instance.roundLimitMoney;
+    }
+
     [Header("场景过渡配置")]
     [SerializeField] protected Image fadeImage; //过渡背景
     [SerializeField] protected float fadeDuration = 0.3f; //过渡持续时间
@@ -21,6 +38,11 @@ public class SceneManager : MonoBehaviour
     protected CanvasGroup fadeCanvasGroup;
     protected bool isTransitioning;
     protected bool isStartScene = false;
+    [Header("交叉过渡设置")]
+    [SerializeField] private float crossFadeDuration = 1.0f;
+    [SerializeField] private float moveUpDistance = 100f;
+    [SerializeField] private AnimationCurve crossFadeCurve = AnimationCurve.Linear(0, 0, 1, 1);
+
     protected virtual void Awake()
     {
         InitializeFadeImage();
@@ -43,6 +65,18 @@ public class SceneManager : MonoBehaviour
 
         fadeCanvasGroup.alpha = 0f;
         fadeImage.color = Color.black;
+    }
+    [Header("升级动画设置")]
+    [SerializeField] private float upgradeAnimDuration = 0.5f; // 动画持续时间
+    [SerializeField] private float upgradeMoveDistance = 50f; // 上移距离
+    [SerializeField] private AnimationCurve upgradeFadeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1); // 动画曲线
+
+    // 获取或添加CanvasGroup组件
+    private CanvasGroup EnsureCanvasGroup(GameObject obj)
+    {
+        var group = obj.GetComponent<CanvasGroup>();
+        if (group == null) group = obj.AddComponent<CanvasGroup>();
+        return group;
     }
 
     protected IEnumerator SceneEnterTransition() //进入场景时调用
@@ -276,6 +310,111 @@ public class SceneManager : MonoBehaviour
 
     }
 
+    public void StartCrossFade(GameObject fadingOutObject, GameObject fadingInObject)
+    {
+        StartCoroutine(CrossFadeAnimation(fadingOutObject, fadingInObject));
+    }
+
+    public IEnumerator CrossFadeAnimation(GameObject fadingOutObj, GameObject fadingInObj)
+    {
+        // 确保初始状态正确
+        fadingInObj.SetActive(true);
+
+        // 将渐显对象置于渐隐对象下方
+        fadingInObj.transform.SetAsFirstSibling();
+
+        // 获取或添加必要的组件
+        CanvasGroup fadeOutGroup = GetOrAddCanvasGroup(fadingOutObj);
+        CanvasGroup fadeInGroup = GetOrAddCanvasGroup(fadingInObj);
+
+        // 初始状态设置
+        fadeOutGroup.alpha = 1f;
+        fadeInGroup.alpha = 0f;
+        Vector3 fadeOutStartPos = fadingOutObj.transform.localPosition;
+        Vector3 fadeOutTargetPos = fadeOutStartPos + Vector3.up * moveUpDistance;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < crossFadeDuration)
+        {
+            float progress = elapsedTime / crossFadeDuration;
+            float curveProgress = crossFadeCurve.Evaluate(progress);
+
+            // 处理渐隐对象
+            fadeOutGroup.alpha = 1f - curveProgress;
+            fadingOutObj.transform.localPosition = Vector3.Lerp(
+                fadeOutStartPos,
+                fadeOutTargetPos,
+                curveProgress
+            );
+
+            // 处理渐显对象
+            fadeInGroup.alpha = curveProgress;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 确保最终状态
+        fadeOutGroup.alpha = 0f;
+        fadeInGroup.alpha = 1f;
+        fadingOutObj.transform.localPosition = fadeOutTargetPos;
+        fadingOutObj.SetActive(false);
+    }
+
+    private CanvasGroup GetOrAddCanvasGroup(GameObject obj)
+    {
+        CanvasGroup group = obj.GetComponent<CanvasGroup>();
+        if (group == null)
+        {
+            group = obj.AddComponent<CanvasGroup>();
+        }
+        return group;
+    }
+
+    public IEnumerator PlayUpgradeAnimation(GameObject currentObj, GameObject nextObj)
+    {
+        // 确保所有子UI激活
+        foreach (var text in nextObj.GetComponentsInChildren<Text>(true))
+        {
+            text.gameObject.SetActive(true);
+        }
+
+        // 设置层级关系
+        nextObj.transform.SetAsFirstSibling();
+        nextObj.SetActive(true);
+
+        // 获取CanvasGroup组件
+        CanvasGroup currentGroup = EnsureCanvasGroup(currentObj);
+        CanvasGroup nextGroup = EnsureCanvasGroup(nextObj);
+
+        // 初始状态
+        currentGroup.alpha = 1f;
+        nextGroup.alpha = 0f;
+        Vector3 startPos = currentObj.transform.localPosition;
+
+        float timer = 0f;
+        while (timer < upgradeAnimDuration)
+        {
+            float progress = upgradeFadeCurve.Evaluate(timer / upgradeAnimDuration);
+
+            // 当前对象上移+淡出
+            currentGroup.alpha = 1 - progress;
+            currentObj.transform.localPosition = startPos + Vector3.up * (upgradeMoveDistance * progress);
+
+            // 新对象淡入
+            nextGroup.alpha = progress;
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // 最终状态
+        currentGroup.alpha = 0f;
+        nextGroup.alpha = 1f;
+        currentObj.transform.localPosition = startPos + Vector3.up * upgradeMoveDistance;
+    }
+
     public void UseButBanButton(Button button)
     {
         UseButton(button);
@@ -285,6 +424,11 @@ public class SceneManager : MonoBehaviour
     {
         image.gameObject.SetActive(false);
         image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+    }
+    public void InitUseImage(Image image)
+    {
+        image.gameObject.SetActive(true);
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
     }
     public void InitCloseButton(Button button)
     {
@@ -299,6 +443,10 @@ public class SceneManager : MonoBehaviour
         button.interactable = false;
         button.image.color = Color.gray;
     }
+    public void WhiteBanButton(Button button)
+    {
+        button.interactable = false;
+    }
     public void UnuseButton(Button button)
     {
         button.interactable = false;
@@ -306,16 +454,22 @@ public class SceneManager : MonoBehaviour
     }
     public void UseButton(Button button)
     {
-
-        button.interactable = true;
-
-        if (button.image.color != Color.gray) // 完全透明)
+        if (button.image.color != Color.gray && button.interactable == false) // 完全透明)
             StartCoroutine(AnimateButtonAppearance(button));
         else
         {
             button.enabled = true;
             button.image.color = new Color(1, 1, 1, 1);
         }
+
+        button.interactable = true;
+
+    }
+    public void InitUseButton(Button button)
+    {
+        button.enabled = true;
+        button.image.color = new Color(1, 1, 1, 1);
+        button.interactable = true;
     }
     public void UseImage(Image image)
     {
