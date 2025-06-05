@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde76f8380f77f048bfe2f9ad604a5c8, type: 3}
+  m_Name: TD2
+  m_EditorClassIdentifier: 
+  age: 36
+  npcName: "\u5929\u6B8B"
+  sex: 0
+  type: 1
+  travelTo: 0
+  npcDialogue: {fileID: 11400000, guid: 0fcf446df8b18614e90a979649514aad, type: 2}
+  requestItems: []
+  offerItems: []
+  minPerRequestAwardGolds: 0
+  maxPerRequestAwardGolds: 0
+  minPerNonrequestAwardGolds: 0
+  maxPerNonrequestAwardGolds: 0
+  trueChoiceAwardGolds: 0
+  falseChoicePunishGolds: 0
+  initialFavorability: 0
+  hand: {fileID: 0}
+  ticket:
+  - {fileID: 0}
+  storyNpcDescriptions:
+  - "\u4E00\u4E2A\u6C99\u54D1\u865A\u5F31\u7684\u58F0\u97F3"
+  storyNpcMinAppearRounds: 08000000
+  storyNpcMaxAppearRounds: 14000000
+  storyNpcReasons:
+  - "\u4E70\u5356"
+  storyNpcBackPack:
+  - "\u98DF\u7269"
+  storyNpcFollowUpPlot: []
+  shouldAgreeList: 00
+  npcDescription: 
+  minAppearRound: 0
+  maxAppearRound: 0
+  reason: 
+  backPack: 
+  isMoneyMore10K: 0
+  isRoundMore5: 0

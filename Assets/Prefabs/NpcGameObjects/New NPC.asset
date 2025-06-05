@@ -39,10 +39,11 @@ MonoBehaviour:
   storyNpcMinAppearRounds: 
   storyNpcMaxAppearRounds: 
   storyNpcReasons: []
+  storyNpcBackPack: []
   npcDescription: "\u662F\u4E2A\u778E\u5B50"
   minAppearRound: 0
   maxAppearRound: 100
-  reasonToFurture: []
-  reasonToPast: []
+  reason: 
   isMoneyMore10K: 0
   isRoundMore5: 0
+  backPack: 
