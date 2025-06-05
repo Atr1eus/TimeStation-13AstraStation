@@ -1,11 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum Issuer
-{
-    Tencent,
-    CyGames
-}
 public class Ticket
 {
     public TicketData data;
@@ -15,7 +10,7 @@ public class Ticket
     public TravelTo travelTo;
     public int leaveRound;
     public GameObject ticketGraph;
-    public Issuer ticketIssuer;
+    public string ticketIssuer;
     public bool isTrueTicket;
     public Ticket()
     {

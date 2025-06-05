@@ -16,35 +16,47 @@ public class NpcCardManager : MonoBehaviour
     public void InitializeCards(List<NpcData> npcs)
     {
         ClearCardList();
+
         float screenWidth = Screen.width;
-        float leftBorder = screenWidth / 10f;    // 左边界（1/10 处）
-        float rightBorder = screenWidth * 9f / 10f; // 右边界（9/10 处）
+        float screenHeight = Screen.height;
+        float leftBorder = screenWidth / 10f;
+        float rightBorder = screenWidth * 9f / 10f;
+        float yPos = screenHeight / 2f;
+
         float totalSpace = rightBorder - leftBorder;
-        float spacing = totalSpace / (npcs.Count + 1); // 卡牌间距
+        float spacing = totalSpace / (npcs.Count + 1);
+
         for (int i = 0; i < npcs.Count; i++)
         {
-            GameObject cardObj = Instantiate(cardPrefab, cardContainer);
-
             float xPos = leftBorder + (i + 1) * spacing;
-            float yPos = Screen.height / 2f; // 默认居中
+            Vector3 screenPos = new Vector3(xPos, yPos, 10f);
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
 
-            RectTransform cardRect = cardObj.GetComponent<RectTransform>();
-            Vector2 screenPos = new Vector2(xPos, yPos);
-
-            Vector2 anchoredPos;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                (RectTransform)cardContainer,
-                screenPos,
-                null,
-                out anchoredPos
-            );
-            cardRect.anchoredPosition = anchoredPos;
+            GameObject cardObj = Instantiate(cardPrefab, worldPos, Quaternion.identity, cardContainer);
+            cardObj.transform.localScale = Vector3.zero; // 初始大小为0
 
             NpcCardUI cardUI = cardObj.GetComponent<NpcCardUI>();
             NpcCard cardData = new NpcCard(npcs[i]);
             cardUI.SetUp(cardData);
             activeCards.Add(cardUI);
+
+            // 启动缩放动画协程
+            StartCoroutine(ScaleCardAnimation(cardObj.transform, 0.2f, new Vector3(1, 1, 1)));
         }
+    }
+    private IEnumerator ScaleCardAnimation(Transform cardTransform, float duration, Vector3 targetScale)
+    {
+        float elapsedTime = 0f;
+        Vector3 initialScale = Vector3.zero;
+
+        while (elapsedTime < duration)
+        {
+            cardTransform.localScale = Vector3.Lerp(initialScale, targetScale, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        cardTransform.localScale = targetScale; // 确保最终大小准确
     }
     public void InitializeRemainingNpcs(List<NpcData> npcs)
     {
@@ -64,8 +76,11 @@ public class NpcCardManager : MonoBehaviour
         RoundManager.Instance.currentCanSelectNpcNum--;
         RoundManager.Instance.AddCurrentRoundSelectedNpc(selectedUI.npcCard.npc);
         Destroy(selectedUI.gameObject);
+        scene.OnOpenApplicationButtonClick();
+        scene.OnOpenTicketButtonClick();
         DialogueManager.Instance.StartDialogue();
-        //scene.DecidedNpcButtonState();
+        DialogueManager.Instance.HandleSpaceKeyPress();
+        scene.DecidedNpcButtonState();
         Debug.Log($"已选择 NPC: {selectedCard.npc.npcName}");
     }
     public void LoadRemainingCards()

@@ -35,6 +35,11 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
 
     public List<NpcData> currentRoundNpcDatas = new List<NpcData>(); //本回合出现NPC
 
+
+    public List<string> decreaseItemList = new List<string>();
+    public List<int> decreaseItemCountList = new List<int>();
+    public List<Npc> currentStoryNpcList = new List<Npc>();
+
     public List<Npc> currentRoundNpcs = new List<Npc>();
 
 
@@ -60,6 +65,7 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         InitializeAvaliableStoryNpcDatas();
         InitializeRoundNpcDatas();
         InitializeRoundNpcs();
+        DateExtensions.ToGameDate(1);
         OnRoundStart?.Invoke();
 
     }
@@ -189,6 +195,9 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         currentRoundNpcDatas.Clear();
         currentRoundNpcs.Clear();
         currentSelectedNpcs.Clear();
+        currentStoryNpcList.Clear();
+        decreaseItemList.Clear();
+        decreaseItemCountList.Clear();
     }
     public void CurrentRoundDataToLastRound()
     {
@@ -204,19 +213,36 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         lastRoundSelectionsPerRound = 0;
         lastRoundMaxSelectionsPerRound = 0;
         lastRound = 0;
+        currentStoryNpcList.Clear();
+        decreaseItemCountList.Clear();
+        decreaseItemList.Clear();
+
     }
     public void AddMaxSelectionsPerRound()
     {
-        maxSelectionsPerRound ++;
+        maxSelectionsPerRound++;
     }
     public void AddSelectionsPerRound()
     {
-        selectionsPerRound ++;
+        selectionsPerRound++;
     }
 
     protected override void Awake()
     {
         base.Awake();
         InitializeWholeNpcDatas();
+    }
+    public void UpdateDailyDecreaseListData()
+    {
+        foreach (var item in InventorySystem.Instance.items)
+        {
+            if (InventorySystem.Instance.lastRoundItems.Contains(item) &&
+                InventorySystem.Instance.lastRoundItems[InventorySystem.Instance.lastRoundItems.IndexOf(item)].amount >
+                InventorySystem.Instance.items[InventorySystem.Instance.items.IndexOf(item)].amount)
+            {
+                decreaseItemList.Add(item.data.name);
+                decreaseItemCountList.Add(item.amount);
+            }
+        }
     }
 }

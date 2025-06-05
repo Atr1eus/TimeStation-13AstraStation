@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8293c2e56cb548b4fac8a42d7588432c, type: 3}
+  m_Name: First
+  m_EditorClassIdentifier: 
+  npc: {fileID: 11400000, guid: 79812ee4657775041ae277812481863a, type: 2}
+  targetDate: 9999.1.1
+  travelTo: 1
+  ticketGraph: {fileID: 0}
+  ticketIssuer: "\u5217\u8F66\u7EC4"
+  isTrueTicket: 1

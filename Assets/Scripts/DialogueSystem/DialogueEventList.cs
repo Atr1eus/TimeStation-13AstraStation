@@ -17,13 +17,13 @@ public class DialogueEventList : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public Npc FindNpcByName(string npcName)
@@ -51,9 +51,16 @@ public class DialogueEventList : MonoBehaviour
                 break;
 
             case "EndDialogue": // 对话结束，开始选择
-                scene.DecidedNpcButtonState();
+                scene.OnDialogueEnd();
                 break;
 
+            case "Agree":
+                scene.DialogueAgree();
+                break;
+
+            case "DisAgree":
+                scene.DialigueDisagree();
+                break;
             case "ChangeDialogueNumber": // 更改对话组
                 ChangeDialogueNumber(myEvent.intParameter, myEvent.stringParameter);
                 break;

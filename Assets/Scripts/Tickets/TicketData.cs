@@ -10,7 +10,7 @@ public class TicketData : ScriptableObject
     public string targetDate;
     public TravelTo travelTo;
     public GameObject ticketGraph;
-    public Issuer ticketIssuer;
+    public string ticketIssuer;
     public bool isTrueTicket;
 
 }

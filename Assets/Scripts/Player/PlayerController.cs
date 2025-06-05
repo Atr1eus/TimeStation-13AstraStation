@@ -12,6 +12,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     public int customerCountRank = 1;
     public readonly int MaxTrainRank = 3;
     public readonly int MaxCustomerCountRank = 3;
+    public List<int> roundLimitMoney = new List<int>();
     public List<int> trainRankUpNeedMoney = new List<int>();
     public List<int> customerCountRankUpNeedMoney = new List<int>();
     public bool CanAfford(ItemData item, int amount) => item.itemPrice * amount <= gold;
@@ -19,7 +20,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     public bool CanTrainRankUp()
     {
         if (trainCountRank > MaxTrainRank) return false;
-        return CanAfford(trainRankUpNeedMoney[trainCountRank]);
+        return CanAfford(trainRankUpNeedMoney[trainCountRank - 1]);
     }
     public bool CanCustomerRankUp()
     {

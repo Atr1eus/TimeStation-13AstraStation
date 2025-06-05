@@ -47,7 +47,7 @@ public class DialogueManager : MonoBehaviour
         isTalking = false;
     }
 
-    
+
 
     private void Start()
     {
@@ -91,8 +91,8 @@ public class DialogueManager : MonoBehaviour
         // 对话推进控制
         if (Input.GetKeyDown(advanceKey))
         {
-            
-            if(!dialogueManager.IsRunning && isTalking)
+
+            if (!dialogueManager.IsRunning && isTalking)
             {
                 isTalking = false;
                 if (!m_graph)
@@ -102,7 +102,7 @@ public class DialogueManager : MonoBehaviour
                 Debug.Log("开始对话");
                 dialogueManager.StartDialogue(m_graph); // 开始对话
             }
-            else if(dialogueManager.IsRunning)
+            else if (dialogueManager.IsRunning)
             {
                 if (dialogueManager.IsRunning)
                 {
@@ -144,6 +144,33 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void HandleSpaceKeyPress()
+    {
+        if (!dialogueManager.IsRunning && isTalking)
+        {
+            isTalking = false;
+            if (!m_graph)
+            {
+                Debug.LogWarning("NO GRAPH!!!");
+            }
+            Debug.Log("开始对话");
+            dialogueManager.StartDialogue(m_graph); // 开始对话
+        }
+        else if (dialogueManager.IsRunning)
+        {
+            if (dialogueManager.IsRunning)
+            {
+                if (dialogueManager.isAnimating)
+                {
+                    dialogueManager.EndLine(); // 跳过文本动画
+                }
+                else if (dialogueManager.CurrentState != DialogueState.AwaitingEventResponse)
+                {
+                    dialogueManager.AdvanceDialogue(); // 推进对话
+                }
+            }
+        }
+    }
     public void SetGraph(DialogueGraph graph)
     {
         Debug.Log("对画图设置成功！");
@@ -196,13 +223,13 @@ public class DialogueManager : MonoBehaviour
     public void GameStateHandler()
     {
         Debug.Log("获取角色数据用于对话分支");
-        
+
         if (npcmanager == null)
         {
             npcmanager = NpcManager.Instance;
             //Debug.LogWarning("no npcmanager!");
         }
-        if(npcmanager.currentNpc == null)
+        if (npcmanager.currentNpc == null)
         {
             Debug.LogWarning("no npccontroller!");
         }

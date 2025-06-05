@@ -16,6 +16,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public List<NpcData> wholeStoryNpcDataList;
     public List<ItemData> wholeItemDataList;
     public List<GameObject> wholeNormalHandList;
+    public List<string> wholeNormalReasonsList;
     public NpcCardManager m_npcCard;
     [Header("Systems")]
     [SerializeField] private PlayerController m_player;
@@ -66,12 +67,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     public void OnAgreeNpcButtonClick()
     {
-        m_inventory.GetNpcOfferItems(m_npc.currentNpc); //不论是否正确，都会给予物品
+        // m_inventory.GetNpcOfferItems(m_npc.currentNpc); //不论是否正确，都会给予物品
         m_npc.AgreeNpcAward(); //根据实际情况增加或减少金钱
         m_round.DecriseSelectionTimes();
         m_npc.currentNpc.npc.Select(true);
 
-        Debug.Log($"成功获取了{m_npc.currentNpc.currentOfferAmount}个{m_npc.currentNpc.currentOfferItem}");
     }
     public void OnDisagreeNpcButtonClick()
     {
@@ -85,7 +85,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void OnInventoryBrowseButtonClick()
     {
-        if(m_inventoryUI == null)
+        if (m_inventoryUI == null)
         {
             //Debug.LogWarning("无！");
             m_inventoryUI = InventoryItemUI.Instance;

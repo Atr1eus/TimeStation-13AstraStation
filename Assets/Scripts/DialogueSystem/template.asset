@@ -36,7 +36,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 725ba9f18cffd694cbb4d9367e87a4f5
+  id: e06811bb10d659344a79994d630c2a21
   nodeName: Branch
   processed: 0
   entered: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: f721e9311196d9c4099fa365c9b46b3e
-  nodeName: "\u5BF9\u8BDD\u6D411"
+  id: e527389ed6698df41872ebb616aae974
+  nodeName: Text node
   processed: 0
   entered: 0
   input: 0
@@ -164,8 +164,8 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 7ab12c8b31de88d4388fc305e0e372da
-  nodeName: "\u5BF9\u8BDD\u6D413"
+  id: c80b7f7f095147242a5f63a5778ae71a
+  nodeName: Text node
   processed: 0
   entered: 0
   input: 0
@@ -275,7 +275,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: cd1c6e4f0b86ba647a20c76a743314a8
+  id: 0f6f47cf4e27a3e46b6f402273d8fbff
   nodeName: Condition
   processed: 0
   entered: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 992fc718b97f85247ba0cbe3e61708bd
+  id: 71f65836eb9696d49b19d163904e9125
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -421,8 +421,8 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: f90e892479b2e1c4c8c535f6964eec37
-  nodeName: "\u5BF9\u8BDD\u6D412"
+  id: 976608655b3937b4888e3ad88217d07d
+  nodeName: Text node
   processed: 0
   entered: 0
   input: 0
@@ -498,7 +498,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 56c8594cb77157b4ba34f21a6a5cb30f
+  id: 85990da7b816e6345b515b818581e89d
   nodeName: Condition
   processed: 0
   entered: 0
@@ -577,7 +577,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 471f4f9e902ffcd4e8b5f9ea936a1328
+  id: 8fcfb26befdeb2d4daa8e45629cfb827
   nodeName: Condition
   processed: 0
   entered: 0
@@ -646,8 +646,8 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: edca947271d78e645b9d8ee763cb4080
-  nodeName: EndDialogue
+  id: c8ebf3e45dfb3a743b658616c14e3d2d
+  nodeName: Event node
   processed: 0
   entered: 0
   input: 0
@@ -703,8 +703,8 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: b7855ea939323f84f8be23c25feb0d02
-  nodeName: "\u5BF9\u8BDD\u6D410"
+  id: 5ebc6b50caec6d942a80fa10b85c1587
+  nodeName: Text node
   processed: 0
   entered: 0
   input: 0

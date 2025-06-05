@@ -19,16 +19,14 @@ public class TicketManager : SingletonMonoBehaviour<TicketManager>
     [Header("Npc出发时间与当前回合不一致概率")]
     public float leaveRoundWrongProbility = 0.1f;
     [Header("票的发行商池及外貌池(不同发行商对应外貌请一一对应)")]
-    public List<Issuer> ticketIssure;
+    public List<string> ticketIssure;
     public List<GameObject> ticket;
     [Header("目的时间及对应回合数(若目标时间不在游戏时间范围内,前往过去填写-2,前往未来填写-1)")]
     public List<string> targetDate;
     public List<int> targetRound;
 
-    [Header("出发时间及对应回合数")]
+    [Header("出发时间")]
     public List<string> leaveDate;
-    public List<int> leaveRound;
-
     public void InitializeWholeNormalNpcDatas()
     {
         wholeNormalNpcDataList = GameManager.Instance.wholeNormalNpcDataList;
@@ -132,13 +130,14 @@ public class TicketManager : SingletonMonoBehaviour<TicketManager>
         currentTicket.ticketIssuer = GetRandomIssure();
         return ticket[index];
     }
-    public Issuer GetRandomIssure()
+    public string GetRandomIssure()
     {
         float randomNumc = Random.Range(0, 100);
         if (randomNumc < issue_graphWrongProbility * 100.0)
         {
-            currentTicket.isTrueTicket = false;
-            return ticketIssure[Random.Range(0, ticketIssure.Count)];
+            int idx = Random.Range(0, ticketIssure.Count);
+            currentTicket.isTrueTicket = idx == ticketIndex ? true : false;
+            return ticketIssure[idx];
         }
         return ticketIssure[ticketIndex];
     }
@@ -149,76 +148,51 @@ public class TicketManager : SingletonMonoBehaviour<TicketManager>
         currentTicket.ticketIssuer = GetTrueIssure();
         return ticket[index];
     }
-    public Issuer GetTrueIssure()
+    public string GetTrueIssure()
     {
         return ticketIssure[ticketIndex];
     }
     public string GetRandomTargetDate()
     {
         int randomNum = Random.Range(0, targetDate.Count);
-        while (targetRound[randomNum] == RoundManager.Instance.currentRound)
+        while (targetDate[randomNum] == DateExtensions.GetDate())
         {
-            currentTicket.isTrueTicket = false;
             randomNum = Random.Range(0, targetDate.Count);
         }
-        currentTicket.travelTo = GetTravelTo(targetRound[randomNum]);
+        GetTravelTo(targetDate[randomNum], DateExtensions.GetDate());
         return targetDate[randomNum];
     }
     public string GetRandomTrueTargetDate()
     {
         int randomNum = Random.Range(0, targetDate.Count);
-        while (targetRound[randomNum] == RoundManager.Instance.currentRound && currentTicket.travelTo != NpcManager.Instance.currentNpc.npc.data.travelTo)
+        while (targetDate[randomNum] == DateExtensions.GetDate() || currentTicket.travelTo != NpcManager.Instance.currentNpc.npc.data.travelTo)
         {
-            currentTicket.isTrueTicket = false;
             randomNum = Random.Range(0, targetDate.Count);
-            currentTicket.travelTo = GetTravelTo(targetRound[randomNum]);
         }
+        currentTicket.travelTo = GetTravelTo(targetDate[randomNum], DateExtensions.GetDate());
         return targetDate[randomNum];
     }
-    public TravelTo GetTravelTo(int count)
+    public TravelTo GetTravelTo(string date1, string date2)
     {
-        if (count == -2) return TravelTo.Past;
-        else if (count == -1) return TravelTo.Future;
-        else
+        if (DateExtensions.IsEarlier(date1, date2))
         {
-            if (count <= RoundManager.Instance.currentRound)
-            {
-                return TravelTo.Past;
-            }
-            else return TravelTo.Future;
+            return TravelTo.Past;
         }
+        else return TravelTo.Future;
     }
     public string GetRandomLeaveDate()
     {
         int randomNum = Random.Range(0, 100);
         if (randomNum < leaveRoundWrongProbility * 100)
         {
-            int randomLeaveRound = Random.Range(0, leaveDate.Count);
-            currentTicket.isTrueTicket = false;
-            currentTicket.leaveRound = leaveRound[randomLeaveRound];
-            return leaveDate[randomLeaveRound];
+            int randomLeaveRound = Random.Range(0, 100);
+            return DateExtensions.ToGameDateString(randomLeaveRound);
         }
-        for (int i = 0; i < leaveRound.Count; i++)
-        {
-            if (leaveRound[i] == RoundManager.Instance.currentRound)
-            {
-                currentTicket.leaveRound = leaveRound[i];
-                return leaveDate[i];
-            }
-        }
-        return null;
+        return DateExtensions.GetDate();
     }
     public string GetTrueLeaveDate(Ticket ticket)
     {
-        for (int i = 0; i < leaveRound.Count; i++)
-        {
-            if (leaveRound[i] == RoundManager.Instance.currentRound)
-            {
-                ticket.leaveRound = leaveRound[i];
-                return leaveDate[i];
-            }
-        }
-        return null;
+        return DateExtensions.GetDate();
     }
 
     public void ClearCurrentTicket()

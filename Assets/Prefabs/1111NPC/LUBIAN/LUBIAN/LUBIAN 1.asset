@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde76f8380f77f048bfe2f9ad604a5c8, type: 3}
+  m_Name: LUBIAN 1
+  m_EditorClassIdentifier: 
+  age: 6
+  npcName: "\u5929\u5929"
+  sex: 0
+  type: 0
+  travelTo: 1
+  npcDialogue: {fileID: 11400000, guid: 1c0f0b6004af9a64a9d2f6e72e8b2cd5, type: 2}
+  requestItems: []
+  offerItems: []
+  minPerRequestAwardGolds: 0
+  maxPerRequestAwardGolds: 0
+  minPerNonrequestAwardGolds: 0
+  maxPerNonrequestAwardGolds: 0
+  trueChoiceAwardGolds: 10
+  falseChoicePunishGolds: 5
+  initialFavorability: 0
+  hand: {fileID: 0}
+  ticket: []
+  storyNpcDescriptions: []
+  storyNpcMinAppearRounds: 
+  storyNpcMaxAppearRounds: 
+  storyNpcReasons: []
+  storyNpcBackPack: []
+  storyNpcFollowUpPlot: []
+  shouldAgreeList: 
+  npcDescription: "\u4E00\u4E2A\u7AE5\u771F\u7684\u58F0\u97F3"
+  minAppearRound: 2
+  maxAppearRound: 30
+  reason: "\u5B66\u4E60"
+  backPack: 
+  isMoneyMore10K: 0
+  isRoundMore5: 0

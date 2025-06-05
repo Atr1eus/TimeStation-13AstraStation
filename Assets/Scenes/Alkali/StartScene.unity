@@ -259,6 +259,8 @@ MonoBehaviour:
   availableNormalNpcDatas: []
   availableStoryNpcDatas: []
   currentRoundNpcDatas: []
+  decreaseItemList: []
+  decreaseItemCountList: 
   isRandomTicket: 
   OnRoundStart:
     m_PersistentCalls:
@@ -415,23 +417,32 @@ MonoBehaviour:
   ticketPrefab: {fileID: 6786028991675438802, guid: c9dd3cd5c3d08c141862e5334ccde71d, type: 3}
   currentTicketObj: {fileID: 0}
   wholeNormalNpcDataList: []
-  npcWrongProbability: 0.1
-  issue_graphWrongProbility: 0.1
-  leaveRoundWrongProbility: 0.1
-  ticketIssure: 0000000000000000
+  npcWrongProbability: 0.2
+  issue_graphWrongProbility: 0.2
+  leaveRoundWrongProbility: 0
+  ticketIssure:
+  - "\u5217\u8F66\u7EC4"
+  - "\u5546\u4EBA\u8054\u76DF"
+  - "\u5171\u548C\u56FD"
   ticket:
   - {fileID: 2420219703718885894, guid: 84fb08237b052004baa901ac7959201b, type: 3}
   - {fileID: 2420219703718885894, guid: 84fb08237b052004baa901ac7959201b, type: 3}
+  - {fileID: 2420219703718885894, guid: 84fb08237b052004baa901ac7959201b, type: 3}
   targetDate:
-  - 2020-5-3
-  - 2026-7-3
-  targetRound: feffffffffffffff
-  leaveDate:
-  - 2025.6.1
-  - 2025.6.2
-  - 2025.6.3
-  - 2025.6.4
-  leaveRound: 01000000020000000300000004000000
+  - 4774.2.2
+  - 2345.6.8
+  - 1582.6.9
+  - 1102.3.9
+  - 1520.6.7
+  - 4562.9.5
+  - 6859.3.6
+  - 7562.6.8
+  - 8562.4.6
+  - 9856.3.4
+  - 7526.4.8
+  - 5260.8.5
+  targetRound: fefffffffefffffffefffffffefffffffefffffffeffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  leaveDate: []
 --- !u!4 &240006038
 Transform:
   m_ObjectHideFlags: 0
@@ -671,6 +682,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 823e4213a11904b468dcf8214b8d3383, type: 2}
   wholeNormalHandList:
   - {fileID: 1755731916373887472, guid: 70738a2a99fc02c45812d8ff2627d882, type: 3}
+  wholeNormalReasonsList: []
   m_npcCard: {fileID: 0}
   m_player: {fileID: 1525159885}
   m_npc: {fileID: 219528408}
@@ -1269,12 +1281,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eaad7a0e29655a48af8da3dd248320f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 200
+  gold: 10
   lastRoundGold: 0
   trainCountRank: 1
   customerCountRank: 1
-  trainRankUpNeedMoney: 05000000050000000500000005000000
-  customerCountRankUpNeedMoney: 05000000050000000500000005000000
+  roundLimitMoney: 00000000050000000a0000000f000000190000001e000000280000003700000046000000550000005a0000006900000078000000870000009b000000a0000000aa000000b4000000c8000000dc000000f000000004010000180100002c010000540100007c010000a4010000cc010000f40100001c0200003a02000058020000
+  trainRankUpNeedMoney: 0a0000001e00000032000000
+  customerCountRankUpNeedMoney: 0a0000001400000032000000
 --- !u!4 &1525159886
 Transform:
   m_ObjectHideFlags: 0
@@ -1502,8 +1515,73 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 971015792}
   fadeDuration: 0.3
+  scaleDuration: 0.5
+  targetScale: {x: 1, y: 1, z: 1}
+  enableScaleAnimation: 1
+  startImageScale: 0
+  targetImageScale: 1
+  crossFadeDuration: 1
+  moveUpDistance: 100
+  crossFadeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  upgradeAnimDuration: 0.5
+  upgradeMoveDistance: 50
+  upgradeFadeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   startGameButton: {fileID: 1353004483}
   quitGameButton: {fileID: 1853160963}
+  creatorListButton: {fileID: 0}
+  creatorListCloseButton: {fileID: 0}
+  creatorList: {fileID: 0}
+  creatorListPos: {fileID: 0}
+  loadImage: {fileID: 0}
+  loadImageConfirmButton: {fileID: 0}
+  loadImageCancelButton: {fileID: 0}
+  loadImageQuitButton: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

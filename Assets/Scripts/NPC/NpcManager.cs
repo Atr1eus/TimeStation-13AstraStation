@@ -78,7 +78,6 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         if (RoundManager.Instance.isRandomTicket[nowTicketIdx++])
             npc.ticket = TicketManager.Instance.GetRandomTicket();
         else npc.ticket = TicketManager.Instance.GetTrueTicket();
-        TicketManager.Instance.InitializeTicket();
         if (npc.ticket.travelTo != npc.data.travelTo) npc.ticket.isTrueTicket = false;
         RoundManager.Instance.isSelected = true;
         currentNpc.OnTradeEnter();
@@ -93,7 +92,6 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         currentNpc = npcObj.AddComponent<NpcController>();
         currentNpc.InitializeController(npc);
         currentNpc.npc.ticket = TicketManager.Instance.GetStoryNpcTicket(npc);
-        TicketManager.Instance.InitializeTicket(npc.ticket);
         nowTicketIdx++;
         currentNpc.OnTradeEnter();
         DialogueManager.Instance.SetGraph(npcdata.npcDialogue);

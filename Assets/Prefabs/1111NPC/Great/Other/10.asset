@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde76f8380f77f048bfe2f9ad604a5c8, type: 3}
+  m_Name: 10
+  m_EditorClassIdentifier: 
+  age: 20
+  npcName: "\u679C\u5B50\u72F8"
+  sex: 0
+  type: 0
+  travelTo: 0
+  npcDialogue: {fileID: 11400000, guid: 61fba74ad9857c744b5bba4673be7243, type: 2}
+  requestItems: []
+  offerItems: []
+  minPerRequestAwardGolds: 0
+  maxPerRequestAwardGolds: 0
+  minPerNonrequestAwardGolds: 0
+  maxPerNonrequestAwardGolds: 0
+  trueChoiceAwardGolds: -10
+  falseChoicePunishGolds: -10
+  initialFavorability: 0
+  hand: {fileID: 0}
+  ticket:
+  - {fileID: 0}
+  storyNpcDescriptions:
+  - "\u4E00\u4E2A\u666E\u901A\u4EBA"
+  storyNpcMinAppearRounds: 0a000000
+  storyNpcMaxAppearRounds: 0a000000
+  storyNpcReasons:
+  - "\u89C6\u5BDF"
+  storyNpcBackPack:
+  - "\u65E0"
+  storyNpcFollowUpPlot:
+  - "\u5217\u8F66\u7EC4\u51B3\u5B9A\u964D\u672C\u589E\u6548\uFF0C\u6BCF\u540D\u6210\u5458\u6263\u966410\u70B9\u5956\u91D1"
+  shouldAgreeList: 00
+  npcDescription: 
+  minAppearRound: 0
+  maxAppearRound: 0
+  reason: 
+  backPack: 
+  isMoneyMore10K: 0
+  isRoundMore5: 0
