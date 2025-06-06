@@ -9,6 +9,7 @@ public class NpcCardManager : MonoBehaviour
 {
     public GameObject cardPrefab;
     public Transform cardContainer;
+    public GIFPlayer player;
     public List<NpcCardUI> activeCards = new List<NpcCardUI>();
     public List<NpcData> remainingNpcs = new List<NpcData>();
     [SerializeField] private TradingSceneManager scene;
@@ -68,19 +69,41 @@ public class NpcCardManager : MonoBehaviour
         {
             card.GetComponent<RectTransform>().DOAnchorPosY(-600f, 0.5f).OnComplete(() => Destroy(card.gameObject)); // 非选择Npc卡牌向下移动，动画完成后销毁
         }
+        //yield return new WaitForSeconds(0.5f); // 等待卡牌动画完成（0.5秒）
+
+        // 2. 播放 GIF 动画并等待完成
+        player.StartGIFAndBlock();
+
+        StartCoroutine(ExecuteAfterGIF(selectedCard));
+    }
+
+    private IEnumerator ExecuteAfterGIF(NpcCard selectedCard)
+    {
+        // 等待 GIF 播放完成
+        while (player.isPlaying)
+        {
+            yield return null;
+        }
+
+        // GIF 播放完成后执行后续逻辑
         Debug.Log("SelectCard");
         NpcCardUI selectedUI = activeCards.Find(c => c.npcCard == selectedCard);
-        activeCards.Remove(selectedUI);
+        if (selectedUI != null)
+        {
+            activeCards.Remove(selectedUI);
+            remainingNpcs.Remove(selectedCard.npc);
+            RoundManager.Instance.currentCanSelectNpcNum--;
+            RoundManager.Instance.AddCurrentRoundSelectedNpc(selectedUI.npcCard.npc);
+            Destroy(selectedUI.gameObject);
+        }
         activeCards.Clear();
-        remainingNpcs.Remove(selectedCard.npc);
-        RoundManager.Instance.currentCanSelectNpcNum--;
-        RoundManager.Instance.AddCurrentRoundSelectedNpc(selectedUI.npcCard.npc);
-        Destroy(selectedUI.gameObject);
         DialogueManager.Instance.StartDialogue();
         DialogueManager.Instance.HandleSpaceKeyPress();
         scene.DecidedNpcButtonState();
+
         Debug.Log($"已选择 NPC: {selectedCard.npc.npcName}");
     }
+
     public void LoadRemainingCards()
     {
         InitializeCards(remainingNpcs);
