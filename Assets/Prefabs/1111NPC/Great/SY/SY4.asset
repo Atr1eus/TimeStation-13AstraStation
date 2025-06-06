@@ -27,7 +27,7 @@ MonoBehaviour:
   trueChoiceAwardGolds: 10
   falseChoicePunishGolds: 5
   initialFavorability: 0
-  hand: {fileID: 21300000, guid: cd5063a221a75a24ebe81d745044e023, type: 3}
+  hand: {fileID: 21300000, guid: 5a8ff79984583ba44b1b9fea72f44230, type: 3}
   ticket:
   - {fileID: 11400000, guid: 8dddb5d36ddf30b4da9ebe77a1795d72, type: 2}
   storyNpcDescriptions:

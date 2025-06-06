@@ -34,14 +34,14 @@ public class NpcCardManager : MonoBehaviour
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
 
             GameObject cardObj = Instantiate(cardPrefab, worldPos, Quaternion.identity, cardContainer);
-            cardObj.transform.localScale = Vector3.zero; // ³õÊ¼´óÐ¡Îª0
+            cardObj.transform.localScale = Vector3.zero; // ï¿½ï¿½Ê¼ï¿½ï¿½Ð¡Îª0
 
             NpcCardUI cardUI = cardObj.GetComponent<NpcCardUI>();
             NpcCard cardData = new NpcCard(npcs[i]);
             cardUI.SetUp(cardData);
             activeCards.Add(cardUI);
 
-            // Æô¶¯Ëõ·Å¶¯»­Ð­³Ì
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½Ð­ï¿½ï¿½
             StartCoroutine(ScaleCardAnimation(cardObj.transform, 0.2f, new Vector3(1, 1, 1)));
         }
     }
@@ -57,21 +57,21 @@ public class NpcCardManager : MonoBehaviour
             yield return null;
         }
 
-        cardTransform.localScale = targetScale; // È·±£×îÖÕ´óÐ¡×¼È·
+        cardTransform.localScale = targetScale; // È·ï¿½ï¿½ï¿½ï¿½ï¿½Õ´ï¿½Ð¡×¼È·
     }
     public void InitializeRemainingNpcs(List<NpcData> npcs)
     {
         remainingNpcs = npcs;
     }
-    public void SelectCard(NpcCard selectedCard) //Ñ¡Ôñ¿¨ÅÆÊÂ¼þ
+    public void SelectCard(NpcCard selectedCard) //Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
     {
         foreach (var card in activeCards)
         {
-            card.GetComponent<RectTransform>().DOAnchorPosY(-600f, 0.5f).OnComplete(() => Destroy(card.gameObject)); // ·ÇÑ¡ÔñNpc¿¨ÅÆÏòÏÂÒÆ¶¯£¬¶¯»­Íê³ÉºóÏú»Ù
+            card.GetComponent<RectTransform>().DOAnchorPosY(-600f, 0.5f).OnComplete(() => Destroy(card.gameObject)); // ï¿½ï¿½Ñ¡ï¿½ï¿½Npcï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éºï¿½ï¿½ï¿½ï¿½ï¿½
         }
-        //yield return new WaitForSeconds(0.5f); // µÈ´ý¿¨ÅÆ¶¯»­Íê³É£¨0.5Ãë£©
+        //yield return new WaitForSeconds(0.5f); // ï¿½È´ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½É£ï¿½0.5ï¿½ë£©
 
-        // 2. ²¥·Å GIF ¶¯»­²¢µÈ´ýÍê³É
+        // 2. ï¿½ï¿½ï¿½ï¿½ GIF ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½
         player.StartGIFAndBlock();
 
         StartCoroutine(ExecuteAfterGIF(selectedCard));
@@ -79,13 +79,13 @@ public class NpcCardManager : MonoBehaviour
 
     private IEnumerator ExecuteAfterGIF(NpcCard selectedCard)
     {
-        // µÈ´ý GIF ²¥·ÅÍê³É
+        // ï¿½È´ï¿½ GIF ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         while (player.isPlaying)
         {
             yield return null;
         }
 
-        // GIF ²¥·ÅÍê³ÉºóÖ´ÐÐºóÐøÂß¼­
+        // GIF ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éºï¿½Ö´ï¿½Ðºï¿½ï¿½ï¿½ï¿½ß¼ï¿½
         Debug.Log("SelectCard");
         NpcCardUI selectedUI = activeCards.Find(c => c.npcCard == selectedCard);
         if (selectedUI != null)
@@ -101,7 +101,7 @@ public class NpcCardManager : MonoBehaviour
         DialogueManager.Instance.HandleSpaceKeyPress();
         scene.DecidedNpcButtonState();
 
-        Debug.Log($"ÒÑÑ¡Ôñ NPC: {selectedCard.npc.npcName}");
+        Debug.Log($"ï¿½ï¿½Ñ¡ï¿½ï¿½ NPC: {selectedCard.npc.npcName}");
     }
 
     public void LoadRemainingCards()

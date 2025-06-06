@@ -12,6 +12,8 @@ public class TradingSceneManager : SceneManager
 {
     private Ticket currentTicket;
 
+    public VideoPlayer videoPlayer;
+    public string videoFileName = "yourvideo.mp4"; // ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Ä¼ï¿½ï¿½ï¿½
     [SerializeField] private GameManager manager;
     [SerializeField] private NpcCardManager cardManager;
     [SerializeField] private RoundManager roundManager;
@@ -60,6 +62,10 @@ public class TradingSceneManager : SceneManager
         NpcManager.Instance.handSpawnPoint = npcSpawnPos;
         roundManager = RoundManager.Instance;
 
+        videoPlayer = gameObject.AddComponent<VideoPlayer>();
+        videoPlayer.playOnAwake = false;
+        videoPlayer.source = VideoSource.Url;
+        videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoFileName);
 
         ticketImage.transform.position = ticketSpawnPos.position;
         applicationSpawnPos.transform.position = applicationSpawnPos.position;
@@ -259,10 +265,32 @@ public class TradingSceneManager : SceneManager
 
 
 
+    public IEnumerator PlayVideoAndWait()
+    {
+
+        videoPlayer.Prepare();
+
+        // ï¿½È´ï¿½ï¿½ï¿½Æµ×¼ï¿½ï¿½ï¿½ï¿½ï¿½
+        while (!videoPlayer.isPrepared)
+        {
+            yield return null;
+        }
+
+        videoPlayer.Play();
+
+        // ï¿½È´ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        while (videoPlayer.isPlaying)
+        {
+            yield return null;
+        }
+
+        // ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éºï¿½Ö´ï¿½ÐµÄ²ï¿½ï¿½ï¿½
+        YourPostVideoAction();
+    }
 
     private void YourPostVideoAction()
     {
-        Debug.Log("ÊÓÆµ²¥·ÅÍê³É£¬Ö´ÐÐºóÐø²Ù×÷");
+        Debug.Log("ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É£ï¿½Ö´ï¿½Ðºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
     }
 
 }
