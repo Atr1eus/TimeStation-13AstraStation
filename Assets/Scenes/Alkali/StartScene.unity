@@ -457,6 +457,8 @@ MonoBehaviour:
     sceneName: TestRestScene
   - sceneType: 0
     sceneName: StartScene
+  - sceneType: 3
+    sceneName: EndScene
 --- !u!4 &166451243
 Transform:
   m_ObjectHideFlags: 0
@@ -922,6 +924,8 @@ MonoBehaviour:
   - "\u6CBB\u75C5"
   - "\u7ED8\u753B"
   - "\u65C5\u6E38"
+  loseStoryNpcList: []
+  currentLoseNpcList: []
   m_npcCard: {fileID: 0}
   m_player: {fileID: 1525159885}
   m_npc: {fileID: 219528408}
@@ -1007,7 +1011,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 474bee47a2fcfbb4ba496feb7fe22649, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e6565aef2a02e05409ad4ef61c981df0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1690,6 +1694,8 @@ MonoBehaviour:
   lastRoundGold: 0
   trainCountRank: 0
   customerCountRank: 0
+  lastTrainCountRank: 0
+  lastCustomerCountRank: 0
   roundLimitMoney: 00000000050000000a0000000f000000190000001e000000280000003700000046000000550000005a0000006900000078000000870000009b000000a0000000aa000000b4000000c8000000dc000000f000000004010000180100002c010000540100007c010000a4010000cc010000f40100001c02000058020000
   trainRankUpNeedMoney: 0a0000001e00000032000000
   customerCountRankUpNeedMoney: 0a0000001400000032000000

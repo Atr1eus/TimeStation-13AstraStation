@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DialogueSystem;
+using Unity.VisualScripting;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class DialogueManager : MonoBehaviour
     //public GameObject Text;
 
     [Header(" ‰»Îøÿ÷∆")]
-    public KeyCode advanceKey = KeyCode.Space;
+    public KeyCode advanceKey = KeyCode.Mouse0;
     public KeyCode speedUpKey = KeyCode.T;
     public KeyCode themeTestKey = KeyCode.S;
     public KeyCode pauseKey = KeyCode.P;

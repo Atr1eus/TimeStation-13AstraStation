@@ -49,6 +49,7 @@ public class RestSceneManager : SceneManager
         m_player = FindAnyObjectByType<PlayerController>();
         m_inventory = FindObjectOfType<InventorySystem>();
         m_round = FindAnyObjectByType<RoundManager>();
+        currentRoundText.text = RoundManager.Instance.currentRound.ToString();
         InitializeUI();
         InitializeButtonsEvent();
         InitializeReport();
@@ -156,6 +157,8 @@ public class RestSceneManager : SceneManager
                          m_player.trainRankUpNeedMoney[m_player.trainCountRank].ToString();
         if (m_player.CanTrainRankUp()) UseButton(trainCountUpButton);
         else UseButBanButton(trainCountUpButton);
+        if (m_player.CanCustomerRankUp()) UseButton(customerCountUpButton);
+        else UseButBanButton(customerCountUpButton);
     }
     public void OnCustomerCountRankUpButtonClick()
     {
@@ -166,6 +169,8 @@ public class RestSceneManager : SceneManager
                                 m_player.customerCountRankUpNeedMoney[m_player.customerCountRank].ToString();
         if (m_player.CanCustomerRankUp()) UseButton(customerCountUpButton);
         else UseButBanButton(customerCountUpButton);
+        if (m_player.CanTrainRankUp()) UseButton(trainCountUpButton);
+        else UseButBanButton(trainCountUpButton);
     }
     public void InitializeUI()
     {

@@ -14,6 +14,7 @@ public enum NpcSex
     Man,
     Woman
 }
+[SerializeField]
 [CreateAssetMenu(fileName = "New NPC", menuName = "Game/NPC")]
 public class NpcData : ScriptableObject
 {

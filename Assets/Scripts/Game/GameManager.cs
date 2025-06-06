@@ -17,6 +17,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public List<ItemData> wholeItemDataList;
     public List<Sprite> wholeNormalHandList;
     public List<string> wholeNormalReasonsList;
+    public List<NpcData> loseStoryNpcList;
+
+
+    public List<NpcData> currentLoseNpcList;
     public NpcCardManager m_npcCard;
     [Header("Systems")]
     [SerializeField] private PlayerController m_player;

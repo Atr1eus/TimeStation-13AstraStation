@@ -85,6 +85,10 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     {
         NpcData npcdata = npcCard.npc;
         Npc npc = npcDictionary[npcdata.npcName];
+        if(GameManager.Instance.loseStoryNpcList.Contains(npcdata))
+        {
+            GameManager.Instance.currentLoseNpcList.Add(npcdata);
+        }
         currentNpc = new NpcController();
         currentNpc.InitializeController(npc);
         currentNpc.npc.ticket = TicketManager.Instance.GetStoryNpcTicket(npc);

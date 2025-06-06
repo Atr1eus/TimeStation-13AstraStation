@@ -19,11 +19,16 @@ public class RoundData
     public int gold;
     public List<NpcDataEntry> normalNpcData;
     public List<NpcDataEntry> storyNpcData;
+    public List<NpcData> loseNpc;
     public List<ItemSaveEntry> items = new List<ItemSaveEntry>();
     public int currentRound; //目前回合数
-    public string currentDate;
+    public int currentYear;
+    public int currentMonth;
+    public int currentDay;
     public int selectionsPerRound; //每回合可选择次数
     public int maxSelectionsPerRound; //每回合可提供选择数
+    public int trainCountRank;
+    public int cutomerCountRank;
 }
 
 [Serializable]

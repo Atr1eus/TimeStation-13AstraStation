@@ -45,7 +45,6 @@ public class TradingSceneManager : SceneManager
 
 
 
-
     [SerializeField] private Image hand;
 
 
@@ -72,7 +71,7 @@ public class TradingSceneManager : SceneManager
     {
         base.Update();
         positionText.text = roundManager.remainingSelections.ToString();
-        customerText.text = roundManager.currentCanSelectNpcNum.ToString();
+        customerText.text = cardManager.remainingNpcs.Count.ToString();
     }
     private void InitializeButtonsEvent()
     {
@@ -87,6 +86,21 @@ public class TradingSceneManager : SceneManager
 
         loadRestSceneButton?.onClick.AddListener(() =>
         {
+            if (FinalManager.IsWin())
+            {
+                StartCoroutine(TransitionToScene(SceneLoader.GameScene.EndArea));
+                return;
+            }
+            if (FinalManager.IsLose())
+            {
+                StartCoroutine(TransitionToScene(SceneLoader.GameScene.EndArea));
+                return;
+            }
+            if (FinalManager.IsFull())
+            {
+                StartCoroutine(TransitionToScene(SceneLoader.GameScene.EndArea));
+                return;
+            }
             SaveSystem.GameSave();
             StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
         });
@@ -257,12 +271,5 @@ public class TradingSceneManager : SceneManager
         UnuseImage(hand);
     }
 
-
-
-
-    private void YourPostVideoAction()
-    {
-        Debug.Log("视频播放完成，执行后续操作");
-    }
 
 }

@@ -10,6 +10,8 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     public int lastRoundGold;
     public int trainCountRank = 0;
     public int customerCountRank = 1;
+    public int lastTrainCountRank;
+    public int lastCustomerCountRank;
     public readonly int MaxTrainRank = 3;
     public readonly int MaxCustomerCountRank = 3;
     public List<int> roundLimitMoney = new List<int>();
@@ -33,11 +35,17 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     public void CurrentPlayerDataToLastRound()
     {
         lastRoundGold = gold;
+        lastTrainCountRank = trainCountRank;
+        lastCustomerCountRank = customerCountRank;
     }
     public void ClearBeforeLoading()
     {
         gold = 0;
         lastRoundGold = 0;
+        trainCountRank = 0;
+        customerCountRank = 0;
+        lastTrainCountRank = 0;
+        lastCustomerCountRank = 0;
     }
     public void TrainCountRankUp()
     {
@@ -46,6 +54,10 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     public void CustomerCountRankUp()
     {
         MinusGold(customerCountRankUpNeedMoney[customerCountRank++]);
+    }
+    public bool IsLose()
+    {
+        return gold < roundLimitMoney[RoundManager.Instance.currentRound];
     }
     void Update()
     {

@@ -4,8 +4,21 @@ using System.Globalization;
 [Serializable]
 public static class DateExtensions
 {
-    private static DateTime BaseDate = new DateTime(5070, 6, 5);
+    public static DateTime BaseDate = new DateTime(5070, 6, 5);
+    public static int GetBaseYear()
+    {
+        return BaseDate.Year;
+    }
 
+    public static int GetBaseMonth()
+    {
+        return BaseDate.Month;
+    }
+
+    public static int GetBaseDay()
+    {
+        return BaseDate.Day;
+    }
     public static DateTime ToGameDate(this int dayOffset)
     {
         return BaseDate.AddDays(dayOffset);

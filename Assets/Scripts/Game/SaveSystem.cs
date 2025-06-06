@@ -146,8 +146,15 @@ public static class SaveSystem
         roundData.gold = m_player.gold;
         roundData.maxSelectionsPerRound = m_round.maxSelectionsPerRound;
         roundData.selectionsPerRound = m_round.selectionsPerRound;
-        roundData.currentDate = DateExtensions.GetDate();
-
+        roundData.currentYear = DateExtensions.GetBaseYear();
+        roundData.currentYear = DateExtensions.GetBaseMonth();
+        roundData.currentDay = DateExtensions.GetBaseDay();
+        roundData.trainCountRank = m_player.lastTrainCountRank;
+        roundData.cutomerCountRank = m_player.lastCustomerCountRank;
+        foreach (var data in GameManager.Instance.currentLoseNpcList)
+        {
+            roundData.loseNpc.Add(data);
+        }
 
         List<NpcDataEntry> normalNpcDatas = new List<NpcDataEntry>();
         List<NpcDataEntry> storyNpcDatas = new List<NpcDataEntry>();
@@ -168,7 +175,8 @@ public static class SaveSystem
         roundData.maxSelectionsPerRound = m_round.lastRoundMaxSelectionsPerRound;
         roundData.selectionsPerRound = m_round.lastRoundSelectionsPerRound;
         roundData.gold = m_player.lastRoundGold;
-        roundData.currentDate = DateExtensions.ToGameDateString(-1);
+        roundData.trainCountRank = m_player.trainCountRank;
+        roundData.cutomerCountRank = m_player.customerCountRank;
 
 
         List<NpcDataEntry> normalNpcDatas = new List<NpcDataEntry>();
@@ -287,6 +295,13 @@ public static class SaveSystem
         m_round.currentRound = data.currentRound;
         m_round.maxSelectionsPerRound = data.maxSelectionsPerRound;
         m_round.selectionsPerRound = data.selectionsPerRound;
+        DateExtensions.BaseDate = new DateTime(data.currentYear, data.currentMonth, data.currentMonth);
+        m_player.customerCountRank = data.cutomerCountRank;
+        m_player.trainCountRank = data.trainCountRank;
+        foreach (var dt in data.loseNpc)
+        {
+            GameManager.Instance.currentLoseNpcList.Add(dt);
+        }
         LoadCurrentNpcData(data.normalNpcData, data.storyNpcData);
         LoadCurrentInventory(data.items);
 
@@ -298,6 +313,8 @@ public static class SaveSystem
         m_round.lastRound = data.currentRound;
         m_round.lastRoundMaxSelectionsPerRound = data.maxSelectionsPerRound;
         m_round.lastRoundSelectionsPerRound = data.selectionsPerRound;
+        m_player.lastCustomerCountRank = data.cutomerCountRank;
+        m_player.trainCountRank = data.trainCountRank;
         LoadLastNpcData(data.normalNpcData, data.storyNpcData);
         LoadLastInventory(data.items);
     }
