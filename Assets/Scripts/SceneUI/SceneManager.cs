@@ -20,7 +20,7 @@ public class SceneManager : MonoBehaviour
     protected virtual void Update()
     {
         if (diskText != null)
-            diskText.text = PlayerController.Instance.gold.ToString() + "/" + PlayerController.Instance.roundLimitMoney;
+            diskText.text = PlayerController.Instance.gold.ToString() + "/" + PlayerController.Instance.roundLimitMoney[RoundManager.Instance.currentRound].ToString();
     }
 
     [Header("≥°æ∞π˝∂…≈‰÷√")]

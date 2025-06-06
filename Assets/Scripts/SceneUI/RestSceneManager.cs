@@ -58,7 +58,7 @@ public class RestSceneManager : SceneManager
     {
         base.Update();
         positionText.text = RoundManager.Instance.maxSelectionsPerRound.ToString();
-        positionText.text = RoundManager.Instance.selectionsPerRound.ToString();
+        customerText.text = RoundManager.Instance.selectionsPerRound.ToString();
     }
 
 

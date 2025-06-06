@@ -69,7 +69,7 @@ public class TradingSceneManager : SceneManager
     protected override void Update()
     {
         base.Update();
-        positionText.text = cardManager.remainingNpcs.ToString();
+        positionText.text = roundManager.remainingSelections.ToString();
         customerText.text = roundManager.currentCanSelectNpcNum.ToString();
     }
     private void InitializeButtonsEvent()

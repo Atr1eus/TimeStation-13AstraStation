@@ -558,9 +558,9 @@ MonoBehaviour:
   issue_graphWrongProbility: 0.2
   leaveRoundWrongProbility: 0
   ticketIssure:
-  - 
-  - 
-  - 
+  - 1
+  - 2
+  - 3
   ticket:
   - {fileID: 2420219703718885894, guid: 84fb08237b052004baa901ac7959201b, type: 3}
   - {fileID: 2420219703718885894, guid: 84fb08237b052004baa901ac7959201b, type: 3}
@@ -883,8 +883,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1ee77047207f3a34da3288b9ee4a40f9, type: 2}
   wholeStoryNpcDataList:
   - {fileID: 11400000, guid: 79812ee4657775041ae277812481863a, type: 2}
-  - {fileID: 11400000, guid: f849a8a9b48a04c438eca1bb35c0f00c, type: 2}
-  - {fileID: 11400000, guid: d7aac7e673ca02042a1bbaa4751c3c8d, type: 2}
   - {fileID: 11400000, guid: bd6a9288e56bf2e428086ccb67219c02, type: 2}
   - {fileID: 11400000, guid: 243b76697a33cd24bb9e050c855ee458, type: 2}
   - {fileID: 11400000, guid: 7967239ca0885854785b73eb26d6a648, type: 2}

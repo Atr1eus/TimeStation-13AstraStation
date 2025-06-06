@@ -105,14 +105,14 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
             Debug.Log("你放过了一个正确的人");
             return;
         }
-        PlayerController.Instance.MinusGold(currentNpc.npc.data.falseChoicePunishGolds);
+        PlayerController.Instance.AddGold(currentNpc.npc.data.falseChoicePunishGolds);
         Debug.Log("判断错误！！！");
     }
     public void DisagreeNpcAward()
     {
         if (currentNpc.npc.ticket.isTrueTicket)
         {
-            PlayerController.Instance.MinusGold(currentNpc.npc.data.falseChoicePunishGolds);
+            PlayerController.Instance.AddGold(currentNpc.npc.data.falseChoicePunishGolds);
             Debug.Log("判断错误！！！");
             return;
         }

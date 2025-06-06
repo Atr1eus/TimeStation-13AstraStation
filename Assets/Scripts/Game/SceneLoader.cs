@@ -50,6 +50,7 @@ public class SceneLoader : SingletonMonoBehaviour<SceneLoader>
         base.Awake();
         InitializeSceneDictionary();
     }
+
     private IEnumerator LoadSceneCoroutine(string sceneName, Image fadeImage, CanvasGroup fadeCanvasGroup)
     {
         // ¿ªÊ¼Ô¤¼ÓÔØ
