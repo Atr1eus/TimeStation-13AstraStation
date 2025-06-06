@@ -15,6 +15,6 @@ MonoBehaviour:
   npc: {fileID: 11400000, guid: a7aad69a0f30c5840af7357cb7bd2b86, type: 2}
   targetDate: 6000.1.1
   travelTo: 1
-  ticketGraph: {fileID: 0}
+  ticketGraph: {fileID: 21300000, guid: a5d8beea87d2dc443b28bc6319ba4522, type: 3}
   ticketIssuer: "\u5546\u4EBA\u8054\u76DF"
   isTrueTicket: 1

@@ -52,8 +52,11 @@ public class TradingSceneManager : SceneManager
     [SerializeField] private Image applicationImage;
     [SerializeField] private Image decideImage;
     [SerializeField] private Transform handParent;
+
+    [SerializeField] private CanvasGroup canvas;
     protected override void Start()
     {
+        canvas.interactable = true;
         GameManager.Instance.m_npcCard = FindObjectOfType<NpcCardManager>();
         manager = GameManager.Instance;
         NpcManager.Instance.handSpawnPoint = npcSpawnPos;
@@ -86,6 +89,7 @@ public class TradingSceneManager : SceneManager
 
         loadRestSceneButton?.onClick.AddListener(() =>
         {
+            canvas.interactable = false;
             if (FinalManager.IsWin())
             {
                 StartCoroutine(TransitionToScene(SceneLoader.GameScene.EndArea));
@@ -156,7 +160,16 @@ public class TradingSceneManager : SceneManager
         ticketNameText.text = currentTicket.npc.npcName;
         ticketFromDateText.text = currentTicket.leaveDate;
         ticketToDateText.text = currentTicket.targetDate;
-        ticketIssuerText.text = currentTicket.ticketIssuer;
+        if (NpcManager.Instance.currentNpc.npc.data.type == NpcType.Normal)
+        {
+            ticketImage.sprite = TicketManager.Instance.GetRandomTicketGraph();
+            ticketIssuerText.text = TicketManager.Instance.GetRandomIssure(ticketImage.sprite);
+        }
+        else
+        {
+            ticketImage.sprite = NpcManager.Instance.currentNpc.npc.data.ticket[NpcManager.Instance.currentNpc.npc.selectedTimes].ticketGraph;
+            ticketIssuerText.text = NpcManager.Instance.currentNpc.npc.data.ticket[NpcManager.Instance.currentNpc.npc.selectedTimes].ticketIssuer;
+        }
         rightTicketNameText.text = ticketNameText.text;
         rightTicketFromDateText.text = ticketFromDateText.text;
         rightTicketIssuerText.text = ticketIssuerText.text;
@@ -198,6 +211,7 @@ public class TradingSceneManager : SceneManager
     }
     public void DecidedNpcButtonState()
     {
+
         UnuseImage(decideImage);
         UnuseButton(nextNpcButton);
         UseButton(openTicketButton);

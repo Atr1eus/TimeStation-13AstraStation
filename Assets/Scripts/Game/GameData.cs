@@ -19,12 +19,10 @@ public class RoundData
     public int gold;
     public List<NpcDataEntry> normalNpcData;
     public List<NpcDataEntry> storyNpcData;
-    public List<NpcData> loseNpc = new List<NpcData>();
+    public List<string> loseNpc = new List<string>();
     public List<ItemSaveEntry> items = new List<ItemSaveEntry>();
     public int currentRound; //目前回合数
-    public int currentYear;
-    public int currentMonth;
-    public int currentDay;
+    public DateTime dateTime;
     public int selectionsPerRound; //每回合可选择次数
     public int maxSelectionsPerRound; //每回合可提供选择数
     public int trainCountRank;

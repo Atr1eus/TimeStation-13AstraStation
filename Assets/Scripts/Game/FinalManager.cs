@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using UnityEngine;
 
 public static class FinalManager
 {
@@ -11,6 +12,7 @@ public static class FinalManager
     {
         if (RoundManager.Instance.currentRound >= 30)
         {
+            Debug.Log("win");
             FinalNum = 0;
             return true;
         }
@@ -18,14 +20,21 @@ public static class FinalManager
     }
     public static bool IsLose()
     {
-        if (PlayerController.Instance.IsLose()) FinalNum = 0;
-        return PlayerController.Instance.IsLose();
+        if (PlayerController.Instance.IsLose())
+        {
+
+            Debug.Log("lose");
+            FinalNum = 1;
+            return true;
+        }
+        return false;
     }
 
     public static bool IsFull()
     {
         if (GameManager.Instance.currentLoseNpcList.Count >= 3)
         {
+            Debug.Log("full");
             FinalNum = 2;
             return true;
         }

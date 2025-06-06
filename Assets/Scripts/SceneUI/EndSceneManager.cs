@@ -16,6 +16,7 @@ public class EndSceneManager : SceneManager
     public Image SK_EndImage;     // »µ½á¾ÖÍ¼Æ¬
     public Image Poor_EndImage;
     public Button returnToMainButton;
+    public CanvasGroup canvas;
 
     protected override void Awake()
     {
@@ -23,6 +24,7 @@ public class EndSceneManager : SceneManager
     }
     protected override void Start()
     {
+        canvas.interactable = true;
         BestTravel_EndImage.gameObject.SetActive(false);
         SK_EndImage.gameObject.SetActive(false);
         Poor_EndImage.gameObject.SetActive(false);
@@ -36,6 +38,11 @@ public class EndSceneManager : SceneManager
         else StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
         returnToMainButton?.onClick?.AddListener(() =>
         {
+            canvas.interactable = false;
+            if (SaveSystem.HadInitSaveFile())
+            {
+                SaveSystem.InitLoad();
+            }
             StartCoroutine(TransitionToScene(SceneLoader.GameScene.MainArea));
         });
     }

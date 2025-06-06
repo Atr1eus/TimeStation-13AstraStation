@@ -28,6 +28,7 @@ public class RestSceneManager : SceneManager
     [SerializeField] private Button exitDailyReportButton;
     [SerializeField] private RectTransform dailyReportPos;
     [SerializeField] private RectTransform RankUpPos;
+    [SerializeField] private CanvasGroup canvas;
     private List<string> newsReport;
     private int newsReportidx = -1;
 
@@ -40,6 +41,7 @@ public class RestSceneManager : SceneManager
     }
     protected override void Start()
     {
+        canvas.interactable = true;
         newsReportText1.text = "---";
         newsReportText2.text = "---";
         newsReportText3.text = "---";
@@ -95,6 +97,7 @@ public class RestSceneManager : SceneManager
         saveButton?.onClick.AddListener(() => SaveSystem.GameSave());
         loadTradingSceneButton?.onClick.AddListener(() =>
         {
+            canvas.interactable = false;
             StartCoroutine(TransitionToScene(SceneLoader.GameScene.TradingArea));
         });
         rankUpCloseButton?.onClick?.AddListener(OnRankUpCloseButtonClick);
@@ -105,6 +108,11 @@ public class RestSceneManager : SceneManager
         exitDailyReportButton?.onClick.AddListener(OnExitDailyImageButtonClick);
         returnToMainButton?.onClick?.AddListener(() =>
         {
+            if(SaveSystem.HadInitSaveFile())
+            {
+                SaveSystem.InitLoad();
+            }
+            canvas.interactable = false;
             StartCoroutine(TransitionToScene(SceneLoader.GameScene.MainArea));
         });
     }

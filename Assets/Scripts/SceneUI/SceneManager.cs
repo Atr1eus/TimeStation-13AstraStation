@@ -429,6 +429,7 @@ public class SceneManager : MonoBehaviour
     {
         image.gameObject.SetActive(true);
         image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
+        image.transform.localScale = Vector3.one;
     }
     public void InitCloseButton(Button button)
     {
@@ -489,4 +490,5 @@ public class SceneManager : MonoBehaviour
     {
         canvas.interactable = true;
     }
+
 }

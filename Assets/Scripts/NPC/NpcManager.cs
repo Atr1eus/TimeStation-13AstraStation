@@ -67,7 +67,6 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     }
     public void InitializeCurrentNpc(NpcCard npcCard)//npcCard选择事件 根据玩家的选择定义currentNpc
     {
-        Debug.Log("开始初始化角色！");
         NpcData npcdata = npcCard.data;
         Npc npc = npcDictionary[npcdata.npcName];
         currentNpc = new NpcController();
@@ -75,9 +74,9 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         if (RoundManager.Instance.isRandomTicket[nowTicketIdx++])
             npc.ticket = TicketManager.Instance.GetRandomTicket();
         else npc.ticket = TicketManager.Instance.GetTrueTicket();
+
         if (npc.ticket.travelTo != npc.data.travelTo) npc.ticket.isTrueTicket = false;
         RoundManager.Instance.isSelected = true;
-        currentNpc.OnTradeEnter();
         DialogueManager.Instance.SetGraph(npcdata.npcDialogue);
         Debug.Log($"currentNpc:{currentNpc.npc.data.npcName}");
     }
@@ -85,10 +84,6 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     {
         NpcData npcdata = npcCard.data;
         Npc npc = npcDictionary[npcdata.npcName];
-        if(GameManager.Instance.loseStoryNpcList.Contains(npcdata))
-        {
-            GameManager.Instance.currentLoseNpcList.Add(npcdata);
-        }
         currentNpc = new NpcController();
         currentNpc.InitializeController(npc);
         currentNpc.npc.ticket = TicketManager.Instance.GetStoryNpcTicket(npc);
@@ -143,9 +138,9 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     }
     public Npc FindNpc(NpcData data)
     {
-        foreach(var npc in npcDictionary)
+        foreach (var npc in npcDictionary)
         {
-            if(npc.Value.data == data)
+            if (npc.Value.data == data)
             {
                 return npc.Value;
             }

@@ -57,6 +57,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     }
     public bool IsLose()
     {
+        
         return gold < roundLimitMoney[RoundManager.Instance.currentRound];
     }
     void Update()

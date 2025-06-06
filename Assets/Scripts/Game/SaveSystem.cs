@@ -146,9 +146,7 @@ public static class SaveSystem
         roundData.gold = m_player.gold;
         roundData.maxSelectionsPerRound = m_round.maxSelectionsPerRound;
         roundData.selectionsPerRound = m_round.selectionsPerRound;
-        roundData.currentYear = DateExtensions.GetBaseYear();
-        roundData.currentYear = DateExtensions.GetBaseMonth();
-        roundData.currentDay = DateExtensions.GetBaseDay();
+        roundData.dateTime = DateExtensions.BaseDate;
         roundData.trainCountRank = m_player.lastTrainCountRank;
         roundData.cutomerCountRank = m_player.lastCustomerCountRank;
         foreach (var data in GameManager.Instance.currentLoseNpcList)
@@ -295,7 +293,7 @@ public static class SaveSystem
         m_round.currentRound = data.currentRound;
         m_round.maxSelectionsPerRound = data.maxSelectionsPerRound;
         m_round.selectionsPerRound = data.selectionsPerRound;
-        DateExtensions.BaseDate = new DateTime(data.currentYear, data.currentMonth, data.currentMonth);
+        DateExtensions.BaseDate = data.dateTime;
         m_player.customerCountRank = data.cutomerCountRank;
         m_player.trainCountRank = data.trainCountRank;
         foreach (var dt in data.loseNpc)
@@ -394,6 +392,17 @@ public static class SaveSystem
         return null;
     }
 
-
+    public static bool HadSaveFile()
+    {
+        string savePath = Path.Combine(Application.persistentDataPath, "global_save.json");
+        if (!File.Exists(savePath)) return false;
+        else return true;
+    }
+    public static bool HadInitSaveFile()
+    {
+        string savePath = Path.Combine(Application.persistentDataPath, "Init_save.json");
+        if (!File.Exists(savePath)) return false;
+        else return true;
+    }
 
 }

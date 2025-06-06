@@ -24,8 +24,8 @@ public class NpcController : MonoBehaviour
         isTradeFinish = false;
         // InitializeRandomOfferItem();
         // InitializeRandomRequestItem();
-        perRequestAwardGolds = npc.data.GetRandomRequestAwardGolds();
-        perNonrequestAwardGolds = npc.data.GetRandomNonrequestAwardGolds();
+        // perRequestAwardGolds = npc.data.GetRandomRequestAwardGolds();
+        // perNonrequestAwardGolds = npc.data.GetRandomNonrequestAwardGolds();
         // Debug.Log($"{npc.data.name}向你索要{currentRequestAmount}个{currentRequestItem.name},他给你带来了{currentOfferAmount}个{currentOfferItem.name}");
     }
     public int AffordForItems(ItemData itemdata,int amount) //计算Npc获得物品后给予玩家的金钱

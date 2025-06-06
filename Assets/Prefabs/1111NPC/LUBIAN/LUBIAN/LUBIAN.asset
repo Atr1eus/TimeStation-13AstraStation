@@ -36,7 +36,7 @@ MonoBehaviour:
   storyNpcBackPack: []
   storyNpcFollowUpPlot: []
   shouldAgreeList: 
-  npcDescription: "\u4E00\u4E2A\u78C1\u6027\u6C99\u54D1\u7684\u58F0\u97F3"
+  npcDescription: "\u4E00\u4E2A\u5145\u6EE1\u78C1\u6027\u7684\u58F0\u97F3"
   minAppearRound: 2
   maxAppearRound: 30
   reason: "\u8003\u53E4"

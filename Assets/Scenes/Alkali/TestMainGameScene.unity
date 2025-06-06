@@ -2179,6 +2179,7 @@ MonoBehaviour:
   applicationImage: {fileID: 1850675075}
   decideImage: {fileID: 714552650}
   handParent: {fileID: 0}
+  canvas: {fileID: 1613312955}
 --- !u!1 &714552648
 GameObject:
   m_ObjectHideFlags: 0
@@ -3396,6 +3397,7 @@ GameObject:
   - component: {fileID: 1613312953}
   - component: {fileID: 1613312952}
   - component: {fileID: 1613312951}
+  - component: {fileID: 1613312955}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3505,6 +3507,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &1613312955
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613312950}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1622259015
 GameObject:
   m_ObjectHideFlags: 0

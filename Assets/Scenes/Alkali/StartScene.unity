@@ -564,9 +564,9 @@ MonoBehaviour:
   - "\u5546\u4EBA\u8054\u76DF"
   - "\u5171\u548C\u56FD"
   ticket:
-  - {fileID: 2420219703718885894, guid: 84fb08237b052004baa901ac7959201b, type: 3}
-  - {fileID: 2420219703718885894, guid: 84fb08237b052004baa901ac7959201b, type: 3}
-  - {fileID: 2420219703718885894, guid: 84fb08237b052004baa901ac7959201b, type: 3}
+  - {fileID: 21300000, guid: 61c5960cadd0333459ea7e8b03aabf14, type: 3}
+  - {fileID: 21300000, guid: a5d8beea87d2dc443b28bc6319ba4522, type: 3}
+  - {fileID: 21300000, guid: 403410261efb310468b815a319815149, type: 3}
   targetDate:
   - 4774.2.2
   - 2345.6.8
@@ -1005,8 +1005,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74d52d7130bb4114fbd27be7a0b3791a, type: 2}
   - {fileID: 11400000, guid: e99c96bb934c3124ea348ec8073cf2ce, type: 2}
   - {fileID: 11400000, guid: 90603a5520ae89f44bc0ca965c6a47de, type: 2}
-  - {fileID: 11400000, guid: 538eb04ffd27c1340bec30a2aee6245a, type: 2}
-  - {fileID: 11400000, guid: 11577bfc59dd0d9438910c2246e624ca, type: 2}
+  - {fileID: 11400000, guid: 1e2ef7811b7c14f40a9306280e5bd17b, type: 2}
+  - {fileID: 11400000, guid: 9a19158db7cd3224a8613b764e411450, type: 2}
   - {fileID: 11400000, guid: e96b30dbb17fa0a4d9dd62414fa6e386, type: 2}
   - {fileID: 11400000, guid: c8da63de3018e7c45b71ad8fe41996f3, type: 2}
   - {fileID: 11400000, guid: af10d69d13ef8e04daec2ab1dffab32f, type: 2}
@@ -1051,9 +1051,13 @@ MonoBehaviour:
   - "\u6CBB\u75C5"
   - "\u7ED8\u753B"
   - "\u65C5\u6E38"
-  loseStoryNpcList: []
-  currentLoseNpcList:
-  - {fileID: 0}
+  loseStoryNpcList:
+  - {fileID: 11400000, guid: 4665a00ff203bdc4492c9c6ca4220b26, type: 2}
+  - {fileID: 11400000, guid: c792b9adca309304c882401d0f21803f, type: 2}
+  - {fileID: 11400000, guid: 26a5ef503e685684f8ffe4ed153ccda4, type: 2}
+  - {fileID: 11400000, guid: 2ad625f55d36c7244a6551bf91e64304, type: 2}
+  - {fileID: 11400000, guid: a7aad69a0f30c5840af7357cb7bd2b86, type: 2}
+  currentLoseNpcList: []
   m_npcCard: {fileID: 0}
   m_player: {fileID: 1525159885}
   m_npc: {fileID: 219528408}

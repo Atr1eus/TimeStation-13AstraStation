@@ -763,7 +763,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.78}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 983, y: 1.7355}
+  m_AnchoredPosition: {x: 645, y: 1.7355}
   m_SizeDelta: {x: 1483, y: 1110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &495738164
@@ -2630,6 +2630,7 @@ GameObject:
   - component: {fileID: 1480506098}
   - component: {fileID: 1480506097}
   - component: {fileID: 1480506096}
+  - component: {fileID: 1480506100}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2733,6 +2734,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &1480506100
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480506095}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1494605264
 GameObject:
   m_ObjectHideFlags: 0
@@ -3093,6 +3106,7 @@ MonoBehaviour:
   exitDailyReportButton: {fileID: 299128827}
   dailyReportPos: {fileID: 1494605265}
   RankUpPos: {fileID: 1494605265}
+  canvas: {fileID: 1480506100}
 --- !u!1 &1764921120
 GameObject:
   m_ObjectHideFlags: 0

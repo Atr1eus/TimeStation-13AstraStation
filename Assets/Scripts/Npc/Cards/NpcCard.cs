@@ -17,7 +17,7 @@ public class NpcCard
             description = npc.GetDescription();
         else
         {
-            description = npc.storyNpcDescriptions[NpcManager.Instance.FindNpc(data).selectedTimes];
+            description = npc.storyNpcDescriptions[NpcManager.Instance.npcDictionary[data.npcName].selectedTimes];
         }
 
     }

@@ -20,7 +20,7 @@ public class TicketManager : SingletonMonoBehaviour<TicketManager>
     public float leaveRoundWrongProbility = 0.1f;
     [Header("票的发行商池及外貌池(不同发行商对应外貌请一一对应)")]
     public List<string> ticketIssure;
-    public List<GameObject> ticket;
+    public List<Sprite> ticket;
     [Header("目的时间及对应回合数(若目标时间不在游戏时间范围内,前往过去填写-2,前往未来填写-1)")]
     public List<string> targetDate;
     public List<int> targetRound;
@@ -123,14 +123,13 @@ public class TicketManager : SingletonMonoBehaviour<TicketManager>
     /// 获取随机外貌，在此基础上手动控制概率获取随机发行商
     /// </summary>
     /// <returns></returns>
-    public GameObject GetRandomTicketGraph()
+    public Sprite GetRandomTicketGraph()
     {
         int index = Random.Range(0, ticket.Count);
         ticketIndex = index;
-        currentTicket.ticketIssuer = GetRandomIssure();
         return ticket[index];
     }
-    public string GetRandomIssure()
+    public string GetRandomIssure(Sprite sprite)
     {
         float randomNumc = Random.Range(0, 100);
         if (randomNumc < issue_graphWrongProbility * 100.0)
@@ -141,7 +140,7 @@ public class TicketManager : SingletonMonoBehaviour<TicketManager>
         }
         return ticketIssure[ticketIndex];
     }
-    public GameObject GetRandomTrueTicketGraph()
+    public Sprite GetRandomTrueTicketGraph()
     {
         int index = Random.Range(0, ticket.Count);
         ticketIndex = index;

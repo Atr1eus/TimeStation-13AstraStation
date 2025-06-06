@@ -18,8 +18,7 @@ public class StartSceneManager : SceneManager
     [SerializeField] private Button loadImageConfirmButton;
     [SerializeField] private Button loadImageCancelButton;
     [SerializeField] private Button loadImageQuitButton;
-    [SerializeField] private CanvasGroup canvas;
-    protected override void Awake()
+    [SerializeField] private CanvasGroup canvas; protected override void Awake()
     {
         isStartScene = true;
         base.Awake();
@@ -30,6 +29,11 @@ public class StartSceneManager : SceneManager
     protected override void Start()
     {
         UseCanvas(canvas);
+
+        if (!SaveSystem.HadInitSaveFile())
+        {
+            SaveSystem.InitSave();
+        }
         startGameButton?.onClick.RemoveAllListeners();
         quitGameButton?.onClick.RemoveAllListeners();
         creatorListButton?.onClick.RemoveAllListeners();
@@ -50,10 +54,9 @@ public class StartSceneManager : SceneManager
 
         startGameButton?.onClick.AddListener(() =>
         {
-
-            if (HadSaveFile())
+            if (!SaveSystem.HadSaveFile())
             {
-                SaveSystem.InitSave();
+                BanCanvas(canvas);
                 StartCoroutine(TransitionToScene(SceneLoader.GameScene.TradingArea));
             }
             else
@@ -82,6 +85,7 @@ public class StartSceneManager : SceneManager
     }
     private void OnLoadConfirmButtonClick()
     {
+        BanCanvas(canvas);
         SaveSystem.GameLoad();
     }
     private void OnLoadCancelButtonClick()
@@ -97,13 +101,8 @@ public class StartSceneManager : SceneManager
     }
     private void StartNewGame()
     {
+        BanCanvas(canvas);
         StartCoroutine(TransitionToScene(SceneLoader.GameScene.TradingArea));
-    }
-    private bool HadSaveFile()
-    {
-        string savePath = Path.Combine(Application.persistentDataPath, "global_save.json");
-        if (!File.Exists(savePath)) return false;
-        else return true;
     }
 
 

@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 41253654}
   - component: {fileID: 41253653}
   - component: {fileID: 41253652}
+  - component: {fileID: 41253656}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -170,12 +171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 2560, y: 1600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -227,6 +228,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &41253656
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41253651}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &46130511
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,6 +954,7 @@ MonoBehaviour:
   SK_EndImage: {fileID: 1814889235}
   Poor_EndImage: {fileID: 561676889}
   returnToMainButton: {fileID: 127723657}
+  canvas: {fileID: 41253656}
 --- !u!1 &688350172
 GameObject:
   m_ObjectHideFlags: 0

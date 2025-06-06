@@ -21,7 +21,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public List<NpcData> loseStoryNpcList;
 
 
-    public List<NpcData> currentLoseNpcList = new List<NpcData>();
+    public List<string> currentLoseNpcList = new List<string>();
     public NpcCardManager m_npcCard;
     [Header("Systems")]
     [SerializeField] private PlayerController m_player;
@@ -78,6 +78,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         m_round.DecriseSelectionTimes();
         m_npc.currentNpc.npc.Select(true);
 
+        if (loseStoryNpcList.Contains(m_npc.currentNpc.npc.data))
+        {
+            currentLoseNpcList.Add(m_npc.currentNpc.npc.data.npcName);
+        }
+
     }
     public void OnDisagreeNpcButtonClick()
     {
@@ -118,6 +123,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         m_round.ClearBeforeLoading();
         m_inventory.ClearBeforeLoading();
         m_player.ClearBeforeLoading();
+        currentLoseNpcList.Clear();
     }
     protected virtual void Update()
     {

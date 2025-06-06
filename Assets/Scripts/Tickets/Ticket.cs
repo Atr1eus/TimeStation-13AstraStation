@@ -9,7 +9,7 @@ public class Ticket
     public string leaveDate;
     public TravelTo travelTo;
     public int leaveRound;
-    public GameObject ticketGraph;
+    public Sprite ticketGraph;
     public string ticketIssuer;
     public bool isTrueTicket;
     public Ticket()

@@ -163,7 +163,6 @@ namespace DialogueSystem
         {
             _textComponent.maxVisibleCharacters = 0;
             _textComponent.text = text;
-            Debug.Log("");
             StartCoroutine(TypewriterEffect(callback, typewriterSpeedOverride));
         }
 

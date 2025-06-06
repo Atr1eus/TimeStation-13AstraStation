@@ -70,6 +70,7 @@ public class NpcCardManager : MonoBehaviour
             card.GetComponent<RectTransform>().DOAnchorPosY(-600f, 0.5f).OnComplete(() => Destroy(card.gameObject)); // 非选择Npc卡牌向下移动，动画完成后销毁
         }
         player.StartGIFAndBlock();
+        Debug.Log(selectedCard.data.npcName);
         StartCoroutine(ExecuteAfterGIF(selectedCard));
         //Debug.Log("SelectCard");
         //NpcCardUI selectedUI = activeCards.Find(c => c.npcCard == selectedCard);
@@ -93,16 +94,15 @@ public class NpcCardManager : MonoBehaviour
         }
 
         Debug.Log("SelectCard");
+        Debug.Log(selectedCard.data.npcName);
         NpcCardUI selectedUI = activeCards.Find(c => c.npcCard == selectedCard);
-        if (selectedUI != null)
-        {
-            Debug.Log("SelectedUI Find");
-            activeCards.Remove(selectedUI);
-            remainingNpcs.Remove(selectedCard.data);
-            RoundManager.Instance.currentCanSelectNpcNum--;
-            RoundManager.Instance.AddCurrentRoundSelectedNpc(selectedUI.npcCard.data);
-            Destroy(selectedUI.gameObject);
-        }
+        //Debug.Log("SelectedUI Find");
+        activeCards.Remove(selectedUI);
+        remainingNpcs.Remove(selectedCard.data);
+        RoundManager.Instance.currentCanSelectNpcNum--;
+        RoundManager.Instance.AddCurrentRoundSelectedNpc(selectedUI.npcCard.data);
+        //Destroy(selectedUI.gameObject);
+
         activeCards.Clear();
         DialogueManager.Instance.StartDialogue();
         DialogueManager.Instance.HandleSpaceKeyPress();
