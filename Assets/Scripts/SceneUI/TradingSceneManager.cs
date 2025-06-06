@@ -12,6 +12,8 @@ public class TradingSceneManager : SceneManager
 {
     private Ticket currentTicket;
 
+    public VideoPlayer videoPlayer;
+    public string videoFileName = "yourvideo.mp4"; // �����Ƶ�ļ���
     [SerializeField] private GameManager manager;
     [SerializeField] private NpcCardManager cardManager;
     [SerializeField] private RoundManager roundManager;
@@ -59,6 +61,10 @@ public class TradingSceneManager : SceneManager
         NpcManager.Instance.handSpawnPoint = npcSpawnPos;
         roundManager = RoundManager.Instance;
 
+        videoPlayer = gameObject.AddComponent<VideoPlayer>();
+        videoPlayer.playOnAwake = false;
+        videoPlayer.source = VideoSource.Url;
+        videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoFileName);
 
         ticketImage.transform.position = ticketSpawnPos.position;
         applicationSpawnPos.transform.position = applicationSpawnPos.position;

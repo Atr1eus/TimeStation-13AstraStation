@@ -12,6 +12,7 @@ public class NpcCardUI : MonoBehaviour
     public Image npcImage;
     public NpcCard npcCard;
     NpcCardManager npcCardManager;
+    //public GIFPlayer player;
     public void OnEnable()
     {
         npcCardManager = FindObjectOfType<NpcCardManager>();
@@ -24,8 +25,10 @@ public class NpcCardUI : MonoBehaviour
     }
     private void OnChooseButtonClick()
     {
+        //player.StartGIFAndBlock();
         if (npcCard.npc.type == NpcType.Normal) NpcManager.Instance.InitializeCurrentNpc(npcCard);
         else NpcManager.Instance.InitializeCurrentStoryNpc(npcCard);
         npcCardManager.SelectCard(npcCard);
+        
     }
 }
