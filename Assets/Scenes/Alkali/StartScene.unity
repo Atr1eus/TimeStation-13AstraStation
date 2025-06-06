@@ -421,9 +421,9 @@ MonoBehaviour:
   issue_graphWrongProbility: 0.2
   leaveRoundWrongProbility: 0
   ticketIssure:
-  - "\u5217\u8F66\u7EC4"
-  - "\u5546\u4EBA\u8054\u76DF"
-  - "\u5171\u548C\u56FD"
+  - 
+  - 
+  - 
   ticket:
   - {fileID: 2420219703718885894, guid: 84fb08237b052004baa901ac7959201b, type: 3}
   - {fileID: 2420219703718885894, guid: 84fb08237b052004baa901ac7959201b, type: 3}
@@ -670,19 +670,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wholeNormalNpcDataList:
-  - {fileID: 11400000, guid: 7c545215902e9e24f9d308b556befde1, type: 2}
-  - {fileID: 11400000, guid: 59c41c069d467064f9c8603dcd981a13, type: 2}
-  - {fileID: 11400000, guid: c24d1a5fadfd53043a53b5b412a787e7, type: 2}
-  - {fileID: 11400000, guid: 0e600f4e7691d5e49a3e519259764eea, type: 2}
+  - {fileID: 11400000, guid: c4f999cd9f91b31419c8b206717b18ad, type: 2}
+  - {fileID: 11400000, guid: de8bd438ef780764bbb7885f9e6fd66a, type: 2}
+  - {fileID: 11400000, guid: 5b208097390f3a3418154b80c3240aea, type: 2}
+  - {fileID: 11400000, guid: 23fa57487bb00a749a31f7421f7949e0, type: 2}
+  - {fileID: 11400000, guid: 96287b1fef5b4b243bec2e6e8e94429f, type: 2}
+  - {fileID: 11400000, guid: 8ff16567a20e160479831d3ffd46b345, type: 2}
+  - {fileID: 11400000, guid: 96fc80a9b0c3b70498335b30e3c05d32, type: 2}
+  - {fileID: 11400000, guid: 74d52d7130bb4114fbd27be7a0b3791a, type: 2}
+  - {fileID: 11400000, guid: d29fcf11bb49ab74c93b44fa08385627, type: 2}
+  - {fileID: 11400000, guid: da1d2e5596f091548b5f8e641d818e63, type: 2}
+  - {fileID: 11400000, guid: 538eb04ffd27c1340bec30a2aee6245a, type: 2}
+  - {fileID: 11400000, guid: 11577bfc59dd0d9438910c2246e624ca, type: 2}
+  - {fileID: 11400000, guid: 7d515ffca9aa3ed4fb1b3412d9f9509d, type: 2}
+  - {fileID: 11400000, guid: dfd44b6f58f8ae942ab3985a83addbdb, type: 2}
+  - {fileID: 11400000, guid: eb3fc4913c5992f44bea6a4c3a39d351, type: 2}
+  - {fileID: 11400000, guid: 1ee77047207f3a34da3288b9ee4a40f9, type: 2}
   wholeStoryNpcDataList:
-  - {fileID: 11400000, guid: 1b97a923477c8814b8f6c4d20185bc9b, type: 2}
+  - {fileID: 11400000, guid: 79812ee4657775041ae277812481863a, type: 2}
+  - {fileID: 11400000, guid: f849a8a9b48a04c438eca1bb35c0f00c, type: 2}
+  - {fileID: 11400000, guid: d7aac7e673ca02042a1bbaa4751c3c8d, type: 2}
+  - {fileID: 11400000, guid: bd6a9288e56bf2e428086ccb67219c02, type: 2}
+  - {fileID: 11400000, guid: 243b76697a33cd24bb9e050c855ee458, type: 2}
+  - {fileID: 11400000, guid: 7967239ca0885854785b73eb26d6a648, type: 2}
+  - {fileID: 11400000, guid: 35007e854279be942b8709c0fbc71ce0, type: 2}
+  - {fileID: 11400000, guid: c182429ab0cd04a4ca5fd69e109b8044, type: 2}
+  - {fileID: 11400000, guid: 1265ac5fdec8d9b4187f1818ce8e8d2b, type: 2}
+  - {fileID: 11400000, guid: 61e5bc72599d7ec43972cc056a1cd0b6, type: 2}
+  - {fileID: 11400000, guid: cdfdd3c45ae197447862695f997b1ce7, type: 2}
+  - {fileID: 11400000, guid: 9ca15ea856dfed345aac39a45358c21e, type: 2}
+  - {fileID: 11400000, guid: 5dbb14d104974954eb91c749a1351d9f, type: 2}
+  - {fileID: 11400000, guid: c3e9b0ecb63d126488397b57f2073b95, type: 2}
+  - {fileID: 11400000, guid: 82b9eb1bbdebe9c4ea809919413c8f02, type: 2}
   wholeItemDataList:
-  - {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
-  - {fileID: 11400000, guid: 7b5eefb295097974b8a2ec51ba448edb, type: 2}
-  - {fileID: 11400000, guid: 823e4213a11904b468dcf8214b8d3383, type: 2}
+  - {fileID: 0}
   wholeNormalHandList:
   - {fileID: 1755731916373887472, guid: 70738a2a99fc02c45812d8ff2627d882, type: 3}
-  wholeNormalReasonsList: []
+  wholeNormalReasonsList:
+  - "\u73A9\u6E38\u620F"
+  - "\u966A\u4F34"
+  - "\u4F20\u627F"
+  - "\u5E26\u53BB\u5FEB\u4E50"
+  - "\u627E\u4EBA"
+  - "\u9000\u5A5A"
+  - "\u6740\u732A"
+  - "\u8FFD\u68A6"
+  - "\u8003\u53E4"
+  - "\u5B66\u4E60"
+  - "\u4E70\u5356"
+  - "\u63A2\u4EB2"
+  - "\u6CBB\u75C5"
+  - "\u7ED8\u753B"
+  - "\u65C5\u6E38"
   m_npcCard: {fileID: 0}
   m_player: {fileID: 1525159885}
   m_npc: {fileID: 219528408}
@@ -1513,6 +1552,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceec49a82ef85a14e82fb621216c4ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRoundText: {fileID: 0}
+  diskText: {fileID: 0}
+  positionText: {fileID: 0}
+  customerText: {fileID: 0}
   fadeImage: {fileID: 971015792}
   fadeDuration: 0.3
   scaleDuration: 0.5

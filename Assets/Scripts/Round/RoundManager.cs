@@ -93,7 +93,8 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         foreach (var npcData in wholeStoryNpcDatas)
         {
             Npc npc = NpcManager.Instance.npcDictionary[npcData.npcName];
-            if (NpcAppearConditions.CanNpcAppear(npcData) && npcData.storyNpcMinAppearRounds[npc.selectedTimes] <= currentRound
+            if (NpcAppearConditions.CanNpcAppear(npcData) && npc.selectedTimes < npcData.storyNpcMinAppearRounds.Count
+                && npcData.storyNpcMinAppearRounds[npc.selectedTimes] <= currentRound
                 && npcData.storyNpcMaxAppearRounds[npc.selectedTimes] >= currentRound
                 && NpcManager.Instance.npcDictionary[npcData.npcName].isSelected[npc.selectedTimes] == false
                 && NpcManager.Instance.npcDictionary[npcData.npcName].canAppera[npc.selectedTimes]

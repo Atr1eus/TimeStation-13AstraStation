@@ -9,7 +9,7 @@ public class SceneLoader : SingletonMonoBehaviour<SceneLoader>
 {
     public enum GameScene
     {
-        MainMenu,
+        MainArea,
         TradingArea,
         RestArea
     }

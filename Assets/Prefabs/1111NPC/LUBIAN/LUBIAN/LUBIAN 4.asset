@@ -40,6 +40,6 @@ MonoBehaviour:
   minAppearRound: 2
   maxAppearRound: 30
   reason: "\u6CBB\u75C5"
-  backPack: 
+  backPack: "\u91D1\u94B1"
   isMoneyMore10K: 0
   isRoundMore5: 0

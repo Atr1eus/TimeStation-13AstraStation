@@ -19,7 +19,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     public bool CanAfford(int amount) => gold >= amount;
     public bool CanTrainRankUp()
     {
-        if (trainCountRank > MaxTrainRank) return false;
+        if (trainCountRank >= MaxTrainRank) return false;
         return CanAfford(trainRankUpNeedMoney[trainCountRank - 1]);
     }
     public bool CanCustomerRankUp()

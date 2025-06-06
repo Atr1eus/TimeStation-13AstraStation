@@ -12,18 +12,25 @@ public class RestSceneManager : SceneManager
     [Header("UI??")]
     [SerializeField] private Button loadTradingSceneButton;
     [SerializeField] private Button saveButton;
-    [SerializeField] private Button loadButton;
     [SerializeField] private Image rankUpImage;
     [SerializeField] private Button rankUpOpenButton;
     [SerializeField] private Button rankUpCloseButton;
     [SerializeField] private Button trainCountUpButton;
     [SerializeField] private Button customerCountUpButton;
+    [SerializeField] private Button returnToMainButton;
     [SerializeField] private Image reportImage;
-    [SerializeField] private Text decreaseItemHeaderText;
-    [SerializeField] private Text totalItemHeaderText;
-    [SerializeField] private Text newsReportText;
+    [SerializeField] private Text newsReportText1;
+    [SerializeField] private Text newsReportText2;
+    [SerializeField] private Text newsReportText3;
+    [SerializeField] private Text customerNeedMoney;
+    [SerializeField] private Text TrainNeedMoney;
     [SerializeField] private Button awakeDailyReportButton;
     [SerializeField] private Button exitDailyReportButton;
+    [SerializeField] private RectTransform dailyReportPos;
+    [SerializeField] private RectTransform RankUpPos;
+    private List<string> newsReport;
+    private int newsReportidx = -1;
+
     private InventorySystem m_inventory;
 
     protected override void Awake()
@@ -31,11 +38,14 @@ public class RestSceneManager : SceneManager
         base.Awake();
 
     }
-    protected void Start()
+    protected override void Start()
     {
-        decreaseItemHeaderText.text = "";
-        totalItemHeaderText.text = "";
-        newsReportText.text = "";
+        newsReportText1.text = "---";
+        newsReportText2.text = "---";
+        newsReportText3.text = "---";
+        newsReportidx = -1;
+        newsReport = new List<string>();
+
         m_player = FindAnyObjectByType<PlayerController>();
         m_inventory = FindObjectOfType<InventorySystem>();
         m_round = FindAnyObjectByType<RoundManager>();
@@ -44,45 +54,44 @@ public class RestSceneManager : SceneManager
         InitializeReport();
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        positionText.text = RoundManager.Instance.maxSelectionsPerRound.ToString();
+        positionText.text = RoundManager.Instance.selectionsPerRound.ToString();
+    }
 
 
     public void InitializeReport()
     {
-        if (m_round.currentRound > 1)
+
+        for (int i = 0; i < m_round.currentSelectedNpcs.Count; i++)
         {
-            for (int i = 0; i < m_round.decreaseItemList.Count; i++)
+            Npc npc = m_round.currentSelectedNpcs[i];
+            if (npc.data.type == NpcType.Story)
             {
-                decreaseItemHeaderText.text += m_round.decreaseItemList[i];
-                decreaseItemHeaderText.text += "     " + m_round.decreaseItemCountList[i] + "\n";
+                newsReportidx++;
+                newsReport.Add(npc.data.storyNpcFollowUpPlot[npc.selectedTimes - 1]);
             }
         }
-        for (int i = 0; i < m_inventory.items.Count; i++)
-        {
-            totalItemHeaderText.text += m_inventory.items[i].data.name;
-            totalItemHeaderText.text += "      " + m_inventory.items[i].amount + "\n";
-        }
-        for (int i = 0; i < m_round.currentStoryNpcList.Count; i++)
-        {
-            Npc npc = m_round.currentStoryNpcList[i];
-            newsReportText.text += npc.data.storyNpcFollowUpPlot[npc.selectedTimes - 1] + "\n";
-        }
+        newsReportText1.text = newsReportidx >= 0 ? newsReport[0] : "---";
+        newsReportText2.text = newsReportidx >= 1 ? newsReport[1] : "---";
+        newsReportText3.text = newsReportidx >= 2 ? newsReport[2] : "---";
     }
 
     private void InitializeButtonsEvent()
     {
         loadTradingSceneButton?.onClick.RemoveAllListeners();
         saveButton?.onClick.RemoveAllListeners();
-        loadButton?.onClick.RemoveAllListeners();
         rankUpCloseButton?.onClick.RemoveAllListeners();
         rankUpOpenButton?.onClick.RemoveAllListeners();
         customerCountUpButton?.onClick.RemoveAllListeners();
         trainCountUpButton?.onClick?.RemoveAllListeners();
         awakeDailyReportButton?.onClick?.RemoveAllListeners();
         exitDailyReportButton?.onClick.RemoveAllListeners();
+        returnToMainButton?.onClick.RemoveAllListeners();
 
         saveButton?.onClick.AddListener(() => SaveSystem.GameSave());
-        loadButton?.onClick.AddListener(() => SaveSystem.GameLoad());
-        loadButton?.onClick.AddListener(() => StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea)));
         loadTradingSceneButton?.onClick.AddListener(() =>
         {
             StartCoroutine(TransitionToScene(SceneLoader.GameScene.TradingArea));
@@ -93,15 +102,19 @@ public class RestSceneManager : SceneManager
         rankUpOpenButton?.onClick?.AddListener(OnRankUpOpenButtonClick);
         awakeDailyReportButton?.onClick?.AddListener(OnAwakeDailyImageButtonClick);
         exitDailyReportButton?.onClick.AddListener(OnExitDailyImageButtonClick);
+        returnToMainButton?.onClick?.AddListener(() =>
+        {
+            StartCoroutine(TransitionToScene(SceneLoader.GameScene.MainArea));
+        });
     }
     public void OnAwakeDailyImageButtonClick()
     {
+        reportImage.rectTransform.position = dailyReportPos.position;
         UseImage(reportImage);
-        UseButBanButton(loadButton);
-        UseButBanButton(saveButton);
-        UseButBanButton(loadTradingSceneButton);
-        UseButBanButton(rankUpOpenButton);
-        UseButBanButton(exitDailyReportButton);
+        UseButton(saveButton);
+        UseButton(loadTradingSceneButton);
+        UseButton(rankUpOpenButton);
+        UseButton(exitDailyReportButton);
     }
     public void OnExitDailyImageButtonClick()
     {
@@ -109,16 +122,20 @@ public class RestSceneManager : SceneManager
     }
     public void OnRankUpOpenButtonClick()
     {
-        UseButBanButton(loadButton);
-        UseButBanButton(saveButton);
-        UseButBanButton(loadTradingSceneButton);
-        UseButBanButton(rankUpOpenButton);
-        UseButBanButton(awakeDailyReportButton);
+        rankUpImage.rectTransform.position = RankUpPos.position;
+        UseButton(saveButton);
+        UseButton(loadTradingSceneButton);
+        UseButton(rankUpOpenButton);
+        UseButton(awakeDailyReportButton);
         UseImage(rankUpImage);
         UseButton(rankUpCloseButton);
-        UnuseButton(trainCountUpButton);
-        UnuseButton(customerCountUpButton);
+        TrainNeedMoney.text = m_player.trainCountRank >= m_player.MaxTrainRank ?
+                         "---" :
+                         m_player.trainRankUpNeedMoney[m_player.trainCountRank].ToString();
 
+        customerNeedMoney.text = m_player.customerCountRank >= m_player.MaxCustomerCountRank ?
+                                 "---" :
+                                m_player.customerCountRankUpNeedMoney[m_player.customerCountRank].ToString();
 
         if (m_player.CanTrainRankUp()) UseButton(trainCountUpButton);
         else UseButBanButton(trainCountUpButton);
@@ -134,6 +151,9 @@ public class RestSceneManager : SceneManager
     {
         m_player.TrainCountRankUp();
         m_round.AddMaxSelectionsPerRound();
+        TrainNeedMoney.text = m_player.trainCountRank >= m_player.MaxTrainRank ?
+                         "---" :
+                         m_player.trainRankUpNeedMoney[m_player.trainCountRank].ToString();
         if (m_player.CanTrainRankUp()) UseButton(trainCountUpButton);
         else UseButBanButton(trainCountUpButton);
     }
@@ -141,6 +161,9 @@ public class RestSceneManager : SceneManager
     {
         m_player.CustomerCountRankUp();
         m_round.AddSelectionsPerRound();
+        customerNeedMoney.text = m_player.customerCountRank >= m_player.MaxCustomerCountRank ?
+                                 "---" :
+                                m_player.customerCountRankUpNeedMoney[m_player.customerCountRank].ToString();
         if (m_player.CanCustomerRankUp()) UseButton(customerCountUpButton);
         else UseButBanButton(customerCountUpButton);
     }
@@ -148,7 +171,6 @@ public class RestSceneManager : SceneManager
     {
         InitCloseImage(reportImage);
         InitCloseImage(rankUpImage);
-        UseButton(loadButton);
         UseButton(saveButton);
         UseButton(loadTradingSceneButton);
         UseButton(rankUpOpenButton);
@@ -158,7 +180,6 @@ public class RestSceneManager : SceneManager
     {
         UnuseImage(rankUpImage);
         UnuseImage(reportImage);
-        UseButton(loadButton);
         UseButton(saveButton);
         UseButton(loadTradingSceneButton);
         UseButton(rankUpOpenButton);

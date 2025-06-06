@@ -18,7 +18,7 @@ public class DialogueUIHandler : MonoBehaviour
     void Start()
     {
         ChoicePanel.gameObject.SetActive(false);
-
+        
     }
 
     public void RenderDialogueChoices(DialogueChoices dialogueChoices, Dialogue dialogueSystem)

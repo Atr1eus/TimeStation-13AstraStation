@@ -40,17 +40,20 @@ public class TradingSceneManager : SceneManager
     [SerializeField] private Text rightTicketFromDateText;
     [SerializeField] private Text rightTicketToDateText;
     [SerializeField] private Text rightTicketIssuerText;
-    [SerializeField] private Text currentRoundText;
+
+
+
+
+
+
+
+
     [SerializeField] private Image applicationImage;
     [SerializeField] private Image decideImage;
     [SerializeField] private Transform handParent;
     private Transform npcHand;
-    protected override void Awake()
-    {
-        base.Awake();
 
-    }
-    void Start()
+    protected override void Start()
     {
         GameManager.Instance.m_npcCard = FindObjectOfType<NpcCardManager>();
         manager = GameManager.Instance;
@@ -62,6 +65,12 @@ public class TradingSceneManager : SceneManager
         InitializeButtonsEvent();
         InitializeUI();
         GameManager.Instance.OnNextRoundClick();
+    }
+    protected override void Update()
+    {
+        base.Update();
+        positionText.text = cardManager.remainingNpcs.ToString();
+        customerText.text = roundManager.currentCanSelectNpcNum.ToString();
     }
     private void InitializeButtonsEvent()
     {
@@ -94,7 +103,7 @@ public class TradingSceneManager : SceneManager
     public void OnDisagreeButtonClick()
     {
         manager.OnDisagreeNpcButtonClick();
-        if (RoundManager.Instance.currentCanSelectNpcNum <= 0)
+        if (RoundManager.Instance.currentCanSelectNpcNum <= 0 || cardManager.remainingNpcs.Count <= 0)
         {
             StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
         }
@@ -175,12 +184,12 @@ public class TradingSceneManager : SceneManager
         UnuseButton(nextNpcButton);
         UseButton(openTicketButton);
         UseButton(openApplicationButton);
-        npcHand = FindObjectOfType<NpcController>().transform;
-        npcHand.SetParent(handParent);
+        //todo:出现NPC的手
+
     }
     public void OnDialogueEnd()
     {
-        UseImage(decideImage); UseImage(decideImage);
+        UseImage(decideImage);
         UseButton(disagreeButton);
         if (RoundManager.Instance.canSelect)
         {
@@ -221,15 +230,20 @@ public class TradingSceneManager : SceneManager
     public void AgreeButtonState()
     {
         UnuseImage(decideImage);
-        if (RoundManager.Instance.canSelect && RoundManager.Instance.currentCanSelectNpcNum > 0)
+        if (RoundManager.Instance.canSelect && RoundManager.Instance.currentCanSelectNpcNum > 0 && cardManager.remainingNpcs.Count > 0)
         {
             UseButton(nextNpcButton);
             UnuseButton(loadRestSceneButton);
         }
+        else if (RoundManager.Instance.canSelect && RoundManager.Instance.currentCanSelectNpcNum > 0)
+        {
+            UseButton(nextNpcButton);
+            UseButton(loadRestSceneButton);
+        }
         else
         {
             UseButton(loadRestSceneButton);
-            UseButton(nextNpcButton);
+            UnuseButton(nextNpcButton);
         }
         UnuseButton(openTicketButton);
         UnuseButton(openApplicationButton);

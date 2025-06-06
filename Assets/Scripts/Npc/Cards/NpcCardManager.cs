@@ -76,8 +76,6 @@ public class NpcCardManager : MonoBehaviour
         RoundManager.Instance.currentCanSelectNpcNum--;
         RoundManager.Instance.AddCurrentRoundSelectedNpc(selectedUI.npcCard.npc);
         Destroy(selectedUI.gameObject);
-        scene.OnOpenApplicationButtonClick();
-        scene.OnOpenTicketButtonClick();
         DialogueManager.Instance.StartDialogue();
         DialogueManager.Instance.HandleSpaceKeyPress();
         scene.DecidedNpcButtonState();

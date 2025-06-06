@@ -41,6 +41,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         //{
         //    Debug.Log($"找到DialogueManager: {m_dialogue.gameObject.name}");
         //}
+
     }
     public void OnNextRoundClick() //下一回合按钮点击事件
     {

@@ -49,6 +49,14 @@ public static class SaveSystem
     {
         Load();
     }
+    public static void InitSave()
+    {
+        ItSave();
+    }
+    public static bool InitLoad()
+    {
+        return ItLoad();
+    }
     public static void Save()
     {
         SaveGlobalData();
@@ -56,6 +64,43 @@ public static class SaveSystem
     public static void Load()
     {
         LoadGlobalData();
+    }
+    public static void ItSave()
+    {
+        GameData gameData = new GameData { currentRoundData = new RoundData(), lastRoundData = new RoundData() };
+        SaveCurrentRoundData(gameData.currentRoundData);
+        SaveLastRoundData(gameData.lastRoundData);
+
+
+        string json = JsonConvert.SerializeObject(gameData, Formatting.Indented);
+        string savePath = Path.Combine(Application.persistentDataPath, "Init_save.json");
+        string encryptedJson = EncryptionUtility.Encrypt(json);
+
+        File.WriteAllText(savePath, encryptedJson);
+        Debug.Log("全局存储成功!");
+    }
+    public static bool ItLoad()
+    {
+        string savePath = Path.Combine(Application.persistentDataPath, "Init_save.json");
+        if (!File.Exists(savePath)) return false;
+        try
+        {
+            string encryptedJson = File.ReadAllText(savePath);
+            string json = EncryptionUtility.Decrypt(encryptedJson);
+            GameData saveData = JsonConvert.DeserializeObject<GameData>(json);
+            m_gameManager.ClearDatasBeforeLoading();
+
+            LoadCurrentRoundData(saveData.currentRoundData);
+            LoadLastRoundData(saveData.lastRoundData);
+            Debug.Log("读取存档成功!");
+
+            return true;
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"读取存档失败: {e.Message}");
+            return false;
+        }
     }
     public static void SaveGlobalData()
     {

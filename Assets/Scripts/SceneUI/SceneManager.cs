@@ -6,6 +6,23 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class SceneManager : MonoBehaviour
 {
+
+    [SerializeField] protected Text currentRoundText;
+    [SerializeField] protected Text diskText;
+    [SerializeField] protected Text positionText;
+    [SerializeField] protected Text customerText;
+
+    protected virtual void Start()
+    {
+        if (currentRoundText != null)
+            currentRoundText.text = RoundManager.Instance.currentRound.ToString();
+    }
+    protected virtual void Update()
+    {
+        if (diskText != null)
+            diskText.text = PlayerController.Instance.gold.ToString() + "/" + PlayerController.Instance.roundLimitMoney;
+    }
+
     [Header("场景过渡配置")]
     [SerializeField] protected Image fadeImage; //过渡背景
     [SerializeField] protected float fadeDuration = 0.3f; //过渡持续时间
