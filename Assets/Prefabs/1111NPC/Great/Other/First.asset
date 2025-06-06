@@ -39,9 +39,7 @@ MonoBehaviour:
   storyNpcBackPack:
   - "\u5565\u90FD\u6CA1\u5E26"
   storyNpcFollowUpPlot:
-  - "\u540E\u7EED\u5267\u60C51"
-  - "\u540E\u7EED\u5267\u60C52"
-  - "\u540E\u7EED\u5267\u60C53"
+  - "\u65B0\u4EFB\u5217\u8F66\u68C0\u7968\u5458\u4E0A\u4EFB\uFF01"
   shouldAgreeList: 01
   npcDescription: 
   minAppearRound: 0
