@@ -68,7 +68,7 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     public void InitializeCurrentNpc(NpcCard npcCard)//npcCard选择事件 根据玩家的选择定义currentNpc
     {
         Debug.Log("开始初始化角色！");
-        NpcData npcdata = npcCard.npc;
+        NpcData npcdata = npcCard.data;
         Npc npc = npcDictionary[npcdata.npcName];
         currentNpc = new NpcController();
         currentNpc.InitializeController(npc);
@@ -83,7 +83,7 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     }
     public void InitializeCurrentStoryNpc(NpcCard npcCard)
     {
-        NpcData npcdata = npcCard.npc;
+        NpcData npcdata = npcCard.data;
         Npc npc = npcDictionary[npcdata.npcName];
         if(GameManager.Instance.loseStoryNpcList.Contains(npcdata))
         {
@@ -141,5 +141,16 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     {
         lastRoundNpcDictionary = npcDictionary;
     }
-
+    public Npc FindNpc(NpcData data)
+    {
+        foreach(var npc in npcDictionary)
+        {
+            if(npc.Value.data == data)
+            {
+                return npc.Value;
+            }
+        }
+        Debug.Log($"Can't Find Npc : {data.npcName}");
+        return null;
+    }
 }

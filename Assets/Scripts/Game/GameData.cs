@@ -19,7 +19,7 @@ public class RoundData
     public int gold;
     public List<NpcDataEntry> normalNpcData;
     public List<NpcDataEntry> storyNpcData;
-    public List<NpcData> loseNpc;
+    public List<NpcData> loseNpc = new List<NpcData>();
     public List<ItemSaveEntry> items = new List<ItemSaveEntry>();
     public int currentRound; //目前回合数
     public int currentYear;

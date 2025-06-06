@@ -18,6 +18,7 @@ public class StartSceneManager : SceneManager
     [SerializeField] private Button loadImageConfirmButton;
     [SerializeField] private Button loadImageCancelButton;
     [SerializeField] private Button loadImageQuitButton;
+    [SerializeField] private CanvasGroup canvas;
     protected override void Awake()
     {
         isStartScene = true;
@@ -28,6 +29,7 @@ public class StartSceneManager : SceneManager
 
     protected override void Start()
     {
+        UseCanvas(canvas);
         startGameButton?.onClick.RemoveAllListeners();
         quitGameButton?.onClick.RemoveAllListeners();
         creatorListButton?.onClick.RemoveAllListeners();
@@ -39,10 +41,6 @@ public class StartSceneManager : SceneManager
 
         InitializeButtonsStart();
         InitializeLoadImage();
-        if (SaveSystem.InitLoad() == false)
-        {
-            SaveSystem.InitSave();
-        }
     }
     private void InitializeButtonsStart()
     {
@@ -52,7 +50,12 @@ public class StartSceneManager : SceneManager
 
         startGameButton?.onClick.AddListener(() =>
         {
-            if (!HadSaveFile()) StartCoroutine(TransitionToScene(SceneLoader.GameScene.TradingArea));
+
+            if (HadSaveFile())
+            {
+                SaveSystem.InitSave();
+                StartCoroutine(TransitionToScene(SceneLoader.GameScene.TradingArea));
+            }
             else
             {
                 WhiteBanButton(startGameButton);

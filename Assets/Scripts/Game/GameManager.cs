@@ -1,6 +1,7 @@
 using DialogueSystem;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public List<NpcData> loseStoryNpcList;
 
 
-    public List<NpcData> currentLoseNpcList;
+    public List<NpcData> currentLoseNpcList = new List<NpcData>();
     public NpcCardManager m_npcCard;
     [Header("Systems")]
     [SerializeField] private PlayerController m_player;
@@ -112,47 +113,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
 
     }
-    #region  测试一些功能
-    public ItemData item0;
-    public ItemData item1;
-    public ItemData item2;
-    public void TESTOfferItem()
-    {
-        if (InventorySystem.Instance.HasEnoughItem(item0, 2))
-        {
-            int money = NpcManager.Instance.currentNpc.AffordForItems(item0, 2);
-            m_inventory.RemoveItem(item0, 2);
-            PlayerController.Instance.gold += money;
-            Debug.Log($"交易了2个Item,获得了{money}元");
-        }
-        else Debug.Log("没有足够的Item");
-    }
-
-    public void TESTOfferIte1()
-    {
-        if (InventorySystem.Instance.HasEnoughItem(item1, 2))
-        {
-            int money = NpcManager.Instance.currentNpc.AffordForItems(item1, 2);
-            m_inventory.RemoveItem(item1, 2);
-            PlayerController.Instance.gold += money;
-            Debug.Log($"交易了2个Item1,获得了{money}元");
-        }
-        else Debug.Log("没有足够的Item1");
-    }
-
-    public void TESTOfferItem2()
-    {
-        if (InventorySystem.Instance.HasEnoughItem(item2, 2))
-        {
-            int money = NpcManager.Instance.currentNpc.AffordForItems(item2, 2);
-            m_inventory.RemoveItem(item2, 2);
-            PlayerController.Instance.gold += money;
-            Debug.Log($"交易了2个Item2,获得了{money}元");
-        }
-        else Debug.Log("没有足够的Item2");
-    }
-    #endregion
-
     public void ClearDatasBeforeLoading()
     {
         m_round.ClearBeforeLoading();
@@ -163,6 +123,4 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
 
     }
-
-
 }

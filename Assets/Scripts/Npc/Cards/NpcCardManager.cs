@@ -92,15 +92,15 @@ public class NpcCardManager : MonoBehaviour
             yield return null;
         }
 
-        // GIF ??????????§Ü??????
         Debug.Log("SelectCard");
         NpcCardUI selectedUI = activeCards.Find(c => c.npcCard == selectedCard);
         if (selectedUI != null)
         {
+            Debug.Log("SelectedUI Find");
             activeCards.Remove(selectedUI);
-            remainingNpcs.Remove(selectedCard.npc);
+            remainingNpcs.Remove(selectedCard.data);
             RoundManager.Instance.currentCanSelectNpcNum--;
-            RoundManager.Instance.AddCurrentRoundSelectedNpc(selectedUI.npcCard.npc);
+            RoundManager.Instance.AddCurrentRoundSelectedNpc(selectedUI.npcCard.data);
             Destroy(selectedUI.gameObject);
         }
         activeCards.Clear();
@@ -108,7 +108,7 @@ public class NpcCardManager : MonoBehaviour
         DialogueManager.Instance.HandleSpaceKeyPress();
         scene.DecidedNpcButtonState();
 
-        Debug.Log($"????? NPC: {selectedCard.npc.npcName}");
+        Debug.Log($"????? NPC: {selectedCard.data.npcName}");
     }
 
     public void LoadRemainingCards()

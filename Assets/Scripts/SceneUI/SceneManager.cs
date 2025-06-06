@@ -481,4 +481,12 @@ public class SceneManager : MonoBehaviour
         if (image.color.a == 1)
             StartCoroutine(AnimateFade(image, 1, 0, false));
     }
+    public void BanCanvas(CanvasGroup canvas)
+    {
+        canvas.interactable = false;
+    }
+    public void UseCanvas(CanvasGroup canvas)
+    {
+        canvas.interactable = true;
+    }
 }

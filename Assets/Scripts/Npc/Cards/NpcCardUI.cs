@@ -24,7 +24,7 @@ public class NpcCardUI : MonoBehaviour
     }
     private void OnChooseButtonClick()
     {
-        if (npcCard.npc.type == NpcType.Normal) NpcManager.Instance.InitializeCurrentNpc(npcCard);
+        if (npcCard.data.type == NpcType.Normal) NpcManager.Instance.InitializeCurrentNpc(npcCard);
         else NpcManager.Instance.InitializeCurrentStoryNpc(npcCard);
         npcCardManager.SelectCard(npcCard);
     }

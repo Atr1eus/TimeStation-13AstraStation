@@ -1052,7 +1052,8 @@ MonoBehaviour:
   - "\u7ED8\u753B"
   - "\u65C5\u6E38"
   loseStoryNpcList: []
-  currentLoseNpcList: []
+  currentLoseNpcList:
+  - {fileID: 0}
   m_npcCard: {fileID: 0}
   m_player: {fileID: 1525159885}
   m_npc: {fileID: 219528408}
@@ -1063,9 +1064,6 @@ MonoBehaviour:
   m_ticket: {fileID: 240006037}
   m_dialogue: {fileID: 0}
   i_dialogue: {fileID: 0}
-  item0: {fileID: 11400000, guid: 8f1aef7924793c4409c438daadf9056b, type: 2}
-  item1: {fileID: 11400000, guid: 7b5eefb295097974b8a2ec51ba448edb, type: 2}
-  item2: {fileID: 11400000, guid: 823e4213a11904b468dcf8214b8d3383, type: 2}
 --- !u!4 &605689870
 Transform:
   m_ObjectHideFlags: 0
@@ -1376,6 +1374,7 @@ GameObject:
   - component: {fileID: 1054349440}
   - component: {fileID: 1054349439}
   - component: {fileID: 1054349438}
+  - component: {fileID: 1054349442}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1473,6 +1472,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &1054349442
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054349437}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1083026482
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,6 +2162,7 @@ MonoBehaviour:
   loadImageConfirmButton: {fileID: 1967213445}
   loadImageCancelButton: {fileID: 442375753}
   loadImageQuitButton: {fileID: 299900816}
+  canvas: {fileID: 1054349442}
 --- !u!1001 &1667139275290428164
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2248,7 +2260,9 @@ PrefabInstance:
       value: 'CancelButton '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1557825578495215951, guid: fcb441b59b5e50643809d0bfc3b57d0f, type: 3}
+    - {fileID: 4913537424179221884, guid: fcb441b59b5e50643809d0bfc3b57d0f, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4980972119266872708, guid: fcb441b59b5e50643809d0bfc3b57d0f, type: 3}
       insertIndex: -1
