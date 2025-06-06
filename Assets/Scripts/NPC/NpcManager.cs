@@ -13,7 +13,7 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     public Transform handSpawnPoint;
     private int npcIndex = -1;
     public NpcController currentNpc;
-    public GameObject npcObj;
+    public Sprite npcHand;
     private NpcData GetNpcInRandom() => npcDatas[Random.Range(0, npcDatas.Count)]; //在列表中随机选取npc
     private NpcData GetNpcInOrder() => npcDatas[++npcIndex % npcDatas.Count]; // 在列表中顺序选取npc
     public int nowTicketIdx = 0;
@@ -54,16 +54,14 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         //每次生成重新实例化NPC，初始化控制器
         NpcData npcdata = rule == 0 ? GetNpcInRandom() : GetNpcInOrder();
         Npc npc = npcDictionary[npcdata.npcName];
-        GameObject npcObj = Instantiate(npc.data.hand, handSpawnPoint.position, Quaternion.identity);
-        currentNpc = npcObj.AddComponent<NpcController>();
+        currentNpc = new NpcController();
         currentNpc.InitializeController(npc);
         currentNpc.OnTradeEnter();
     }
     public void SpawnNpc(NpcData npcdata) //直接根据NPC生成 不与NpcCard产生关联 半废弃
     {
-        GameObject npcObj = Instantiate(npcdata.hand, handSpawnPoint.position, Quaternion.identity);
         Npc npc = npcDictionary[npcdata.npcName];
-        currentNpc = npcObj.AddComponent<NpcController>();
+        currentNpc = new NpcController();
         currentNpc.InitializeController(npc);
         currentNpc.OnTradeEnter();
     }
@@ -72,8 +70,7 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
         Debug.Log("开始初始化角色！");
         NpcData npcdata = npcCard.npc;
         Npc npc = npcDictionary[npcdata.npcName];
-        npcObj = Instantiate(npc.hand, handSpawnPoint.position, Quaternion.identity);
-        currentNpc = npcObj.AddComponent<NpcController>();
+        currentNpc = new NpcController();
         currentNpc.InitializeController(npc);
         if (RoundManager.Instance.isRandomTicket[nowTicketIdx++])
             npc.ticket = TicketManager.Instance.GetRandomTicket();
@@ -88,8 +85,7 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
     {
         NpcData npcdata = npcCard.npc;
         Npc npc = npcDictionary[npcdata.npcName];
-        npcObj = Instantiate(npc.hand, handSpawnPoint.position, Quaternion.identity);
-        currentNpc = npcObj.AddComponent<NpcController>();
+        currentNpc = new NpcController();
         currentNpc.InitializeController(npc);
         currentNpc.npc.ticket = TicketManager.Instance.GetStoryNpcTicket(npc);
         nowTicketIdx++;
@@ -105,14 +101,14 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
             Debug.Log("你放过了一个正确的人");
             return;
         }
-        PlayerController.Instance.MinusGold(currentNpc.npc.data.falseChoicePunishGolds);
+        PlayerController.Instance.AddGold(currentNpc.npc.data.falseChoicePunishGolds);
         Debug.Log("判断错误！！！");
     }
     public void DisagreeNpcAward()
     {
         if (currentNpc.npc.ticket.isTrueTicket)
         {
-            PlayerController.Instance.MinusGold(currentNpc.npc.data.falseChoicePunishGolds);
+            PlayerController.Instance.AddGold(currentNpc.npc.data.falseChoicePunishGolds);
             Debug.Log("判断错误！！！");
             return;
         }
@@ -130,7 +126,6 @@ public class NpcManager : SingletonMonoBehaviour<NpcManager>
 
     public void ClearCurrentNpc()
     {
-        if (npcObj != null) Destroy(npcObj);
         //NPC离开时 销毁NPC实例并置空控制器
         if (currentNpc != null && currentNpc.gameObject != null)
         {

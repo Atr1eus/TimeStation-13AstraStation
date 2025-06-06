@@ -40,18 +40,13 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 9a835ce9bfef0b64f8f5fac55f0cee55
+  id: 9cdfc48bf27e48b43bbca3890864fdcf
   nodeName: Event node
   processed: 0
   entered: 0
   input: 0
   output: 0
   events:
-  - eventName: 
-    intParameter: 0
-    floatParameter: 0
-    stringParameter: 
-    boolParameter: 0
   - eventName: EndDialogue
     intParameter: 0
     floatParameter: 0
@@ -101,7 +96,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: c1dc0918de4e1d849a7ed2561fdb0da4
+  id: 7e88b193b89601141b473a91e68ab682
   nodeName: Text node
   processed: 0
   entered: 0
@@ -159,7 +154,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: cc004eaeb7e1d4f4bb81d9bcfb0375c9
+  id: d66d823588a8baa49a0bf054098d4bf3
   nodeName: Text node
   processed: 0
   entered: 0
@@ -217,7 +212,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 1daf89c36f13c6c469ae2d7090d68ed3
+  id: bd6ac8e78414fd04fa74405b32a1b217
   nodeName: Text node
   processed: 0
   entered: 0
@@ -330,7 +325,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 4fca6cceb52a204449e582e3eab49653
+  id: d3940180c08bccf4a8ea95f32b32edcd
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -383,7 +378,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 074b05d619c86b544a1bbc39a6f30d84
+  id: bad3571bcb77c6644942aa79fd46c567
   nodeName: Text node
   processed: 0
   entered: 0
@@ -441,7 +436,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 50f01cbba0bd46245b13e163fdfcb38b
+  id: c3fe12a76ededd84dbf369faa27bcf83
   nodeName: Text node
   processed: 0
   entered: 0
@@ -510,7 +505,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 7b8f4ae30d1b78f40a9b610f7567ea81
+  id: fe414818e09edf44cbc6a527b7e508f9
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -574,7 +569,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 130eeb7c228f7224bb238d0c1baeaa91
+  id: 2cab8b5b820c31944a6e5def27ec3386
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -627,7 +622,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: a7d6d6afae14fb84689a72f4836c8828
+  id: 4d4c85fd00240594f96fffe8d87c6080
   nodeName: Text node
   processed: 0
   entered: 0
@@ -685,7 +680,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: ffe555d0d13e3a246a4588c317fb109e
+  id: 874aca676bb6e744c8b298f1b916e7d1
   nodeName: Text node
   processed: 0
   entered: 0
@@ -754,7 +749,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  id: 95dd8d11d84b52b41bde5b2637cd7e89
+  id: fbf4e25d9cc5850499e04ccb10e6aa6e
   nodeName: Choice Node
   processed: 0
   entered: 0
@@ -794,7 +789,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: ed381dd21195ec0458e6641aa934ae36
+  id: 3d4d1d81739a42f44be8c59e57b9bcab
   nodeName: Branch
   processed: 0
   entered: 0
@@ -843,7 +838,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  id: 1c35d7a5065db704588dbfe40b07de17
+  id: 2f38474688b550f4fa4b4ba3bff94091
   nodeName: Text node
   processed: 0
   entered: 0

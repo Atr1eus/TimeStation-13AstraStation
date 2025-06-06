@@ -6,10 +6,14 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class TradingSceneManager : SceneManager
 {
     private Ticket currentTicket;
+
+    public VideoPlayer videoPlayer;
+    public string videoFileName = "yourvideo.mp4"; // 你的视频文件名
     [SerializeField] private GameManager manager;
     [SerializeField] private NpcCardManager cardManager;
     [SerializeField] private RoundManager roundManager;
@@ -59,6 +63,12 @@ public class TradingSceneManager : SceneManager
         manager = GameManager.Instance;
         NpcManager.Instance.handSpawnPoint = npcSpawnPos;
         roundManager = RoundManager.Instance;
+
+        videoPlayer = gameObject.AddComponent<VideoPlayer>();
+        videoPlayer.playOnAwake = false;
+        videoPlayer.source = VideoSource.Url;
+        videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoFileName);
+
         ticketImage.transform.position = ticketSpawnPos.position;
         applicationSpawnPos.transform.position = applicationSpawnPos.position;
         currentRoundText.text = (roundManager.currentRound + 1).ToString();
@@ -69,7 +79,7 @@ public class TradingSceneManager : SceneManager
     protected override void Update()
     {
         base.Update();
-        positionText.text = cardManager.remainingNpcs.ToString();
+        positionText.text = roundManager.remainingSelections.ToString();
         customerText.text = roundManager.currentCanSelectNpcNum.ToString();
     }
     private void InitializeButtonsEvent()
@@ -250,4 +260,35 @@ public class TradingSceneManager : SceneManager
         UnuseImage(ticketImage);
         UnuseImage(applicationImage);
     }
+
+
+
+    public IEnumerator PlayVideoAndWait()
+    {
+
+        videoPlayer.Prepare();
+
+        // 等待视频准备完成
+        while (!videoPlayer.isPrepared)
+        {
+            yield return null;
+        }
+
+        videoPlayer.Play();
+
+        // 等待视频播放完成
+        while (videoPlayer.isPlaying)
+        {
+            yield return null;
+        }
+
+        // 视频播放完成后执行的操作
+        YourPostVideoAction();
+    }
+
+    private void YourPostVideoAction()
+    {
+        Debug.Log("视频播放完成，执行后续操作");
+    }
+
 }

@@ -11,7 +11,7 @@ public enum TravelTo
 public class Npc
 {
     public NpcData data;
-    public GameObject hand;
+    public Sprite hand;
     public Ticket ticket;
     public int selectedTimes;
     public List<bool> isSelected = new List<bool>();
@@ -45,7 +45,7 @@ public class Npc
         canAppera.Add(result == ticket.isTrueTicket ? true : false);
         isSelected.Add(false);
     }
-    public GameObject GetRandomHand()
+    public Sprite GetRandomHand()
     {
         return GameManager.Instance.wholeNormalHandList[Random.Range(0, GameManager.Instance.wholeNormalHandList.Count)];
     }

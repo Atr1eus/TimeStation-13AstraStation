@@ -13,8 +13,8 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
     public int lastRoundMaxSelectionsPerRound;
     public int lastRound;
     [Header("回合配置")]
-    [SerializeField] public int selectionsPerRound = 5; //单回合npc出现数
-    [SerializeField] public int maxSelectionsPerRound = 2;//单回合最多可选择npc数
+    [SerializeField] public int selectionsPerRound = 2; //单回合npc出现数
+    [SerializeField] public int maxSelectionsPerRound = 1;//单回合最多可选择npc数
     [SerializeField] public float roundDuration = 180f;//单回合持续时间
 
     [Header("当前回合状态")]

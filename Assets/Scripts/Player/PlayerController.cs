@@ -6,12 +6,12 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerController : SingletonMonoBehaviour<PlayerController>
 {
-    public int gold = 200;
+    public int gold = 10;
     public int lastRoundGold;
     public int trainCountRank = 1;
     public int customerCountRank = 1;
-    public readonly int MaxTrainRank = 3;
-    public readonly int MaxCustomerCountRank = 3;
+    public readonly int MaxTrainRank = 4;
+    public readonly int MaxCustomerCountRank = 4;
     public List<int> roundLimitMoney = new List<int>();
     public List<int> trainRankUpNeedMoney = new List<int>();
     public List<int> customerCountRankUpNeedMoney = new List<int>();

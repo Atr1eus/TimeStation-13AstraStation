@@ -37,7 +37,7 @@ public class NpcData : ScriptableObject
     public int initialFavorability;
 
     [Header("仅剧情npc配置")]
-    public GameObject hand;
+    public Sprite hand;
     public List<TicketData> ticket;
     public List<string> storyNpcDescriptions;
     public List<int> storyNpcMinAppearRounds;
