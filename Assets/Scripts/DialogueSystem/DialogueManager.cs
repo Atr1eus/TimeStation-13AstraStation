@@ -89,7 +89,7 @@ public class DialogueManager : MonoBehaviour
     private void HandleInput()
     {
         // 对话推进控制
-        if (Input.GetKeyDown(advanceKey)||Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(advanceKey))
         {
 
             if (!dialogueManager.IsRunning && isTalking)
