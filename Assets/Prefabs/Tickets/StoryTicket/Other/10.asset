@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 10
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: d7aac7e673ca02042a1bbaa4751c3c8d, type: 2}
-  targetDate: 9527.1.1
+  targetDate: 9827.1.1.
   travelTo: 1
   ticketGraph: {fileID: 0}
   ticketIssuer: "\u5217\u8F66\u7EC4"

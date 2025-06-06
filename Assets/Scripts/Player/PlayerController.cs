@@ -6,9 +6,9 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerController : SingletonMonoBehaviour<PlayerController>
 {
-    public int gold = 200;
+    public int gold = 10;
     public int lastRoundGold;
-    public int trainCountRank = 1;
+    public int trainCountRank = 0;
     public int customerCountRank = 1;
     public readonly int MaxTrainRank = 3;
     public readonly int MaxCustomerCountRank = 3;
@@ -20,7 +20,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     public bool CanTrainRankUp()
     {
         if (trainCountRank >= MaxTrainRank) return false;
-        return CanAfford(trainRankUpNeedMoney[trainCountRank - 1]);
+        return CanAfford(trainRankUpNeedMoney[trainCountRank]);
     }
     public bool CanCustomerRankUp()
     {

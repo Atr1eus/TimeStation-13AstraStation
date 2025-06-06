@@ -6,10 +6,12 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class TradingSceneManager : SceneManager
 {
     private Ticket currentTicket;
+
     [SerializeField] private GameManager manager;
     [SerializeField] private NpcCardManager cardManager;
     [SerializeField] private RoundManager roundManager;
@@ -44,21 +46,21 @@ public class TradingSceneManager : SceneManager
 
 
 
-
+    [SerializeField] private Image hand;
 
 
 
     [SerializeField] private Image applicationImage;
     [SerializeField] private Image decideImage;
     [SerializeField] private Transform handParent;
-    private Transform npcHand;
-
     protected override void Start()
     {
         GameManager.Instance.m_npcCard = FindObjectOfType<NpcCardManager>();
         manager = GameManager.Instance;
         NpcManager.Instance.handSpawnPoint = npcSpawnPos;
         roundManager = RoundManager.Instance;
+
+
         ticketImage.transform.position = ticketSpawnPos.position;
         applicationSpawnPos.transform.position = applicationSpawnPos.position;
         currentRoundText.text = (roundManager.currentRound + 1).ToString();
@@ -167,6 +169,7 @@ public class TradingSceneManager : SceneManager
         InitCloseImage(ticketImage);
         InitCloseImage(applicationImage);
         InitCloseButton(loadRestSceneButton);
+        InitCloseImage(hand);
     }
     public void InitializeUIStates()
     {
@@ -175,6 +178,7 @@ public class TradingSceneManager : SceneManager
         UnuseButton(loadRestSceneButton);
         UnuseButton(openTicketButton);
         UnuseButton(openApplicationButton);
+        UnuseImage(hand);
         OnCloseApplicationButtonClick();
         OnCloseTicketButtonClick();
     }
@@ -184,7 +188,8 @@ public class TradingSceneManager : SceneManager
         UnuseButton(nextNpcButton);
         UseButton(openTicketButton);
         UseButton(openApplicationButton);
-        //todo:出现NPC的手
+        hand.sprite = NpcManager.Instance.currentNpc.npc.hand;
+        InitUseImage(hand);
 
     }
     public void OnDialogueEnd()
@@ -249,5 +254,15 @@ public class TradingSceneManager : SceneManager
         UnuseButton(openApplicationButton);
         UnuseImage(ticketImage);
         UnuseImage(applicationImage);
+        UnuseImage(hand);
     }
+
+
+
+
+    private void YourPostVideoAction()
+    {
+        Debug.Log("视频播放完成，执行后续操作");
+    }
+
 }

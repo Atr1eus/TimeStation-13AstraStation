@@ -3047,8 +3047,8 @@ MonoBehaviour:
   TrainNeedMoney: {fileID: 1764921122}
   awakeDailyReportButton: {fileID: 591403082}
   exitDailyReportButton: {fileID: 299128827}
-  dailyReportPos: {fileID: 0}
-  RankUpPos: {fileID: 0}
+  dailyReportPos: {fileID: 1494605265}
+  RankUpPos: {fileID: 1494605265}
 --- !u!1 &1764921120
 GameObject:
   m_ObjectHideFlags: 0

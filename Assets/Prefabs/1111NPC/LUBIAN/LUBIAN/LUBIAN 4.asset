@@ -17,7 +17,7 @@ MonoBehaviour:
   sex: 1
   type: 0
   travelTo: 1
-  npcDialogue: {fileID: 11400000, guid: d3f1e7bb1bb3a9f478b8a82b08522409, type: 2}
+  npcDialogue: {fileID: 11400000, guid: 38ca035df34182c4089fa2be2c3825b8, type: 2}
   requestItems: []
   offerItems: []
   minPerRequestAwardGolds: 0

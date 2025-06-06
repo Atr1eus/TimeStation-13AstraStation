@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8293c2e56cb548b4fac8a42d7588432c, type: 3}
   m_Name: SK 1
   m_EditorClassIdentifier: 
-  npc: {fileID: 11400000, guid: bd6a9288e56bf2e428086ccb67219c02, type: 2}
+  npc: {fileID: 11400000, guid: 4665a00ff203bdc4492c9c6ca4220b26, type: 2}
   targetDate: 2049.12.12
   travelTo: 0
   ticketGraph: {fileID: 0}

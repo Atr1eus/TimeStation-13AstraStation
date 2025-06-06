@@ -15,7 +15,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public List<NpcData> wholeNormalNpcDataList;
     public List<NpcData> wholeStoryNpcDataList;
     public List<ItemData> wholeItemDataList;
-    public List<GameObject> wholeNormalHandList;
+    public List<Sprite> wholeNormalHandList;
     public List<string> wholeNormalReasonsList;
     public NpcCardManager m_npcCard;
     [Header("Systems")]

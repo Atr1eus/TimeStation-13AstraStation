@@ -64,13 +64,13 @@ public class NpcCardManager : MonoBehaviour
     }
     public void SelectCard(NpcCard selectedCard) //选择卡牌事件
     {
-        Debug.Log("SelectCard");
-        NpcCardUI selectedUI = activeCards.Find(c => c.npcCard == selectedCard);
-        activeCards.Remove(selectedUI);
         foreach (var card in activeCards)
         {
             card.GetComponent<RectTransform>().DOAnchorPosY(-600f, 0.5f).OnComplete(() => Destroy(card.gameObject)); // 非选择Npc卡牌向下移动，动画完成后销毁
         }
+        Debug.Log("SelectCard");
+        NpcCardUI selectedUI = activeCards.Find(c => c.npcCard == selectedCard);
+        activeCards.Remove(selectedUI);
         activeCards.Clear();
         remainingNpcs.Remove(selectedCard.npc);
         RoundManager.Instance.currentCanSelectNpcNum--;
