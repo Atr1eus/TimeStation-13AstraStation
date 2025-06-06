@@ -156,3 +156,5 @@ Assets/Plugins/**       linguist-vendored
 
 # Spine export file for Unity
 *.skel.bytes            lfs
+
+Assets/Fonts/Pixel/HyPixel-SDF32.asset filter=lfs diff=lfs merge=lfs -text
