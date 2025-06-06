@@ -11,7 +11,8 @@ public class SceneLoader : SingletonMonoBehaviour<SceneLoader>
     {
         MainArea,
         TradingArea,
-        RestArea
+        RestArea,
+        EndArea
     }
 
     [System.Serializable]
@@ -120,6 +121,10 @@ public class SceneLoader : SingletonMonoBehaviour<SceneLoader>
     public void LoadTradingScene(Image fadeImage, CanvasGroup fadeCanvasGroup)
     {
         Load(GameScene.TradingArea, fadeImage, fadeCanvasGroup);
+    }
+    public void LoadEndScene(Image fadeImage, CanvasGroup fadeCanvasGroup)
+    {
+        Load(GameScene.EndArea, fadeImage, fadeCanvasGroup);
     }
 
     public static void Load(GameScene scene, Image fadeImage, CanvasGroup fadeCanvasGroup, LoadSceneMode mode = LoadSceneMode.Single)
