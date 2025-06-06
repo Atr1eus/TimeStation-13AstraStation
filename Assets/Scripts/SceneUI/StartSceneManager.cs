@@ -26,7 +26,7 @@ public class StartSceneManager : SceneManager
         creatorList.gameObject.SetActive(false);
     }
 
-    void Start()
+    protected override void Start()
     {
         startGameButton?.onClick.RemoveAllListeners();
         quitGameButton?.onClick.RemoveAllListeners();
