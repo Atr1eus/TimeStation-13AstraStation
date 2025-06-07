@@ -153,7 +153,14 @@ public static class SaveSystem
         {
             roundData.loseNpc.Add(data);
         }
-
+        foreach (var name in RoundManager.Instance.currentAgreeStoryNpcList)
+        {
+            roundData.agreeStoryNpc.Add(name);
+        }
+        foreach (var name in RoundManager.Instance.currentDisagreeStoryNpcList)
+        {
+            roundData.disagreeStoryNpc.Add(name);
+        }
         List<NpcDataEntry> normalNpcDatas = new List<NpcDataEntry>();
         List<NpcDataEntry> storyNpcDatas = new List<NpcDataEntry>();
         List<ItemSaveEntry> itemSaveEntries = new List<ItemSaveEntry>();
@@ -299,6 +306,14 @@ public static class SaveSystem
         foreach (var dt in data.loseNpc)
         {
             GameManager.Instance.currentLoseNpcList.Add(dt);
+        }
+        foreach (var name in data.agreeStoryNpc)
+        {
+            RoundManager.Instance.currentAgreeStoryNpcList.Add(name);
+        }
+        foreach (var name in data.disagreeStoryNpc)
+        {
+            RoundManager.Instance.currentDisagreeStoryNpcList.Add(name);
         }
         LoadCurrentNpcData(data.normalNpcData, data.storyNpcData);
         LoadCurrentInventory(data.items);

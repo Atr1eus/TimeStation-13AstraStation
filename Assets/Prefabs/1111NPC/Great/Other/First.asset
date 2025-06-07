@@ -38,8 +38,10 @@ MonoBehaviour:
   - "\u6559\u7A0B"
   storyNpcBackPack:
   - "\u5565\u90FD\u6CA1\u5E26"
-  storyNpcFollowUpPlot:
-  - "\u65B0\u4EFB\u5217\u8F66\u68C0\u7968\u5458\u4E0A\u4EFB\uFF01"
+  AgreeStoryNpcFollowUpPlot:
+  - "\u65B0\u5217\u8F66\u5458\u540C\u610F\u4E86"
+  DisagreeStoryNpcFollowUpPlot:
+  - "\u65B0\u5217\u8F66\u5458\u62D2\u7EDD\u4E86"
   shouldAgreeList: 01
   npcDescription: 
   minAppearRound: 0

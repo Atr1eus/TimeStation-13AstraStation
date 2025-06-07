@@ -11,11 +11,15 @@ public class SceneManager : MonoBehaviour
     [SerializeField] protected Text diskText;
     [SerializeField] protected Text positionText;
     [SerializeField] protected Text customerText;
+    [SerializeField] protected Button quitButton;
 
     protected virtual void Start()
     {
+        quitButton.onClick.RemoveAllListeners();
         if (currentRoundText != null)
             currentRoundText.text = RoundManager.Instance.currentRound.ToString();
+        if (quitButton != null)
+            quitButton.onClick.AddListener(() => Application.Quit());
     }
     protected virtual void Update()
     {
@@ -465,6 +469,14 @@ public class SceneManager : MonoBehaviour
 
         button.interactable = true;
 
+    }
+    public void UseText(Text text)
+    {
+        text.gameObject.SetActive(true);
+    }
+    public void UnuseText(Text text)
+    {
+        text.gameObject.SetActive(false);
     }
     public void InitUseButton(Button button)
     {

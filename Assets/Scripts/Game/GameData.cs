@@ -20,6 +20,8 @@ public class RoundData
     public List<NpcDataEntry> normalNpcData;
     public List<NpcDataEntry> storyNpcData;
     public List<string> loseNpc = new List<string>();
+    public List<string> agreeStoryNpc = new List<string>();
+    public List<string> disagreeStoryNpc = new List<string>();
     public List<ItemSaveEntry> items = new List<ItemSaveEntry>();
     public int currentRound; //目前回合数
     public DateTime dateTime;

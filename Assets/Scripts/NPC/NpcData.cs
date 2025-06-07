@@ -9,11 +9,6 @@ public enum NpcType
     Normal,
     Story
 }
-public enum NpcSex
-{
-    Man,
-    Woman
-}
 [SerializeField]
 [CreateAssetMenu(fileName = "New NPC", menuName = "Game/NPC")]
 public class NpcData : ScriptableObject
@@ -23,7 +18,6 @@ public class NpcData : ScriptableObject
     [Header("npc通用配置")]
     public int age;
     public string npcName;
-    public NpcSex sex;
     public NpcType type;
     public TravelTo travelTo;
     public DialogueGraph npcDialogue;
@@ -45,7 +39,8 @@ public class NpcData : ScriptableObject
     public List<int> storyNpcMaxAppearRounds;
     public List<string> storyNpcReasons;
     public List<string> storyNpcBackPack;
-    public List<string> storyNpcFollowUpPlot;
+    public List<string> AgreeStoryNpcFollowUpPlot;
+    public List<string> DisagreeStoryNpcFollowUpPlot;
     public List<bool> shouldAgreeList;
 
     [Header("仅路边npc配置")]

@@ -167,8 +167,8 @@ public class TicketManager : SingletonMonoBehaviour<TicketManager>
         while (targetDate[randomNum] == DateExtensions.GetDate() || currentTicket.travelTo != NpcManager.Instance.currentNpc.npc.data.travelTo)
         {
             randomNum = Random.Range(0, targetDate.Count);
+            currentTicket.travelTo = GetTravelTo(targetDate[randomNum], DateExtensions.GetDate());
         }
-        currentTicket.travelTo = GetTravelTo(targetDate[randomNum], DateExtensions.GetDate());
         return targetDate[randomNum];
     }
     public TravelTo GetTravelTo(string date1, string date2)

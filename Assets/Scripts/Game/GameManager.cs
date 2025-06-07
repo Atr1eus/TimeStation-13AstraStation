@@ -82,6 +82,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             currentLoseNpcList.Add(m_npc.currentNpc.npc.data.npcName);
         }
+        if (m_npc.currentNpc.npc.data.type == NpcType.Story)
+        {
+            m_round.currentAgreeStoryNpcList.Add(m_npc.currentNpc.npc.data.npcName);
+        }
 
     }
     public void OnDisagreeNpcButtonClick()
@@ -91,6 +95,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         m_ticket.ClearCurrentTicket();
         m_npcCard.LoadRemainingCards();
         m_npc.currentNpc.npc.Select(false);
+        if (m_npc.currentNpc.npc.data.type == NpcType.Story)
+        {
+            m_round.currentDisagreeStoryNpcList.Add(m_npc.currentNpc.npc.data.npcName);
+        }
         m_npc.ClearCurrentNpc();
     }
 

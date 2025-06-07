@@ -38,8 +38,8 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
 
     public List<string> decreaseItemList = new List<string>();
     public List<int> decreaseItemCountList = new List<int>();
-    public List<Npc> currentStoryNpcList = new List<Npc>();
-
+    public List<string> currentAgreeStoryNpcList = new List<string>();
+    public List<string> currentDisagreeStoryNpcList = new List<string>();
     public List<Npc> currentRoundNpcs = new List<Npc>();
 
 
@@ -196,7 +196,8 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         currentRoundNpcDatas.Clear();
         currentRoundNpcs.Clear();
         currentSelectedNpcs.Clear();
-        currentStoryNpcList.Clear();
+        currentAgreeStoryNpcList.Clear();
+        currentDisagreeStoryNpcList.Clear();
         decreaseItemList.Clear();
         decreaseItemCountList.Clear();
     }
@@ -214,7 +215,8 @@ public class RoundManager : SingletonMonoBehaviour<RoundManager>
         lastRoundSelectionsPerRound = 0;
         lastRoundMaxSelectionsPerRound = 0;
         lastRound = 0;
-        currentStoryNpcList.Clear();
+        currentAgreeStoryNpcList.Clear();
+        currentDisagreeStoryNpcList.Clear();
         decreaseItemCountList.Clear();
         decreaseItemList.Clear();
 

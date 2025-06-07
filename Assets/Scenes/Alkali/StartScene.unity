@@ -2097,6 +2097,7 @@ MonoBehaviour:
   diskText: {fileID: 0}
   positionText: {fileID: 0}
   customerText: {fileID: 0}
+  quitButton: {fileID: 1853160963}
   fadeImage: {fileID: 971015792}
   fadeDuration: 0.3
   scaleDuration: 0.5
@@ -2157,7 +2158,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   startGameButton: {fileID: 1353004483}
-  quitGameButton: {fileID: 1853160963}
   creatorListButton: {fileID: 642431423}
   creatorListCloseButton: {fileID: 1349273057}
   creatorList: {fileID: 18812112}

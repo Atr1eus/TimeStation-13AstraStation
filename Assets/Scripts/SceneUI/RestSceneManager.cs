@@ -68,13 +68,22 @@ public class RestSceneManager : SceneManager
     public void InitializeReport()
     {
 
-        for (int i = 0; i < m_round.currentSelectedNpcs.Count; i++)
+        for (int i = 0; i < m_round.currentAgreeStoryNpcList.Count; i++)
         {
-            Npc npc = m_round.currentSelectedNpcs[i];
+            Npc npc = NpcManager.Instance.npcDictionary[m_round.currentAgreeStoryNpcList[i]];
             if (npc.data.type == NpcType.Story)
             {
                 newsReportidx++;
-                newsReport.Add(npc.data.storyNpcFollowUpPlot[npc.selectedTimes - 1]);
+                newsReport.Add(npc.data.AgreeStoryNpcFollowUpPlot[npc.selectedTimes - 1]);
+            }
+        }
+        for (int i = 0; i < m_round.currentDisagreeStoryNpcList.Count; i++)
+        {
+            Npc npc = NpcManager.Instance.npcDictionary[m_round.currentDisagreeStoryNpcList[i]];
+            if (npc.data.type == NpcType.Story)
+            {
+                newsReportidx++;
+                newsReport.Add(npc.data.DisagreeStoryNpcFollowUpPlot[npc.selectedTimes - 1]);
             }
         }
         newsReportText1.text = newsReportidx >= 0 ? newsReport[0] : "---";
@@ -108,7 +117,7 @@ public class RestSceneManager : SceneManager
         exitDailyReportButton?.onClick.AddListener(OnExitDailyImageButtonClick);
         returnToMainButton?.onClick?.AddListener(() =>
         {
-            if(SaveSystem.HadInitSaveFile())
+            if (SaveSystem.HadInitSaveFile())
             {
                 SaveSystem.InitLoad();
             }

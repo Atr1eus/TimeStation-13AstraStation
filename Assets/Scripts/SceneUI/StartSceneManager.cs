@@ -9,7 +9,6 @@ using System.IO;
 public class StartSceneManager : SceneManager
 {
     [SerializeField] private Button startGameButton;
-    [SerializeField] private Button quitGameButton;
     [SerializeField] private Button creatorListButton;
     [SerializeField] private Button creatorListCloseButton;
     [SerializeField] private Image creatorList;
@@ -35,7 +34,6 @@ public class StartSceneManager : SceneManager
             SaveSystem.InitSave();
         }
         startGameButton?.onClick.RemoveAllListeners();
-        quitGameButton?.onClick.RemoveAllListeners();
         creatorListButton?.onClick.RemoveAllListeners();
         creatorListCloseButton?.onClick.RemoveAllListeners();
         loadImageCancelButton?.onClick.RemoveAllListeners();
@@ -68,7 +66,6 @@ public class StartSceneManager : SceneManager
         });
 
 
-        quitGameButton?.onClick.AddListener(() => Application.Quit());
         creatorListButton?.onClick.AddListener(OnCreatorListButtonClick);
         creatorListCloseButton?.onClick.AddListener(OnCreatorListCloseButtonClick);
     }

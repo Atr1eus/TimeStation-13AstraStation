@@ -53,6 +53,7 @@ public class TradingSceneManager : SceneManager
     [SerializeField] private Image decideImage;
     [SerializeField] private Transform handParent;
 
+    [SerializeField] private Text nameText;
     [SerializeField] private CanvasGroup canvas;
     protected override void Start()
     {
@@ -112,6 +113,14 @@ public class TradingSceneManager : SceneManager
         disagreeButton?.onClick.AddListener(OnDisagreeButtonClick);
         nextNpcButton?.onClick.AddListener(manager.OnNextNpcButtonClick);
         agreeButton?.onClick.AddListener(manager.OnAgreeNpcButtonClick);
+        agreeButton?.onClick.AddListener(() =>
+        {
+            if (cardManager.remainingNpcs.Count <= 0)
+            {
+                BanCanvas(canvas);
+                StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
+            }
+        });
         nextNpcButton?.onClick.AddListener(InitializeUIStates);
         agreeButton?.onClick.AddListener(AgreeButtonState);
         openTicketButton?.onClick.AddListener(OnOpenTicketButtonClick);
@@ -125,6 +134,7 @@ public class TradingSceneManager : SceneManager
         manager.OnDisagreeNpcButtonClick();
         if (RoundManager.Instance.currentCanSelectNpcNum <= 0 || cardManager.remainingNpcs.Count <= 0)
         {
+            BanCanvas(canvas);
             StartCoroutine(TransitionToScene(SceneLoader.GameScene.RestArea));
         }
         InitializeUIStates();
@@ -197,6 +207,7 @@ public class TradingSceneManager : SceneManager
         InitCloseImage(applicationImage);
         InitCloseButton(loadRestSceneButton);
         InitCloseImage(hand);
+        UnuseText(nameText);
     }
     public void InitializeUIStates()
     {
@@ -216,14 +227,19 @@ public class TradingSceneManager : SceneManager
         UnuseButton(nextNpcButton);
         UseButton(openTicketButton);
         UseButton(openApplicationButton);
+        openTicketButton?.onClick?.Invoke();
+        openApplicationButton?.onClick?.Invoke();
         hand.sprite = NpcManager.Instance.currentNpc.npc.hand;
+        nameText.text = NpcManager.Instance.currentNpc.npc.data.npcName;
         InitUseImage(hand);
+        UseText(nameText);
 
     }
     public void OnDialogueEnd()
     {
         UseImage(decideImage);
         UseButton(disagreeButton);
+        UnuseText(nameText);
         if (RoundManager.Instance.canSelect)
         {
             UseButton(agreeButton);
